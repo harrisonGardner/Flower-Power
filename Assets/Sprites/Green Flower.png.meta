@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: 5256f164812b1dd4caeedadee8268839
+guid: 8b27ddb9a7e3b944886f0afe02c5c779
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7088847507163480221
-    second: Blue Flower 1_0
+      213: -3123934002526108108
+    second: Green Flower_0
   - first:
-      213: -699409110711094099
-    second: Blue Flower 1_1
+      213: 4589627404311844930
+    second: Green Flower_1
   - first:
-      213: 5253415146483586231
-    second: Blue Flower 1_2
+      213: -8309548253784490491
+    second: Green Flower_2
   - first:
-      213: 3753711302120321357
-    second: Blue Flower 1_3
-  - first:
-      213: 131173592572819504
-    second: Blue Flower 1_4
+      213: 235335517655664653
+    second: Green Flower_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Flower 1_0
+      name: Green Flower_0
       rect:
         serializedVersion: 2
         x: 0
@@ -132,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36f7b9420ca5f9d90800000000000000
-      internalID: -7088847507163480221
+      spriteID: 436caa5739e85a4d0800000000000000
+      internalID: -3123934002526108108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower 1_1
+      name: Green Flower_1
       rect:
         serializedVersion: 2
         x: 16
@@ -153,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da4b4639e133b46f0800000000000000
-      internalID: -699409110711094099
+      spriteID: 248d76daec1a1bf30800000000000000
+      internalID: 4589627404311844930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower 1_2
+      name: Green Flower_2
       rect:
         serializedVersion: 2
         x: 32
@@ -174,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b49fcfed31e7e840800000000000000
-      internalID: 5253415146483586231
+      spriteID: 50e353993ed8eac80800000000000000
+      internalID: -8309548253784490491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower 1_3
+      name: Green Flower_3
       rect:
         serializedVersion: 2
         x: 48
@@ -195,29 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4130409a8cd71430800000000000000
-      internalID: 3753711302120321357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Blue Flower 1_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 038f63dffa502d100800000000000000
-      internalID: 131173592572819504
+      spriteID: d0806ec0864144300800000000000000
+      internalID: 235335517655664653
       vertices: []
       indices: 
       edges: []

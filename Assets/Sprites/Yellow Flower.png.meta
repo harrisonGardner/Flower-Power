@@ -14,9 +14,6 @@ TextureImporter:
   - first:
       213: 3170024671695195995
     second: Yellow Flower_3
-  - first:
-      213: -1674749031492225344
-    second: Yellow Flower_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -125,8 +122,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,8 +143,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,8 +164,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,8 +185,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,27 +194,6 @@ TextureImporter:
       bones: []
       spriteID: b5fcd95b4a03efb20800000000000000
       internalID: 3170024671695195995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Yellow Flower_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c6f9f901a812c8e0800000000000000
-      internalID: -1674749031492225344
       vertices: []
       indices: 
       edges: []

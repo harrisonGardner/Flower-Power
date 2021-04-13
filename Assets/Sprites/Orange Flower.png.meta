@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: bba54c439b347ab4ba811b07575dff20
+guid: e7a0ae32d325364469378839648e2e1f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4423635115718862920
-    second: Red Flower_0
+      213: -4301230753114813374
+    second: Orange Flower_0
   - first:
-      213: 4501500038387953728
-    second: Red Flower_1
+      213: -1839311976262417634
+    second: Orange Flower_1
   - first:
-      213: 6803108035949986933
-    second: Red Flower_2
+      213: 6645677071600124622
+    second: Orange Flower_2
   - first:
-      213: 6429660767772735296
-    second: Red Flower_3
+      213: 8539199378566205279
+    second: Orange Flower_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red Flower_0
+      name: Orange Flower_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 848ed5843b8e36d30800000000000000
-      internalID: 4423635115718862920
+      spriteID: 24c0b9f3b65fe44c0800000000000000
+      internalID: -4301230753114813374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red Flower_1
+      name: Orange Flower_1
       rect:
         serializedVersion: 2
         x: 16
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04075885f6a887e30800000000000000
-      internalID: 4501500038387953728
+      spriteID: e13c1cfa0837976e0800000000000000
+      internalID: -1839311976262417634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red Flower_2
+      name: Orange Flower_2
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 574876bd6be796e50800000000000000
-      internalID: 6803108035949986933
+      spriteID: ec20fa816103a3c50800000000000000
+      internalID: 6645677071600124622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red Flower_3
+      name: Orange Flower_3
       rect:
         serializedVersion: 2
         x: 48
@@ -192,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 047fb59076eba3950800000000000000
-      internalID: 6429660767772735296
+      spriteID: f5fcca99794518670800000000000000
+      internalID: 8539199378566205279
       vertices: []
       indices: 
       edges: []
