@@ -54,5 +54,6 @@ public class Neighbors
 
     // TODO: Method to plant a seed in a randomly determined, empty neighboring plot
     // TODO: Method for a pest to go into a new space with a plant & if none available, die.
+    // TODO: Method to check if the flower in this space is adjacent to a flower of the opposite color
 
 }
