@@ -18,6 +18,9 @@ public class Plant : MonoBehaviour
     // TYPE
     public PlantType PlantType { get; }
 
+    // GAME OBJECTS
+    public GameObject plantPrefab;
+
     // LOCATION
     public Plot MyPlot { get; }
 
@@ -47,6 +50,9 @@ public class Plant : MonoBehaviour
             CurrentStage = new YoungWeed();
         else
             CurrentStage = new Seed();
+
+    
+
     }
 
 

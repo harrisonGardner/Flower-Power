@@ -9,6 +9,9 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public class Plot : MonoBehaviour
 {
+    // GRAPHICS
+    public GameObject plotPrefab;
+
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
     private Garden garden;
@@ -29,7 +32,9 @@ public class Plot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     
+        plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
+       
     }
 
     // Update is called once per frame
@@ -42,9 +47,17 @@ public class Plot : MonoBehaviour
     /// Constructor method to create a new Plot object.
     /// </summary>
     /// <param name="garden">The Garden to which this plot belongs</param>
-    public Plot(Garden garden)
+    public Plot(Garden garden, GameObject prefab)
     {
         this.garden = garden;
+        this.plotPrefab = prefab;
+    }
+
+
+    public void setPositionAndScale(int x, int y, int width, int height)
+    {
+        this.plotPrefab.transform.position.Set(x, y, 1);
+        this.plotPrefab.transform.localScale.Set(width, height, 1);
     }
 
     /// <summary>

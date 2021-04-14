@@ -10,9 +10,14 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public class Garden : MonoBehaviour
 {
+    // PREFABS
+    public GameObject plotPrefab;
+    public GameObject gardenPrefab;
+
     // DIMENSIONS
-    public int Height { get; set; }
-    public int Width { get; set; }
+    public int height;
+    public int width;
+    public int plotLength;
     public Plot[,] plots;
 
     /// <summary>
@@ -33,7 +38,7 @@ public class Garden : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        initializeGarden();
     }
 
     // Update is called once per frame
@@ -51,27 +56,33 @@ public class Garden : MonoBehaviour
     /// </summary>
     /// <param name="height">The number of plots the garden should have along the y axis</param>
     /// <param name="width">The number of plots the garden should have along the x axis</param>
-    public void initializeGarden(int height, int width)
+    public void initializeGarden()
     {
         // New 2d Array of Plots
-        Height = height;
-        Width = width;
-        this.plots = new Plot[Height, Width];
+        //this.height = height;
+        //this.width = width;
+        this.plots = new Plot[this.height, this.width];
+        
 
         // Iterate through array and add plots
-        for (int y = 0; y < Height; y++)
+        for (int y = 0; y < this.height; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < this.width; x++)
             {
-                // TODO: Ensure this is added as game object in appropriate fashion
-                this.plots[y, x] = new Plot(this); 
+                // DUPLICATE PLOT PREFAB
+                Vector3 position = new Vector3((float) x * 0.8F, (float) y * 0.8F, 1.0F);
+                GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
+                    position, new Quaternion());
+
+                // ADD to ARRAY
+                this.plots[y, x] = new Plot(this, prefab);
             }
         }
 
         // Iterate through array and set Neighbors for plots
-        for (int y = 0; y < Height; y++)
+        for (int y = 0; y < this.height; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < this.width; x++)
             {
                 Neighbor[] surroundingPlots = new Neighbor[9];
 
@@ -103,7 +114,7 @@ public class Garden : MonoBehaviour
 
     private bool isInGarden(int y, int x)
     {
-        return (y < Height && y >= 0 && x < Width && x >= 0);
+        return (y < height && y >= 0 && x < width && x >= 0);
     }
 
     /// <summary>
@@ -134,9 +145,9 @@ public class Garden : MonoBehaviour
         WindyToday = false;
 
         // Iterate through array
-        for (int y = 0; y < Height; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < width; x++)
             {
                 this.plots[y, x].addWater(waterAmount);
             }
@@ -153,9 +164,9 @@ public class Garden : MonoBehaviour
         WindyToday = false;
         
         // Iterate through array
-        for (int y = 0; y < Height; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < width; x++)
             {
                 this.plots[y, x].SunEnergyToday = sunAmount;
             }
