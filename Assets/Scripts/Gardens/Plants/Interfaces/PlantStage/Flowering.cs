@@ -5,21 +5,20 @@ using UnityEngine;
 /// <summary>
 /// Third stage of the Plant object.
 /// </summary>
-public class Flowering : MonoBehaviour, IPlantStage
+/// <author>Lisette Peck, Nicholas Gliserman</author>
+public class Flowering : IPlantStage
 {
-    public int DaysToNextStage { get; }
-    [Range(0, 10)]
+    public int DaysToNextStage { get; set; }
     public int CutDifficulty { get; }
-    public bool MustBeHealthyToProgress { get; }
+    public StageType CurrentStage { get; } = StageType.FLOWERING;
 
     /// <summary>
     /// Creates a Flowering Stage object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;
     /// </summary>
-    public void Flowering()
+    public Flowering()
     {
         DaysToNextStage = 5;
         CutDifficulty = 3;
-        MustBeHealthyToProgress = true;
     }
 
     /// <summary>
@@ -27,13 +26,12 @@ public class Flowering : MonoBehaviour, IPlantStage
     /// Decrements at a faster pace is the plant is unhealthy.
     /// </summary>
     /// <param name="isWilting">If the plant is currently wilting</param>
-    public void DecrementDaysToNextStage(bool isWilting)
+    public void DecrementDaysToNextStage(bool wilting)
     {
-        if (isWilting)
+        if (wilting)
             DaysToNextStage -= 2;
         else
             DaysToNextStage--;
-        }
     }
 
     /// <summary>
@@ -51,27 +49,7 @@ public class Flowering : MonoBehaviour, IPlantStage
     /// <returns>A Dying object.</returns>
     public IPlantStage GetNextStage()
     {
-        Dying nextStage = new Dying();
-        return nextStage;
+        return new Dying();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public void GetReproductionBehavior()
-    {
-        //TODO
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
