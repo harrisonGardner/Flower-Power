@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: d832b696f18da73418e8130c1c663eb2
+guid: bba54c439b347ab4ba811b07575dff20
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3959410596255820700
-    second: Weed_0
+      213: 4423635115718862920
+    second: Red Flower Seed
   - first:
-      213: 5841368400047897033
-    second: Weed_1
+      213: 4501500038387953728
+    second: Red Flower Sprout
   - first:
-      213: -366269815520562782
-    second: Weed_2
+      213: 6803108035949986933
+    second: Red Flower Flowering
+  - first:
+      213: 6429660767772735296
+    second: Red Flower Dying
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Weed_0
+      name: Red Flower Seed
       rect:
         serializedVersion: 2
         x: 0
@@ -120,20 +123,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46411426a095d09c0800000000000000
-      internalID: -3959410596255820700
+      spriteID: 848ed5843b8e36d30800000000000000
+      internalID: 4423635115718862920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weed_1
+      name: Red Flower Sprout
       rect:
         serializedVersion: 2
         x: 16
@@ -141,20 +144,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c9fb076c95b01150800000000000000
-      internalID: 5841368400047897033
+      spriteID: 04075885f6a887e30800000000000000
+      internalID: 4501500038387953728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weed_2
+      name: Red Flower Flowering
       rect:
         serializedVersion: 2
         x: 32
@@ -162,14 +165,35 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a1f2f91b8fbaeaf0800000000000000
-      internalID: -366269815520562782
+      spriteID: 574876bd6be796e50800000000000000
+      internalID: 6803108035949986933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Red Flower Dying
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 047fb59076eba3950800000000000000
+      internalID: 6429660767772735296
       vertices: []
       indices: 
       edges: []

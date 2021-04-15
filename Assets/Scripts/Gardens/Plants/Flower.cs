@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Flower : Plant
@@ -9,4 +10,8 @@ public class Flower : Plant
 
     }
 
+    public void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(WeatherType.rain);
+    }
 }

@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: b03f5053f93b8924e840f0215a39f64f
+guid: fb5a7f585fd0eb043847e80a93cd0fbe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2071085793087248035
-    second: Clippers_0
+      213: 1914849043038913832
+    second: Wateringcan Idle
   - first:
-      213: 3863240528202574897
-    second: Clippers_1
+      213: -5007717835261507284
+    second: Wateringcan Using
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clippers_0
+      name: Wateringcan Idle
       rect:
         serializedVersion: 2
         x: 0
@@ -117,20 +117,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a6d2544e89fdbc10800000000000000
-      internalID: 2071085793087248035
+      spriteID: 825c4d03f09e29a10800000000000000
+      internalID: 1914849043038913832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clippers_1
+      name: Wateringcan Using
       rect:
         serializedVersion: 2
         x: 16
@@ -138,14 +138,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13c2865caccfc9530800000000000000
-      internalID: 3863240528202574897
+      spriteID: c2989dd2923018ab0800000000000000
+      internalID: -5007717835261507284
       vertices: []
       indices: 
       edges: []
