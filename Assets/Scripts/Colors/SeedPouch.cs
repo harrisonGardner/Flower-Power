@@ -9,8 +9,9 @@ using UnityEngine;
 /// <author>Lisette Peck, Nicholas Gliserman</author>
 public class SeedPouch : MonoBehaviour
 {
-    private IDictionary<ColorName, int> Seeds { get; } = new Dictionary<ColorName, int>();
     // TODO: Add currentDisplay color for graphics & a method to get the next color so the user can tap the icon to see other seed colors
+    public TalliedSet<ColorName> Seeds { get; } = new TalliedSet<ColorName>();
+    
 
     /// <summary>
     /// Adds a seed of the given color to the players pouch.
@@ -26,38 +27,14 @@ public class SeedPouch : MonoBehaviour
         {
             Color seedColor = seed.PlantColor;
 
-            if (Seeds.ContainsKey(seedColor.Name))
-                Seeds[seedColor.Name]++;
-            else
-                Seeds.Add(seedColor.Name, 1);
+
+            //if (Seeds.ContainsKey(seedColor.Name))
+            //    Seeds[seedColor.Name]++;
+            //else
+            //    Seeds.Add(seedColor.Name, 1);
         }
     }
 
-    /// <summary>
-    /// Checks if the player has a seed of the given color.
-    /// 
-    /// If the player has it, it will be removed and the value
-    /// of "true" is returned. Otherwise returns "false."
-    /// </summary>
-    /// <param name="color">Color of the seed to look for.</param>
-    /// <returns>True if the player has a seed of that color.</returns>
-    public bool Remove(ColorName color)
-    {
-        if (Seeds.ContainsKey(color))
-        {
-            // CASE WHERE THERE IS A SEED TO REMOVE
-            if (Seeds[color] > 0)
-            {
-                Seeds[color] = Seeds[color]--;
-                return true;
-            }
-            if (Seeds[color] <= 0)
-            {
-                Seeds.Remove(color);
-            }
-        }
-        return false;
-    }
 
     // Start is called before the first frame update
     void Start()

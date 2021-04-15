@@ -22,8 +22,8 @@ public class Plot : MonoBehaviour
     public int SunEnergyToday { get; set; } = 0;
 
     // Plant Related Fields
-    Plant plantHere;
-    public IList<Pollen> PollenToday { get; } // TODO: REVISIT DATA STRUCTURE
+    public Plant plantHere;
+    public TalliedSet<ColorName> PollenHere { get; }
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -33,7 +33,7 @@ public class Plot : MonoBehaviour
     void Start()
     {
      
-        plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
+        plantHere = new Flower(this, Colors.GetColor(ColorName.BLUE), new WeedHealth());
        
     }
 
@@ -149,10 +149,16 @@ public class Plot : MonoBehaviour
     }
 
     // TODO: COMPLETE THIS METHOD
-    public void addPollen(int amount) // TODO: Add Color
+    public void addPollen(int amount, ColorName color)
     {
-        // IF THERE IS NO PLANT in the SPACE, DO NOTHING
-        // IF THERE IS A PLANT, ADD POLEN
+        // ONLY DEPOSITE POLLEN if THERE IS A PLANT HERE
+        if (plantHere != null)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                PollenHere.Add(color);
+            }
+        }
     }
 
     // TODO: COMPLETE THIS METHOD

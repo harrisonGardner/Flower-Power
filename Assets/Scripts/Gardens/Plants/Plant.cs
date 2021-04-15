@@ -41,7 +41,7 @@ public class Plant : MonoBehaviour
 
         // ENSURE WEED has no COLOR
         if (PlantType == PlantType.Weed)
-            PlantColor = Colors.getColor(ColorName.NONE);
+            PlantColor = Colors.GetColor(ColorName.NONE);
         else
             PlantColor = color;
 
@@ -50,9 +50,6 @@ public class Plant : MonoBehaviour
             CurrentStage = new YoungWeed();
         else
             CurrentStage = new Seed();
-
-    
-
     }
 
 
@@ -101,15 +98,25 @@ public class Plant : MonoBehaviour
 
     }
 
-    // TODO
-    public void SpreadPollen()
+    /// <summary>
+    /// Spreads pollen according to wind conditions and the reproductive 
+    /// behavior of the plant's current stage
+    /// </summary>
+    /// <param name="windDirection"></param>
+    /// <param name="windyDay"></param>
+    public void SpreadPollen(Direction windDirection, bool windyDay)
     {
-        //Call the IPlantStage's IReproductionBehavior to spreak pollen
+        CurrentStage.Reproduction.SpreadPollen(MyPlot, windDirection, windyDay);
     }
 
-    // TODO
+    /// <summary>
+    /// Transforms the pollen in this plot into seeds according to the 
+    /// reproductive behavior of the plant's current stage. Then,
+    /// spreads the seeds.
+    ///
+    /// </summary>
     public void MakeSeeds()
     {
-        //Call the IPlantStage's IReproductionBehavior to spreak pollen
+        CurrentStage.Reproduction.Seed(MyPlot);
     }
 }
