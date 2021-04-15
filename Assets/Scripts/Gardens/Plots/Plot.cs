@@ -10,7 +10,7 @@ using UnityEngine;
 public class Plot : MonoBehaviour
 {
     // GRAPHICS
-    public GameObject plotPrefab;
+    public GameObject plotObject;
 
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
@@ -18,7 +18,7 @@ public class Plot : MonoBehaviour
 
     // Metrics
     int waterLevel = 0;
-    private const int WATER_CAPCITY = 10;
+    private const int WATER_CAPCITY = 12;
     public int SunEnergyToday { get; set; } = 0;
 
     // Plant Related Fields
@@ -38,9 +38,34 @@ public class Plot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void UpdatePlot()
     {
-        
+        PlotClickedOnCheck();
+    }
+
+    //Mouse click on plot check
+    private void PlotClickedOnCheck()
+    {
+        if (this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked)
+        {
+            waterLevel++;
+            this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
+        }
+
+        SpriteUpdate();
+    }
+
+    //Sprite Update Check
+    public void SpriteUpdate()
+    {
+        if (waterLevel <= 0)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(0);
+        else if (waterLevel <= 4)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(1);
+        else if (waterLevel <= 8)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(2);
+        else if (waterLevel <= 12)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(3);
     }
 
     /// <summary>
@@ -50,14 +75,14 @@ public class Plot : MonoBehaviour
     public Plot(Garden garden, GameObject prefab)
     {
         this.garden = garden;
-        this.plotPrefab = prefab;
+        this.plotObject = prefab;
     }
 
 
     public void setPositionAndScale(int x, int y, int width, int height)
     {
-        this.plotPrefab.transform.position.Set(x, y, 1);
-        this.plotPrefab.transform.localScale.Set(width, height, 1);
+        this.plotObject.transform.position.Set(x, y, 1);
+        this.plotObject.transform.localScale.Set(width, height, 1);
     }
 
     /// <summary>
@@ -166,6 +191,4 @@ public class Plot : MonoBehaviour
     {
         // TODO: Once Pest Class is Implemented
     }
-
-
 }

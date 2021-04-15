@@ -44,7 +44,10 @@ public class Garden : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        foreach(Plot plot in plots)
+        {
+            plot.UpdatePlot();
+        }
     }
 
     /// <summary>
@@ -73,6 +76,8 @@ public class Garden : MonoBehaviour
                 Vector3 position = new Vector3((float) x * 0.8F, (float) y * 0.8F, 1.0F);
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
                     position, new Quaternion());
+
+                prefab.transform.parent = gameObject.transform;
 
                 // ADD to ARRAY
                 this.plots[y, x] = new Plot(this, prefab);
