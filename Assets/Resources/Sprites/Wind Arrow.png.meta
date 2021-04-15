@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: ff950ac732e6c244b9ac3d67249a242a
+guid: 31deebe37dcb4784ea66fbe56ac8512d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3437977996023165345
-    second: Purple Flower_0
+      213: -7218459330969240739
+    second: Wind Right
   - first:
-      213: -3222423076339895094
-    second: Purple Flower_1
+      213: -7302658359591948368
+    second: Wind Down Right
   - first:
-      213: 2669109697620577135
-    second: Purple Flower_2
+      213: 998915776792523057
+    second: Wind Down
   - first:
-      213: 7987934582789746561
-    second: Purple Flower_3
+      213: 5122972627367776974
+    second: Wind Down Left
+  - first:
+      213: -6544745386975862197
+    second: Wind Left
+  - first:
+      213: 5086546577028691454
+    second: Wind Up Left
+  - first:
+      213: 8443672509440508419
+    second: Wind Up
+  - first:
+      213: 7950161314991796418
+    second: Wind Up Right
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Purple Flower_0
+      name: Wind Right
       rect:
         serializedVersion: 2
         x: 0
@@ -123,20 +135,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a1f19ea5c626bf20800000000000000
-      internalID: 3437977996023165345
+      spriteID: d5b79f7cb71e2db90800000000000000
+      internalID: -7218459330969240739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Flower_1
+      name: Wind Down Right
       rect:
         serializedVersion: 2
         x: 16
@@ -144,20 +156,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac43db20947a743d0800000000000000
-      internalID: -3222423076339895094
+      spriteID: 0bf2c70c9eeb7aa90800000000000000
+      internalID: -7302658359591948368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Flower_2
+      name: Wind Down
       rect:
         serializedVersion: 2
         x: 32
@@ -165,20 +177,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b8931e0259a0520800000000000000
-      internalID: 2669109697620577135
+      spriteID: 13170444b9cdcdd00800000000000000
+      internalID: 998915776792523057
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Flower_3
+      name: Wind Down Left
       rect:
         serializedVersion: 2
         x: 48
@@ -186,14 +198,98 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18fad306e28dade60800000000000000
-      internalID: 7987934582789746561
+      spriteID: ec25e404674781740800000000000000
+      internalID: 5122972627367776974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Left
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b426deffeb46c25a0800000000000000
+      internalID: -6544745386975862197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Up Left
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef53641892b079640800000000000000
+      internalID: 5086546577028691454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Up
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302ceec2963fd2570800000000000000
+      internalID: 8443672509440508419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind Up Right
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c0732f1895a45e60800000000000000
+      internalID: 7950161314991796418
       vertices: []
       indices: 
       edges: []

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: e7a0ae32d325364469378839648e2e1f
+guid: c33661b7015d0eb4488a3ff9e67f11e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4301230753114813374
-    second: Orange Flower_0
+      213: 1000147625067367007
+    second: Seedpouch Blank
   - first:
-      213: -1839311976262417634
-    second: Orange Flower_1
+      213: 3055167092945433720
+    second: Seedpouch Red
   - first:
-      213: 6645677071600124622
-    second: Orange Flower_2
+      213: -8686577511114830106
+    second: Seedpouch Yellow
   - first:
-      213: 8539199378566205279
-    second: Orange Flower_3
+      213: -1265305510432439351
+    second: Seedpouch Blue
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Orange Flower_0
+      name: Seedpouch Blank
       rect:
         serializedVersion: 2
         x: 0
@@ -123,20 +123,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24c0b9f3b65fe44c0800000000000000
-      internalID: -4301230753114813374
+      spriteID: f5a471b47fc31ed00800000000000000
+      internalID: 1000147625067367007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange Flower_1
+      name: Seedpouch Red
       rect:
         serializedVersion: 2
         x: 16
@@ -144,20 +144,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e13c1cfa0837976e0800000000000000
-      internalID: -1839311976262417634
+      spriteID: 874b978b842266a20800000000000000
+      internalID: 3055167092945433720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange Flower_2
+      name: Seedpouch Yellow
       rect:
         serializedVersion: 2
         x: 32
@@ -165,20 +165,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec20fa816103a3c50800000000000000
-      internalID: 6645677071600124622
+      spriteID: 6ee8a10f6c3137780800000000000000
+      internalID: -8686577511114830106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange Flower_3
+      name: Seedpouch Blue
       rect:
         serializedVersion: 2
         x: 48
@@ -186,14 +186,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5fcca99794518670800000000000000
-      internalID: 8539199378566205279
+      spriteID: 9c38456975bb07ee0800000000000000
+      internalID: -1265305510432439351
       vertices: []
       indices: 
       edges: []
