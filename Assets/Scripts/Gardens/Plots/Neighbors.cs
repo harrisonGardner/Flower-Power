@@ -52,7 +52,23 @@ public class Neighbors
         return neighbors[(int)direction].Target;
     }
 
-    // TODO: Method to plant a seed in a randomly determined, empty neighboring plot
+
+    public Plot getRandomNeighbor()
+    {
+        Plot randomNeighbor = null;
+
+        while (randomNeighbor == null)
+        {
+            try
+            {
+                randomNeighbor = getNeighbor(Directions.GetRandomDirection().Name);
+            }
+            catch (IndexOutOfRangeException) { }
+        }
+
+        return randomNeighbor;
+    }
+
     // TODO: Method for a pest to go into a new space with a plant & if none available, die.
     // TODO: Method to check if the flower in this space is adjacent to a flower of the opposite color
 

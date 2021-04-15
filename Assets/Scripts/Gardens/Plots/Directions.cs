@@ -11,7 +11,7 @@ using Random = System.Random;
 /// </summary>
 /// <author>Nicholas Gliserman</author>
 public enum DirectionName
-{ none, up, upRight, right, downRight, down, downLeft, left, upLeft }
+{ none, up, upRight, right, downRight, down, downLeft, left, upLeft } // 9 VALUES
 
 /// <summary>
 /// Vector to move from one space to a neighbor, either
@@ -74,5 +74,41 @@ public class Directions
         return directions[rand.Next(1, 9)];
     }
 
+    /// <summary>
+    /// Returns the two closes directions to the inputted direction.
+    ///
+    /// For example, if "up" is inputted, "upleft" and "upright" would be returned.
+    ///
+    /// Useful for spreading pollen.
+    /// </summary>
+    /// <returns></returns>
+    public static DirectionName[] GetAdjacentDirections(DirectionName direction)
+    {
+        DirectionName[] adjacent = new DirectionName[2];
 
+        // CASE WHERE INPUTTED DIRECTION is not ADJACENT to "NONE" VALUE
+        if ((int)direction > 1 && (int)direction < 8)
+        {
+            adjacent[0] = (DirectionName)((int)direction - 1);
+            adjacent[1] = (DirectionName)((int)direction + 1);
+        }
+        // CASES WHERE INPUTTED DIRECTION is ADACENT to NONE
+        else if ((int)direction == 1)
+        {
+            adjacent[0] = (DirectionName)8;
+            adjacent[1] = (DirectionName)2;
+        }
+        else if ((int)direction == 8)
+        {
+            adjacent[0] = (DirectionName)7;
+            adjacent[1] = (DirectionName)1;
+        }
+        else
+        {
+            throw new NullReferenceException("Inputted value is \"None\" "
+                + "and threfore has no adjacent directions");
+        }
+
+        return adjacent;
+    }
 }

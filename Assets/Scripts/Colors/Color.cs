@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Types of colors that a plant object can be.
@@ -24,6 +25,7 @@ public class Color
     public Color OppositeColor { get; set; }
     public ColorType Type { get; }
     public ColorName Name { get; }
+    public IDictionary<ColorName, Color> Blends { get; } = new Dictionary<ColorName, Color>();
 
     /// <summary>
     /// Creates a new color object with its name, type, and a string
@@ -90,11 +92,24 @@ public class Colors
     public Colors()
     {
         // RED & GREEN are OPPOSITES
-        getColor(ColorName.GREEN).setOpposite(getColor(ColorName.RED));
+        GetColor(ColorName.GREEN).setOpposite(GetColor(ColorName.RED));
         // ORANGE & BLUE are OPPOSITES
-        getColor(ColorName.ORANGE).setOpposite(getColor(ColorName.BLUE));
+        GetColor(ColorName.ORANGE).setOpposite(GetColor(ColorName.BLUE));
         // PURPLE & YELLOW are OPPOSITES
-        getColor(ColorName.PURPLE).setOpposite(getColor(ColorName.YELLOW));
+        GetColor(ColorName.PURPLE).setOpposite(GetColor(ColorName.YELLOW));
+
+        // SET BLEND INFORMATION
+        Color red = GetColor(ColorName.RED);
+        red.Blends.Add(ColorName.BLUE, GetColor(ColorName.PURPLE));
+        red.Blends.Add(ColorName.YELLOW, GetColor(ColorName.ORANGE));
+
+        Color yellow = GetColor(ColorName.YELLOW);
+        yellow.Blends.Add(ColorName.RED, GetColor(ColorName.ORANGE));
+        yellow.Blends.Add(ColorName.BLUE, GetColor(ColorName.GREEN));
+
+        Color blue = GetColor(ColorName.BLUE);
+        blue.Blends.Add(ColorName.RED, GetColor(ColorName.PURPLE));
+        blue.Blends.Add(ColorName.YELLOW, GetColor(ColorName.GREEN));
     }
 
     /// <summary>
@@ -102,14 +117,14 @@ public class Colors
     /// </summary>
     /// <param name="color"></param>
     /// <returns></returns>
-    public static Color getColor(ColorName color)
+    public static Color GetColor(ColorName color)
     {
         return allColors[(int)color];
     }
 
     /// <summary>
     /// Checks whether two colors are opposites
-    ///
+    /// 
     /// Returns true if they are opposites, otherwise false
     /// </summary>
     /// <param name="color1"></param>
@@ -117,10 +132,20 @@ public class Colors
     /// <returns></returns>
     public static bool areOpposites(ColorName color1, ColorName color2)
     {
-        if (getColor(color1).OppositeColor.Name == color2)
+        if (GetColor(color1).OppositeColor.Name == color2)
             return true;
         return false;
     }
 
+    public static ColorName GetColorBlend(Color color1, Color color2)
+    {
+        // TODO: Add in functionality for secondary colors
+        if (color1.Type == ColorType.PRIMARY && color2.Type == ColorType.PRIMARY)
+        {
+            return color1.Blends[color2.Name].Name;
+        }
+
+        return ColorName.NONE;
+    }
+
 }
- 

@@ -10,11 +10,18 @@ using UnityEngine;
 /// </summary>
 public class Pollen
 {
-    // COLOR color
-    Direction Move { get; set; }
-    int MovesLeft { get; set; }
-    int Intensity { get; set; }
-    Plot currentPlot { get; set; }
+    private ColorName color;
+    private Direction Move { get; set; }
+    private int MovesLeft { get; set; }
+    private int Intensity { get; set; }
+    public Plot currentPlot { get; set; }
+
+    public Pollen(Direction direction, int totalMoves, int intensity)
+    {
+        Move = direction;
+        MovesLeft = totalMoves;
+        Intensity = intensity;
+    }
 
     /// <summary>
     /// Moves the pollen through the plots along a particular direction
@@ -34,9 +41,12 @@ public class Pollen
         }
     }
 
+    
     private void DepositPollen()
     {
-        currentPlot.addPollen(Intensity);
+        // ONLY ADD POLLEN if PLANT in the SPACE
+        if (currentPlot.plantHere != null)
+            currentPlot.addPollen(Intensity,this.color);
     }
 
     /// <summary>
@@ -56,7 +66,5 @@ public class Pollen
         {
             return false;
         }
-        
-
     }
 }
