@@ -13,6 +13,7 @@ public class Dying : IPlantStage
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; } = StageType.DYING;
     public IReproductionBehavior Reproduction { get; } = new Sterile();
+    public IFeedingBehavior FeedingBehavior { get; } = new FlowerFeedingBehavior(1, 1);
 
     /// <summary>
     /// Creates a seed object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;

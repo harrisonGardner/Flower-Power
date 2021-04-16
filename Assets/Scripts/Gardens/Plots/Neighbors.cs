@@ -69,6 +69,19 @@ public class Neighbors
         return randomNeighbor;
     }
 
+    public Plot[] getNeighbors()
+    {
+        Plot[] adjacentPlots = new Plot[] {
+            neighbors[1].Target, neighbors[2].Target,
+            neighbors[3].Target, neighbors[4].Target,
+            neighbors[5].Target, neighbors[6].Target,
+            neighbors[7].Target, neighbors[8].Target,
+            neighbors[9].Target
+        };
+
+        return adjacentPlots;
+    }
+
     // TODO: Method for a pest to go into a new space with a plant & if none available, die.
     // TODO: Method to check if the flower in this space is adjacent to a flower of the opposite color
 

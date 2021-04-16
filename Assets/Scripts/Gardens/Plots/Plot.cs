@@ -33,7 +33,7 @@ public class Plot : MonoBehaviour
     void Start()
     {
      
-        plantHere = new Flower(this, Colors.GetColor(ColorName.BLUE), new WeedHealth());
+        
        
     }
 
