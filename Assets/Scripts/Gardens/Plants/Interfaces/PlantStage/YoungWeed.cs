@@ -12,6 +12,7 @@ public class YoungWeed : IPlantStage
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; } = StageType.YOUNGWEED;
     public IReproductionBehavior Reproduction { get; } = new Sterile();
+    public IFeedingBehavior FeedingBehavior { get; } = new WeedFeedingBehavior(2, 2);
 
     /// <summary>
     /// Creates a YoungWeed object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;

@@ -25,7 +25,7 @@ public class Plant : MonoBehaviour
     public Plot MyPlot { get; }
 
     // PLANT BEHAVIOR
-    public IFeedingBehavior FeedingBehavior { get; }
+    
 
     // STATE of the PLANT
     public bool Wilting { get; set; }
@@ -88,8 +88,8 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void Feed()
     {
-        FeedingBehavior.CollectWater();
-        FeedingBehavior.CollectSunEnergy();
+        CurrentStage.FeedingBehavior.CollectWater(MyPlot);
+        CurrentStage.FeedingBehavior.CollectSunEnergy(MyPlot);
     }
 
     // TODO

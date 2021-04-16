@@ -12,6 +12,7 @@ public class Sprout : IPlantStage
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; } = StageType.SPROUT;
     public IReproductionBehavior Reproduction { get; } = new Sterile();
+    public IFeedingBehavior FeedingBehavior { get; } = new FlowerFeedingBehavior(2, 2);
 
     /// <summary>
     /// Creates a SproutStage object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;

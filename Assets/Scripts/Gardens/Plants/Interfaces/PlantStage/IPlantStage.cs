@@ -11,6 +11,7 @@ public interface IPlantStage
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; }
     public IReproductionBehavior Reproduction { get; }
+    public IFeedingBehavior FeedingBehavior { get; }
 
     public void DecrementDaysToNextStage(bool wilting);
     public bool IsReadyForNextStage();
