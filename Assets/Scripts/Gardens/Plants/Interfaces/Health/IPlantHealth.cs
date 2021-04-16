@@ -9,7 +9,8 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public interface IPlantHealth
 {
-    public bool IsHealthyToday();
-    public bool IsWiltingToday();
-    public bool IsDyingToday();
+    public bool DyingToday { get; set; } // Set the plant stage as dying
+    public bool WiltingToday { get; set; } // Unhealthy today
+
+    public void FeedingToday(int sun, int water);
 }

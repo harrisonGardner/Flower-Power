@@ -3,7 +3,7 @@
 /// Helps a plant in one stage of life advance to the next stage of maturity
 /// </summary>
 /// <author>Lisette Peck, Nicholas Gliserman</author>
-public enum StageType { SEED, SPROUT, FLOWERING, DYING, YOUNGWEED, MATUREWEED }
+public enum StageType { SEED, SPROUT, FLOWERING, DYING, DEAD, YOUNGWEED, MATUREWEED }
 
 public interface IPlantStage
 {

@@ -54,6 +54,6 @@ public class Dying : IPlantStage
     /// <returns> </returns>
     public IPlantStage GetNextStage()
     {
-        return null;
+        return new Dead();
     }
 }

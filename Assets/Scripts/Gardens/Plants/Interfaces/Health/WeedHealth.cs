@@ -9,7 +9,9 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public class WeedHealth : IPlantHealth
 {
-    public bool IsDyingToday() { return false; }
-    public bool IsHealthyToday() { return true; }
-    public bool IsWiltingToday() { return false; }
+    public bool Dead { get; set; } = false;
+    public bool DyingToday { get; set; } = false;
+    public bool WiltingToday { get; set; } = false;
+    
+    public void FeedingToday(int sun, int water) { }
 }
