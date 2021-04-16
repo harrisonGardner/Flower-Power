@@ -137,7 +137,6 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"WeatherIcon {KeyWordFormat(weather.ToString())}";
 
-        //Don't need a foreach loop for the pest, I'm just lazy
         foreach (Sprite sp in sprites)
         {
             if (sp.name.Equals(spriteName))

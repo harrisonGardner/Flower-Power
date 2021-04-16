@@ -33,11 +33,10 @@ public class Plot : MonoBehaviour
     void Start()
     {
      
-        plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
+        //plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
        
     }
 
-    // Update is called once per frame
     public void UpdatePlot()
     {
         PlotClickedOnCheck();
