@@ -12,6 +12,8 @@ public class Seed : IPlantStage
     public int CutDifficulty { get; }               
     //public bool MustBeHealthyToProgress { get; }
     public StageType CurrentStage { get; } = StageType.SEED;
+    public IReproductionBehavior Reproduction { get; } = new Sterile();
+    public IFeedingBehavior FeedingBehavior { get; } = new FlowerFeedingBehavior(1, 1);
 
     /// <summary>
     /// Creates a seed object, with the default values for DaysToNextStage,

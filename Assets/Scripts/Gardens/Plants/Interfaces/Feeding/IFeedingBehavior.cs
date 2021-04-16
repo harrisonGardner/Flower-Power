@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IFeedingBehavior
 {
-    public int CollectWater();
-    public int CollectSunEnergy();
+    public int CollectWater(Plot plot);
+    public int CollectSunEnergy(Plot plot);
 }

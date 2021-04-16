@@ -24,11 +24,7 @@ public class Plant : MonoBehaviour
     // LOCATION
     public Plot MyPlot { get; }
 
-    // PLANT BEHAVIOR
-    public IFeedingBehavior FeedingBehavior { get; }
-
     // STATE of the PLANT
-    public bool Wilting { get; set; }
     public IPlantHealth Health { get; set; }
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
@@ -41,7 +37,7 @@ public class Plant : MonoBehaviour
 
         // ENSURE WEED has no COLOR
         if (PlantType == PlantType.Weed)
-            PlantColor = Colors.getColor(ColorName.NONE);
+            PlantColor = Colors.GetColor(ColorName.NONE);
         else
             PlantColor = color;
 
@@ -50,9 +46,6 @@ public class Plant : MonoBehaviour
             CurrentStage = new YoungWeed();
         else
             CurrentStage = new Seed();
-
-    
-
     }
 
 
@@ -74,11 +67,12 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void Grow()
     {
-        CurrentStage.DecrementDaysToNextStage(Wilting);
+        CurrentStage.DecrementDaysToNextStage(Health.WiltingToday);
+
         if (CurrentStage.IsReadyForNextStage())
         {
             IPlantStage temp = CurrentStage.GetNextStage();
-            if (temp == null) // IF THIS IS THE TERMINAL STAGE
+            if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
                 MyPlot.removePlant(); // REMOVE from PLOT
             else
                 CurrentStage = temp;
@@ -91,25 +85,47 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void Feed()
     {
-        FeedingBehavior.CollectWater();
-        FeedingBehavior.CollectSunEnergy();
+        int water = CurrentStage.FeedingBehavior.CollectWater(MyPlot);
+        int sun = CurrentStage.FeedingBehavior.CollectSunEnergy(MyPlot);
+        CheckHealth(sun, water);
     }
 
-    // TODO
-    public void CheckHealth()
+    /// <summary>
+    /// Given the sun and water taken in today, assesses
+    /// if the plant is in a state of good health, bad health,
+    /// or even dying.
+    /// </summary>
+    /// <param name="sunshine"></param>
+    /// <param name="water"></param>
+    public void CheckHealth(int sunshine, int water)
     {
+        Health.FeedingToday(sunshine, water);
 
+        if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
+        {
+            MyPlot.removePlant();
+        }
     }
 
-    // TODO
-    public void SpreadPollen()
+    /// <summary>
+    /// Spreads pollen according to wind conditions and the reproductive 
+    /// behavior of the plant's current stage
+    /// </summary>
+    /// <param name="windDirection"></param>
+    /// <param name="windyDay"></param>
+    public void SpreadPollen(Direction windDirection, bool windyDay)
     {
-        //Call the IPlantStage's IReproductionBehavior to spreak pollen
+        CurrentStage.Reproduction.SpreadPollen(MyPlot, windDirection, windyDay);
     }
 
-    // TODO
+    /// <summary>
+    /// Transforms the pollen in this plot into seeds according to the 
+    /// reproductive behavior of the plant's current stage. Then,
+    /// spreads the seeds.
+    ///
+    /// </summary>
     public void MakeSeeds()
     {
-        //Call the IPlantStage's IReproductionBehavior to spreak pollen
+        CurrentStage.Reproduction.Seed(MyPlot);
     }
 }

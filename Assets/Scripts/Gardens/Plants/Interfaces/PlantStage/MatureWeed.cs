@@ -11,6 +11,8 @@ public class MatureWeed : IPlantStage
     public int DaysToNextStage { get; set; }
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; } = StageType.MATUREWEED;
+    public IReproductionBehavior Reproduction { get; } = new WeedReproduction();
+    public IFeedingBehavior FeedingBehavior { get; } = new WeedFeedingBehavior(3, 3);
 
     /// <summary>
     /// Creates a MatureWeed object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;

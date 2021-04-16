@@ -25,8 +25,8 @@ public class Garden : MonoBehaviour
     /// actions at a faster pace, i.e. rather than trying to iterate
     /// through all the plots in the 2d array.
     /// </summary>
-    IList<Plant> flowers = new List<Plant>();
-    IList<Plant> weeds = new List<Plant>();
+    public IList<Plant> Flowers { get; } = new List<Plant>();
+    public IList<Plant> Weeds { get; } = new List<Plant>();
 
     // WEATHER
     public Direction WindDirection { get; set; }
@@ -198,7 +198,7 @@ public class Garden : MonoBehaviour
     {
         // TODO: FINISH THIS METHOD WHEN WEED CLASS IS DONE
         // Iterate through the flowers list
-        foreach (Plant weed in this.weeds)
+        foreach (Plant weed in this.Weeds)
         {
 
         }
@@ -212,7 +212,7 @@ public class Garden : MonoBehaviour
     {
         // TODO: FINISH THIS METHOD WHEN FLOWER CLASS IS DONE
         // Iterate through the flowers list
-        foreach (Plant flower in this.flowers)
+        foreach (Plant flower in this.Flowers)
         {
 
         }
@@ -224,12 +224,12 @@ public class Garden : MonoBehaviour
         // if the plant is a weed
         if (plant.PlantType == PlantType.Weed)
         {
-            this.weeds.Add(plant);
+            this.Weeds.Add(plant);
         }
         // plant is a flower
         else if (plant.PlantType == PlantType.Flower)
         {
-            this.flowers.Add(plant);
+            this.Flowers.Add(plant);
         }
         
     }
@@ -242,11 +242,11 @@ public class Garden : MonoBehaviour
     {
         if (removeMe.PlantType == PlantType.Weed)
         {
-            this.weeds.Remove(removeMe);
+            this.Weeds.Remove(removeMe);
         }
         else if (removeMe.PlantType == PlantType.Flower)
         {
-            this.flowers.Remove(removeMe);
+            this.Flowers.Remove(removeMe);
         }
     }
 

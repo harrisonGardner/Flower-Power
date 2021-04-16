@@ -11,6 +11,8 @@ public class Flowering : IPlantStage
     public int DaysToNextStage { get; set; }
     public int CutDifficulty { get; }
     public StageType CurrentStage { get; } = StageType.FLOWERING;
+    public IReproductionBehavior Reproduction { get; } = new FlowerReproduction();
+    public IFeedingBehavior FeedingBehavior { get; } = new FlowerFeedingBehavior(3, 3);
 
     /// <summary>
     /// Creates a Flowering Stage object, with the default values for DaysToNextStage, CutDifficulty and MustBeHealthyToProgress;

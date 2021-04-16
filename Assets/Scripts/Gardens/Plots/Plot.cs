@@ -22,8 +22,8 @@ public class Plot : MonoBehaviour
     public int SunEnergyToday { get; set; } = 0;
 
     // Plant Related Fields
-    Plant plantHere;
-    public IList<Pollen> PollenToday { get; } // TODO: REVISIT DATA STRUCTURE
+    public Plant plantHere;
+    public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -32,13 +32,13 @@ public class Plot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
+
         //plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
-       
-    }
+    }  
 
     public void UpdatePlot()
     {
+
         PlotClickedOnCheck();
     }
 
@@ -77,7 +77,13 @@ public class Plot : MonoBehaviour
         this.plotObject = prefab;
     }
 
-
+    /// <summary>
+    /// Logic for putting a plot (as game object) into the game.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
     public void setPositionAndScale(int x, int y, int width, int height)
     {
         this.plotObject.transform.position.Set(x, y, 1);
@@ -104,13 +110,19 @@ public class Plot : MonoBehaviour
     /// </summary>
     public void removePlant()
     {
-        // TODO: Add logic to ensure there is plant here and it is in fact dead
-        // TODO: remove it from the garden
+        // REMOVE the PLANT FROM THE GARDEN
+        if (this.plantHere.PlantType == PlantType.Weed)
+        {
+            garden.Weeds.Remove(this.plantHere);
+        }
+        else if (this.plantHere.PlantType == PlantType.Flower)
+        {
+            garden.Flowers.Remove(this.plantHere);
+        }
 
+        // REMOVE from this PLOT
         this.plantHere = null;
-
     }
-    
 
     /// <summary>
     /// Increases the amount of water in the space up to the plot's capacity.
@@ -172,22 +184,39 @@ public class Plot : MonoBehaviour
         }
     }
 
-    // TODO: COMPLETE THIS METHOD
-    public void addPollen(int amount) // TODO: Add Color
+    /// <summary>
+    /// Deposits pollen in this space.
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="color"></param>
+    public void addPollen(int amount, ColorName color)
     {
-        // IF THERE IS NO PLANT in the SPACE, DO NOTHING
-        // IF THERE IS A PLANT, ADD POLEN
+        // ONLY DEPOSIT POLLEN if THERE IS A PLANT HERE
+        if (this.plantHere != null)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                PollenHere.Add(color);
+            }
+        }
     }
 
-    // TODO: COMPLETE THIS METHOD
+    /// <summary>
+    /// Resets the pollen in this plot
+    /// </summary>
     public void emptyPollen()
     {
-        // ONCE DATA STRUCTURE FOR POLLEN IS SETTLED
-        // SET the OLD DATA Loose For Garbage Collection
+        // IF PLANT is HERE, NEED TO EMPTY PLOT of POLLEN
+        if (this.plantHere != null)
+        {
+            // SET the OLD DATA LOOSE for GARBAGE COLLECTIOn
+            PollenHere = new TalliedSet<ColorName>();
+        }
     }
 
+    // TODO: Once Pest Class is Implemented
     public void addPest()
     {
-        // TODO: Once Pest Class is Implemented
+        
     }
 }
