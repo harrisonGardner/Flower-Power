@@ -24,11 +24,7 @@ public class Plant : MonoBehaviour
     // LOCATION
     public Plot MyPlot { get; }
 
-    // PLANT BEHAVIOR
-    
-
     // STATE of the PLANT
-    public bool Wilting { get; set; }
     public IPlantHealth Health { get; set; }
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
@@ -71,11 +67,12 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void Grow()
     {
-        CurrentStage.DecrementDaysToNextStage(Wilting);
+        CurrentStage.DecrementDaysToNextStage(Health.WiltingToday);
+
         if (CurrentStage.IsReadyForNextStage())
         {
             IPlantStage temp = CurrentStage.GetNextStage();
-            if (temp == null) // IF THIS IS THE TERMINAL STAGE
+            if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
                 MyPlot.removePlant(); // REMOVE from PLOT
             else
                 CurrentStage = temp;
@@ -88,14 +85,26 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void Feed()
     {
-        CurrentStage.FeedingBehavior.CollectWater(MyPlot);
-        CurrentStage.FeedingBehavior.CollectSunEnergy(MyPlot);
+        int water = CurrentStage.FeedingBehavior.CollectWater(MyPlot);
+        int sun = CurrentStage.FeedingBehavior.CollectSunEnergy(MyPlot);
+        CheckHealth(sun, water);
     }
 
-    // TODO
-    public void CheckHealth()
+    /// <summary>
+    /// Given the sun and water taken in today, assesses
+    /// if the plant is in a state of good health, bad health,
+    /// or even dying.
+    /// </summary>
+    /// <param name="sunshine"></param>
+    /// <param name="water"></param>
+    public void CheckHealth(int sunshine, int water)
     {
+        Health.FeedingToday(sunshine, water);
 
+        if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
+        {
+            MyPlot.removePlant();
+        }
     }
 
     /// <summary>
