@@ -95,8 +95,11 @@ public class FlowerReproduction : IReproductionBehavior
             {
                 // GET the SEED COLOR
                 ColorName flowerColor = seeds.RemoveRandomElement();
-                adjPlot.addPlant(new Flower(adjPlot,
-                    Colors.GetColor(flowerColor), new WeedHealth()));
+                // TODO: Revist this commenting out
+                //adjPlot.addPlant(new Flower(adjPlot,
+                //    Colors.GetColor(flowerColor), new FlowerHealth(1, 1, 10, 10)));
+
+                adjPlot.addPlant(PlantType.Flower, flowerColor);
             }
             else
             {

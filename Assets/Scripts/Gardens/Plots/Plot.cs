@@ -11,11 +11,11 @@ using UnityEngine;
 public class Plot : MonoBehaviour
 {
     // GRAPHICS
-    public GameObject plotObject;
+    public GameObject PlotObject { get; set; }
 
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
-    private Garden garden;
+    public Garden Garden { get; set; }
 
     // Metrics
     int waterLevel = 0;
@@ -24,6 +24,8 @@ public class Plot : MonoBehaviour
 
     // Plant Related Fields
     public Plant plantHere;
+    public GameObject plantPrefab;
+    public bool IsEmpty = true;
     public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
     public enum PlantAction { NONE, CUT, WILT }
     public PlantAction plotPlantAction = PlantAction.NONE;
@@ -46,7 +48,7 @@ public class Plot : MonoBehaviour
     //Mouse click on plot check
     private void PlotClickedOnCheck()
     {
-        if (this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked)
+        if (this.PlotObject.GetComponent<PlotInteraction>().hasBeenClicked)
         {
             //Watering Can Click
             if (WateringCan.holding)
@@ -57,20 +59,19 @@ public class Plot : MonoBehaviour
             //Clippers Click
             if (Clippers.holding)
             {
-                if(plantHere)
+                if(!IsEmpty)
                     this.plantHere.KillPlant();
                 Clippers.useTool = true;
             }
             if (SeedPouch.holding == true)
             {
-                if (this.plantHere == null)
+                if (IsEmpty)
                 {
-                    Plant plantObject = new Flower(this, Colors.GetColor(SeedPouch.GetSeedColor()), new FlowerHealth(0, 0, 90, 10));
-                    addPlant(plantObject);
+                    addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
                     SeedPouch.holding = false;
                 }
             }
-            this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
+            this.PlotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
         }
         SpriteUpdate();
     }
@@ -79,24 +80,24 @@ public class Plot : MonoBehaviour
     public void SpriteUpdate()
     {
         if (waterLevel <= 0)
-            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(0);
+            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(0);
         else if (waterLevel <= 4)
-            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(1);
+            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(1);
         else if (waterLevel <= 8)
-            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(2);
+            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(2);
         else if (waterLevel <= 12)
-            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(3);
+            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(3);
     }
 
     /// <summary>
     /// Constructor method to create a new Plot object.
     /// </summary>
     /// <param name="garden">The Garden to which this plot belongs</param>
-    public Plot(Garden garden, GameObject prefab)
-    {
-        this.garden = garden;
-        this.plotObject = prefab;
-    }
+    //public Plot(Garden garden, GameObject prefab)
+    //{
+    //    this.Garden = garden;
+    //    this.PlotObject = prefab;
+    //}
 
     /// <summary>
     /// Logic for putting a plot (as game object) into the game.
@@ -107,8 +108,8 @@ public class Plot : MonoBehaviour
     /// <param name="height"></param>
     public void setPositionAndScale(int x, int y, int width, int height)
     {
-        this.plotObject.transform.position.Set(x, y, 1);
-        this.plotObject.transform.localScale.Set(width, height, 1);
+        this.PlotObject.transform.position.Set(x, y, 1);
+        this.PlotObject.transform.localScale.Set(width, height, 1);
     }
 
     /// <summary>
@@ -116,13 +117,19 @@ public class Plot : MonoBehaviour
     /// the inputted plant into this plot.
     /// </summary>
     /// <param name="plant"></param>
-    public void addPlant(Plant plant)
+    public void addPlant(PlantType pt, ColorName cn)
     {
         // Add the plant to the appropriate list (weed or flower) in the garden
-        if (this.plantHere == null)
+        if (this.IsEmpty)
         {
-            this.plantHere = plant;
-            garden.addPlant(plant);
+            plantPrefab = Instantiate(Resources.Load("Prefabs/FlowerPrefab") as GameObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1), new Quaternion());
+            Flower flowerObject = plantPrefab.GetComponent<Flower>();
+            flowerObject.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn));
+            plantPrefab.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SeedPouch.GetSeedColor(), plantPrefab.GetComponent<Flower>().CurrentStage.CurrentStage);
+
+            this.IsEmpty = false;
+            this.plantHere = flowerObject;
+            Garden.addPlant(flowerObject);
         }
     }
 
@@ -134,14 +141,15 @@ public class Plot : MonoBehaviour
         // REMOVE the PLANT FROM THE GARDEN
         if (this.plantHere.PlantType == PlantType.Weed)
         {
-            garden.Weeds.Remove(this.plantHere);
+            Garden.Weeds.Remove(this.plantHere);
         }
         else if (this.plantHere.PlantType == PlantType.Flower)
         {
-            garden.Flowers.Remove(this.plantHere);
+            Garden.Flowers.Remove(this.plantHere);
         }
 
         // REMOVE from this PLOT
+        IsEmpty = true;
         this.plantHere = null;
     }
 

@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WateringCanIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 2969845792712919215, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5709872605317145499, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
       propertyPath: itemUseDelay
       value: 12

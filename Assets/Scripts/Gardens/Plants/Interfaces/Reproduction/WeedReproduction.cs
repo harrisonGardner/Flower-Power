@@ -74,7 +74,9 @@ public class WeedReproduction : IReproductionBehavior
             Plot adjPlot = plot.AdjacentPlots.getRandomNeighbor();
             if (adjPlot.plantHere == null)
             {
-                adjPlot.addPlant(new Weed(adjPlot));
+                // TODO: Revisit this later
+                //adjPlot.addPlant(new Weed(adjPlot));
+                adjPlot.addPlant(PlantType.Weed, ColorName.NONE);
             }
         }
     }
