@@ -9,9 +9,15 @@ using UnityEngine;
 /// <author>Lisette Peck, Nicholas Gliserman</author>
 public class SeedPouch : MonoBehaviour
 {
-    // TODO: Add currentDisplay color for graphics & a method to get the next color so the user can tap the icon to see other seed colors
     public TalliedSet<ColorName> Seeds { get; } = new TalliedSet<ColorName>();
     
+    // Graphic Related
+    private static ColorName[] bagColors = new ColorName[3] { ColorName.BLUE, ColorName.YELLOW, ColorName.RED };
+    private static int bagColorArrayHead = 0;
+    public static bool holding = false;
+
+    public GameObject seedObject;
+    private Vector3 defaultPosition;
 
     /// <summary>
     /// Adds a seed of the given color to the players pouch.
@@ -35,16 +41,49 @@ public class SeedPouch : MonoBehaviour
         }
     }
 
+    public static ColorName GetSeedColor()
+    {
+        return bagColors[bagColorArrayHead];
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        defaultPosition = seedObject.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (holding)
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
+        }
+        else
+            seedObject.transform.position = defaultPosition;
+
+    }
+
+    private void OnMouseOver()
+    {
+        if(Input.GetMouseButtonUp(1))
+        {
+            bagColorArrayHead++;
+            if (bagColorArrayHead > bagColors.Length-1)
+                bagColorArrayHead = 0;
+
+            gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SpriteFetcher.SeedOrPouch.SEEDPOUCH, bagColors[bagColorArrayHead]);
+            seedObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SpriteFetcher.SeedOrPouch.SEED, bagColors[bagColorArrayHead]);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        if (holding)
+            holding = false;
+        else if(!WateringCan.holding && !Clippers.holding)
+            holding = true;
     }
 }

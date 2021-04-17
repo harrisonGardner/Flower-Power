@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160107480589103329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.038333133, y: 0.16849789, z: -0.0002515247}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb89906bb6444ff7b202e04d529c898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plotPrefab: {fileID: 5867977109463979736, guid: 07a0411e2e18d4619b00e4dfa8de3591, type: 3}
+  plotPrefab: {fileID: 4413411524221007625, guid: 07a0411e2e18d4619b00e4dfa8de3591, type: 3}
   gardenPrefab: {fileID: 822484797999255312, guid: b244ee78010cd44e8b0854249c64f5d1, type: 3}
-  height: 10
-  width: 15
-  plotLength: 5
+  height: 5
+  width: 12
+  plotLength: 0

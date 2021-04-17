@@ -4,7 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - plotPrefab: {fileID: 5867977109463979736, guid: 07a0411e2e18d4619b00e4dfa8de3591, type: 3}
+  - plotObject: {fileID: 1759401141460295565, guid: 6485abc4f80553548981b799d0e928cc, type: 3}
+  - plantHere: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
