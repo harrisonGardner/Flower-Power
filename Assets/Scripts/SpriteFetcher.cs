@@ -60,8 +60,8 @@ public class SpriteFetcher : MonoBehaviour
     }
 
     //Tool Sprite Getter
-    public enum Tools { WATERINGCAN, CLIPPERS }
-    public static Sprite GetSprite(Tools tool, bool toolAction)
+    public enum ToolType { WATERINGCAN, CLIPPERS }
+    public static Sprite GetSprite(ToolType tool, bool toolAction)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/{KeyWordFormat(tool.ToString())}";
@@ -137,7 +137,6 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"WeatherIcon {KeyWordFormat(weather.ToString())}";
 
-        //Don't need a foreach loop for the pest, I'm just lazy
         foreach (Sprite sp in sprites)
         {
             if (sp.name.Equals(spriteName))

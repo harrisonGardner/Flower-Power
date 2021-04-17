@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 /// <summary>
 /// Building block of the garden that houses up to a single plant
 /// and mediates the plant's interactions with the external world.
 /// </summary>
-/// <author>Nicholas Gliserman</author>
+/// <author>Nicholas Gliserman, Harrison Gardner</author>
 public class Plot : MonoBehaviour
 {
     // GRAPHICS
-    public GameObject plotPrefab;
+    public GameObject plotObject;
 
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
@@ -18,12 +19,14 @@ public class Plot : MonoBehaviour
 
     // Metrics
     int waterLevel = 0;
-    private const int WATER_CAPCITY = 10;
+    private const int WATER_CAPCITY = 12;
     public int SunEnergyToday { get; set; } = 0;
 
     // Plant Related Fields
     public Plant plantHere;
     public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
+    public enum PlantAction { NONE, CUT, WILT }
+    public PlantAction plotPlantAction = PlantAction.NONE;
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -31,12 +34,51 @@ public class Plot : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {  
+    {
+        
+    }  
+
+    public void UpdatePlot()
+    {
+        PlotClickedOnCheck();
     }
 
-    // Update is called once per frame
-    void Update()
+    //Mouse click on plot check
+    private void PlotClickedOnCheck()
     {
+        if (this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked)
+        {
+            //Watering Can Click
+            if (WateringCan.holding)
+            {
+                waterLevel = WATER_CAPCITY;
+                WateringCan.useTool = true;
+            }
+            if (SeedPouch.holding == true)
+            {
+                if (this.plantHere == null)
+                {
+                    Plant plantObject = new Flower(this, Colors.GetColor(SeedPouch.GetSeedColor()), new FlowerHealth(0, 0, 90, 10));
+                    addPlant(plantObject);
+                    SeedPouch.holding = false;
+                }
+            }
+            this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
+        }
+        SpriteUpdate();
+    }
+
+    //Sprite Update Check
+    public void SpriteUpdate()
+    {
+        if (waterLevel <= 0)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(0);
+        else if (waterLevel <= 4)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(1);
+        else if (waterLevel <= 8)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(2);
+        else if (waterLevel <= 12)
+            this.plotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(3);
     }
 
     /// <summary>
@@ -46,7 +88,7 @@ public class Plot : MonoBehaviour
     public Plot(Garden garden, GameObject prefab)
     {
         this.garden = garden;
-        this.plotPrefab = prefab;
+        this.plotObject = prefab;
     }
 
     /// <summary>
@@ -58,8 +100,8 @@ public class Plot : MonoBehaviour
     /// <param name="height"></param>
     public void setPositionAndScale(int x, int y, int width, int height)
     {
-        this.plotPrefab.transform.position.Set(x, y, 1);
-        this.plotPrefab.transform.localScale.Set(width, height, 1);
+        this.plotObject.transform.position.Set(x, y, 1);
+        this.plotObject.transform.localScale.Set(width, height, 1);
     }
 
     /// <summary>
@@ -94,6 +136,11 @@ public class Plot : MonoBehaviour
 
         // REMOVE from this PLOT
         this.plantHere = null;
+    }
+
+    public int GetWaterLevel()
+    {
+        return waterLevel;
     }
 
     /// <summary>
@@ -191,5 +238,4 @@ public class Plot : MonoBehaviour
     {
         
     }
-
 }
