@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WateringCan : MonoBehaviour
+public class Clippers : MonoBehaviour
 {
-    public SpriteFetcher.ToolType tool = SpriteFetcher.ToolType.WATERINGCAN;
+    public SpriteFetcher.ToolType tool = SpriteFetcher.ToolType.CLIPPERS;
 
     public static bool holding = false;
     public static bool useTool = false;
@@ -56,7 +56,7 @@ public class WateringCan : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!holding && !Clippers.holding && !SeedPouch.holding)
+        if (!holding && !WateringCan.holding && !SeedPouch.holding)
         {
             itemUseTimer = itemUseDelay;
             holding = true;

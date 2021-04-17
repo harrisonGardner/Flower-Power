@@ -83,7 +83,7 @@ public class SeedPouch : MonoBehaviour
     {
         if (holding)
             holding = false;
-        else
+        else if(!WateringCan.holding && !Clippers.holding)
             holding = true;
     }
 }

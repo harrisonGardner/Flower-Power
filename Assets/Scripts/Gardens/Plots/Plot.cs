@@ -54,6 +54,13 @@ public class Plot : MonoBehaviour
                 waterLevel = WATER_CAPCITY;
                 WateringCan.useTool = true;
             }
+            //Clippers Click
+            if (Clippers.holding)
+            {
+                if(plantHere)
+                    this.plantHere.KillPlant();
+                Clippers.useTool = true;
+            }
             if (SeedPouch.holding == true)
             {
                 if (this.plantHere == null)
