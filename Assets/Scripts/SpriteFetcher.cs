@@ -60,8 +60,8 @@ public class SpriteFetcher : MonoBehaviour
     }
 
     //Tool Sprite Getter
-    public enum Tools { WATERINGCAN, CLIPPERS }
-    public static Sprite GetSprite(Tools tool, bool toolAction)
+    public enum ToolType { WATERINGCAN, CLIPPERS }
+    public static Sprite GetSprite(ToolType tool, bool toolAction)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/{KeyWordFormat(tool.ToString())}";

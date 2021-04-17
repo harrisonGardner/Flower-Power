@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 /// <summary>
 /// Building block of the garden that houses up to a single plant
 /// and mediates the plant's interactions with the external world.
 /// </summary>
-/// <author>Nicholas Gliserman</author>
+/// <author>Nicholas Gliserman, Harrison Gardner</author>
 public class Plot : MonoBehaviour
 {
     // GRAPHICS
@@ -24,6 +25,8 @@ public class Plot : MonoBehaviour
     // Plant Related Fields
     public Plant plantHere;
     public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
+    public enum PlantAction { NONE, CUT, WILT }
+    public PlantAction plotPlantAction = PlantAction.NONE;
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -32,13 +35,11 @@ public class Plot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        //plantHere = new Flower(this, Colors.getColor(ColorName.BLUE), new WeedHealth());
+        
     }  
 
     public void UpdatePlot()
     {
-
         PlotClickedOnCheck();
     }
 
@@ -47,10 +48,23 @@ public class Plot : MonoBehaviour
     {
         if (this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked)
         {
-            waterLevel++;
+            //Watering Can Click
+            if (WateringCan.holding)
+            {
+                waterLevel = WATER_CAPCITY;
+                WateringCan.useTool = true;
+            }
+            if (SeedPouch.holding == true)
+            {
+                if (this.plantHere == null)
+                {
+                    Plant plantObject = new Flower(this, Colors.GetColor(SeedPouch.GetSeedColor()), new FlowerHealth(0, 0, 90, 10));
+                    addPlant(plantObject);
+                    SeedPouch.holding = false;
+                }
+            }
             this.plotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
         }
-
         SpriteUpdate();
     }
 
@@ -122,6 +136,11 @@ public class Plot : MonoBehaviour
 
         // REMOVE from this PLOT
         this.plantHere = null;
+    }
+
+    public int GetWaterLevel()
+    {
+        return waterLevel;
     }
 
     /// <summary>

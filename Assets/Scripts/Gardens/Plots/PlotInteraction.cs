@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The game object portion of the plot script.
+/// </summary>
+/// <author> Harrison Gardner </author>>
 public class PlotInteraction : MonoBehaviour
 {
     public bool hasBeenClicked = false;

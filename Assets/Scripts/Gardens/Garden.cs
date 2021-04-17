@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /// <summary>
 /// The primary game space, encompassing the plots where
 /// plants can grow.
 /// </summary>
-/// <author>Nicholas Gliserman</author>
+/// <author>Nicholas Gliserman, Harrison Gardner</author>
 public class Garden : MonoBehaviour
 {
     // PREFABS
@@ -48,6 +49,7 @@ public class Garden : MonoBehaviour
         {
             plot.UpdatePlot();
         }
+        UpdatePlantSprites();
     }
 
     /// <summary>
@@ -64,7 +66,7 @@ public class Garden : MonoBehaviour
         // New 2d Array of Plots
         //this.height = height;
         //this.width = width;
-        this.plots = new Plot[this.height, this.width];
+        this.plots = new Plot[this.width, this.height];
         
 
         // Iterate through array and add plots
@@ -73,14 +75,13 @@ public class Garden : MonoBehaviour
             for (int x = 0; x < this.width; x++)
             {
                 // DUPLICATE PLOT PREFAB
-                Vector3 position = new Vector3((float) x * 0.8F, (float) y * 0.8F, 1.0F);
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
-                    position, new Quaternion());
+                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * 0.16F), 1F), new Quaternion());
 
                 prefab.transform.parent = gameObject.transform;
 
                 // ADD to ARRAY
-                this.plots[y, x] = new Plot(this, prefab);
+                this.plots[x, y] = new Plot(this, prefab);
             }
         }
 
@@ -101,9 +102,9 @@ public class Garden : MonoBehaviour
                     int newX = x + direction.X;
 
                     // IF NEIGHBOR is in the GARDEN 
-                    if (isInGarden(newY, newX))
+                    if (isInGarden(newX, newY))
                     {
-                        surroundingPlots[i] = new Neighbor(direction, plots[newY, newX]);
+                        surroundingPlots[i] = new Neighbor(direction, plots[newX, newY]);
                     }
                     else // USE SPECIAL CONSTRUCTOR INDICATING SPACE is EDGE
                     {
@@ -112,12 +113,12 @@ public class Garden : MonoBehaviour
 
                 }
                 // APPEND NEIGHBORS to PLOT
-                this.plots[y, x].AdjacentPlots = new Neighbors(surroundingPlots);
+                this.plots[x, y].AdjacentPlots = new Neighbors(surroundingPlots);
             }
         }
     }
 
-    private bool isInGarden(int y, int x)
+    private bool isInGarden(int x, int y)
     {
         return (y < height && y >= 0 && x < width && x >= 0);
     }
@@ -154,7 +155,7 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[y, x].addWater(waterAmount);
+                this.plots[x, y].addWater(waterAmount);
             }
         }
     }
@@ -173,7 +174,7 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[y, x].SunEnergyToday = sunAmount;
+                this.plots[x, y].SunEnergyToday = sunAmount;
             }
         }
     }
@@ -188,6 +189,17 @@ public class Garden : MonoBehaviour
         WindDirection = newWindDirection;
         WindyToday = true;
         SunAllPlots(1);
+    }
+
+    public void UpdatePlantSprites()
+    {
+        foreach (Plant flower in this.Flowers)
+        {
+            if (flower.CurrentStage.CurrentStage == StageType.DEAD)
+                removePlant(flower);
+            Flower tempFlower = (Flower)flower;
+            tempFlower.SpriteUpdate();
+        }
     }
 
     /// <summary>
@@ -221,6 +233,7 @@ public class Garden : MonoBehaviour
 
     public void addPlant(Plant plant)
     {
+        Debug.Log("Add Plant in garden called");
         // if the plant is a weed
         if (plant.PlantType == PlantType.Weed)
         {
@@ -231,7 +244,6 @@ public class Garden : MonoBehaviour
         {
             this.Flowers.Add(plant);
         }
-        
     }
 
     /// <summary>
