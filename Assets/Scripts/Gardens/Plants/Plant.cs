@@ -12,7 +12,7 @@ public enum PlantType { Flower, Weed }
 /// to fulfill an order or a weed, which takes resources from the
 /// flowers in the garden.
 /// </summary>
-/// <author>Nicholas Gliserman</author>
+/// <author>Nicholas Gliserman, Harrison Gardner</author>
 public class Plant : MonoBehaviour
 {
     // TYPE
@@ -104,6 +104,16 @@ public class Plant : MonoBehaviour
         if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
         {
             MyPlot.removePlant();
+        }
+    }
+
+    public void KillPlant()
+    {
+        Debug.Log("Try to kill plant");
+        while (CurrentStage.CurrentStage != StageType.DEAD)
+        {
+            Debug.Log("Hasn't died yet");
+            CurrentStage = CurrentStage.GetNextStage();
         }
     }
 
