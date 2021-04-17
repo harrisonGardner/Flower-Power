@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4413411524221007626}
   - component: {fileID: 4413411524221007620}
   - component: {fileID: 4413411524221007621}
+  - component: {fileID: 3535745540569860849}
   m_Layer: 0
   m_Name: PlotPrefab
   m_TagString: Untagged
@@ -123,3 +124,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &3535745540569860849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413411524221007625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38efb71d9e8e46b392f068172796a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plotObject: {fileID: 4413411524221007625}
+  plantHere: {fileID: 0}
+  plotPlantAction: 0
+  clashingFlowerColorHere: 0

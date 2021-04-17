@@ -62,8 +62,5 @@ public class FlowerHealth : IPlantHealth
         {
             DyingToday = true;
         }
-            
-
     }
-
 }

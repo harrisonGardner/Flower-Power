@@ -7,9 +7,8 @@ using UnityEngine;
 /// </summary>
 public class Weed : Plant
 {
-    public Weed(Plot plot) : base(PlantType.Weed, new WeedHealth(), plot, Colors.GetColor(ColorName.NONE))
-    {
+    //public Weed(Plot plot) : base(PlantType.Weed, new WeedHealth(), plot, Colors.GetColor(ColorName.NONE))
+    //{
 
-    }
-
+    //}
 }

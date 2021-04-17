@@ -19,7 +19,7 @@ public class Garden : MonoBehaviour
     public int height;
     public int width;
     public int plotLength;
-    public Plot[,] plots;
+    public GameObject[,] plots;
 
     /// <summary>
     /// n.b. Having these lists of Plants lets us iterate through the plant-based
@@ -45,9 +45,9 @@ public class Garden : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(Plot plot in plots)
+        foreach(GameObject plot in plots)
         {
-            plot.UpdatePlot();
+            plot.GetComponent<Plot>().UpdatePlot();
         }
         UpdatePlantSprites();
     }
@@ -66,7 +66,7 @@ public class Garden : MonoBehaviour
         // New 2d Array of Plots
         //this.height = height;
         //this.width = width;
-        this.plots = new Plot[this.width, this.height];
+        this.plots = new GameObject[this.width, this.height];
         
 
         // Iterate through array and add plots
@@ -78,10 +78,13 @@ public class Garden : MonoBehaviour
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
                     new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * 0.16F), 1F), new Quaternion());
 
+                // Hierarchy
                 prefab.transform.parent = gameObject.transform;
 
                 // ADD to ARRAY
-                this.plots[x, y] = new Plot(this, prefab);
+                this.plots[x, y] = prefab;
+                prefab.GetComponent<Plot>().Garden = this;
+                prefab.GetComponent<Plot>().PlotObject = prefab;
             }
         }
 
@@ -104,7 +107,7 @@ public class Garden : MonoBehaviour
                     // IF NEIGHBOR is in the GARDEN 
                     if (isInGarden(newX, newY))
                     {
-                        surroundingPlots[i] = new Neighbor(direction, plots[newX, newY]);
+                        surroundingPlots[i] = new Neighbor(direction, plots[newX, newY].GetComponent<Plot>());
                     }
                     else // USE SPECIAL CONSTRUCTOR INDICATING SPACE is EDGE
                     {
@@ -113,7 +116,7 @@ public class Garden : MonoBehaviour
 
                 }
                 // APPEND NEIGHBORS to PLOT
-                this.plots[x, y].AdjacentPlots = new Neighbors(surroundingPlots);
+                this.plots[x, y].GetComponent<Plot>().AdjacentPlots = new Neighbors(surroundingPlots);
             }
         }
     }
@@ -155,7 +158,7 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[x, y].addWater(waterAmount);
+                this.plots[x, y].GetComponent<Plot>().addWater(waterAmount);
             }
         }
     }
@@ -174,7 +177,7 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[x, y].SunEnergyToday = sunAmount;
+                this.plots[x, y].GetComponent<Plot>().SunEnergyToday = sunAmount;
             }
         }
     }
@@ -193,12 +196,17 @@ public class Garden : MonoBehaviour
 
     public void UpdatePlantSprites()
     {
+        IList<Plant> removedPlants = new List<Plant>();
         foreach (Plant flower in this.Flowers)
         {
-            if (flower.CurrentStage.CurrentStage == StageType.DEAD)
-                removePlant(flower);
             Flower tempFlower = (Flower)flower;
             tempFlower.SpriteUpdate();
+            if (flower.CurrentStage.CurrentStage == StageType.DEAD)
+                removedPlants.Add(flower);
+        }
+        foreach (Plant remove in removedPlants)
+        {
+            remove.MyPlot.removePlant();
         }
     }
 
@@ -228,7 +236,6 @@ public class Garden : MonoBehaviour
         {
 
         }
-
     }
 
     public void addPlant(Plant plant)
@@ -258,6 +265,7 @@ public class Garden : MonoBehaviour
         }
         else if (removeMe.PlantType == PlantType.Flower)
         {
+
             this.Flowers.Remove(removeMe);
         }
     }
