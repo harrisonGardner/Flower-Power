@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 7818689757044616098
-    second: Plots_0
+    second: Plot Water 0
   - first:
       213: 1272313374670823227
     second: Plots_1
@@ -19,7 +19,7 @@ TextureImporter:
     second: Plots_4
   - first:
       213: 8542913439422267187
-    second: Plots_5
+    second: Plot Water 1
   - first:
       213: 332446633682338461
     second: Plots_6
@@ -34,7 +34,7 @@ TextureImporter:
     second: Plots_9
   - first:
       213: -9223061284634400211
-    second: Plots_10
+    second: Plot Water 2
   - first:
       213: -7423593327925704503
     second: Plots_11
@@ -49,7 +49,7 @@ TextureImporter:
     second: Plots_14
   - first:
       213: -2736846866555261331
-    second: Plots_15
+    second: Plot Water 3
   - first:
       213: -7899795884938867976
     second: Plots_16
@@ -178,7 +178,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Plots_0
+      name: Plot Water 0
       rect:
         serializedVersion: 2
         x: 0
@@ -283,7 +283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Plots_5
+      name: Plot Water 1
       rect:
         serializedVersion: 2
         x: 80
@@ -388,7 +388,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Plots_10
+      name: Plot Water 2
       rect:
         serializedVersion: 2
         x: 160
@@ -493,7 +493,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Plots_15
+      name: Plot Water 3
       rect:
         serializedVersion: 2
         x: 240
@@ -593,90 +593,6 @@ TextureImporter:
       bones: []
       spriteID: c5fff7e3705399df0800000000000000
       internalID: -173048805447434404
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Plots_20
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84b5abce1c2014930800000000000000
-      internalID: 4125581765571664712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Plots_21
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8adbf504cf0f175c0800000000000000
-      internalID: -4219326409667002968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Plots_22
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc60d81fc12fc4510800000000000000
-      internalID: 1534867779152053963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Plots_23
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4968585afce200e0800000000000000
-      internalID: -2305019499292104374
       vertices: []
       indices: 
       edges: []

@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8719932809320372942
-    second: Blue Flower_0
+    second: Blue Flower Seed
   - first:
       213: -3330917754960331136
-    second: Blue Flower_1
+    second: Blue Flower Sprout
   - first:
       213: -1366328544317174966
-    second: Blue Flower_2
+    second: Blue Flower Flowering
   - first:
       213: -1193402978602774121
-    second: Blue Flower_3
+    second: Blue Flower Dying
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Flower_0
+      name: Blue Flower Seed
       rect:
         serializedVersion: 2
         x: 0
@@ -123,7 +123,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,7 +136,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower_1
+      name: Blue Flower Sprout
       rect:
         serializedVersion: 2
         x: 16
@@ -144,7 +144,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower_2
+      name: Blue Flower Flowering
       rect:
         serializedVersion: 2
         x: 32
@@ -165,7 +165,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower_3
+      name: Blue Flower Dying
       rect:
         serializedVersion: 2
         x: 48
@@ -186,7 +186,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

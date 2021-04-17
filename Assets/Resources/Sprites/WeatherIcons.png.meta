@@ -1,31 +1,16 @@
 fileFormatVersion: 2
-guid: 31deebe37dcb4784ea66fbe56ac8512d
+guid: 4162c9e16189fbc43b5df56bac78f15c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7218459330969240739
-    second: Wind Arrow_0
+      213: -1406147488626973732
+    second: WeatherIcon Sun
   - first:
-      213: -7302658359591948368
-    second: Wind Arrow_1
+      213: -7044671423751264024
+    second: WeatherIcon Wind
   - first:
-      213: 998915776792523057
-    second: Wind Arrow_2
-  - first:
-      213: 5122972627367776974
-    second: Wind Arrow_3
-  - first:
-      213: -6544745386975862197
-    second: Wind Arrow_4
-  - first:
-      213: 5086546577028691454
-    second: Wind Arrow_5
-  - first:
-      213: 8443672509440508419
-    second: Wind Arrow_6
-  - first:
-      213: 7950161314991796418
-    second: Wind Arrow_7
+      213: 2196760426095568413
+    second: WeatherIcon Rain
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wind Arrow_0
+      name: WeatherIcon Sun
       rect:
         serializedVersion: 2
         x: 0
@@ -135,20 +120,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5b79f7cb71e2db90800000000000000
-      internalID: -7218459330969240739
+      spriteID: cd3e4962f4c5c7ce0800000000000000
+      internalID: -1406147488626973732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Arrow_1
+      name: WeatherIcon Wind
       rect:
         serializedVersion: 2
         x: 16
@@ -156,20 +141,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bf2c70c9eeb7aa90800000000000000
-      internalID: -7302658359591948368
+      spriteID: 8e8e5f31aac4c3e90800000000000000
+      internalID: -7044671423751264024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Arrow_2
+      name: WeatherIcon Rain
       rect:
         serializedVersion: 2
         x: 32
@@ -177,119 +162,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13170444b9cdcdd00800000000000000
-      internalID: 998915776792523057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wind Arrow_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec25e404674781740800000000000000
-      internalID: 5122972627367776974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wind Arrow_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b426deffeb46c25a0800000000000000
-      internalID: -6544745386975862197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wind Arrow_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef53641892b079640800000000000000
-      internalID: 5086546577028691454
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wind Arrow_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 302ceec2963fd2570800000000000000
-      internalID: 8443672509440508419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wind Arrow_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c0732f1895a45e60800000000000000
-      internalID: 7950161314991796418
+      spriteID: d16ef06f7f57c7e10800000000000000
+      internalID: 2196760426095568413
       vertices: []
       indices: 
       edges: []

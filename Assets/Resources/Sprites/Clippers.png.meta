@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 4162c9e16189fbc43b5df56bac78f15c
+guid: b03f5053f93b8924e840f0215a39f64f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1406147488626973732
-    second: WeatherIcons_0
+      213: 2071085793087248035
+    second: Clippers Idle
   - first:
-      213: -7044671423751264024
-    second: WeatherIcons_1
-  - first:
-      213: 2196760426095568413
-    second: WeatherIcons_2
+      213: 3863240528202574897
+    second: Clippers Using
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WeatherIcons_0
+      name: Clippers Idle
       rect:
         serializedVersion: 2
         x: 0
@@ -120,20 +117,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd3e4962f4c5c7ce0800000000000000
-      internalID: -1406147488626973732
+      spriteID: 3a6d2544e89fdbc10800000000000000
+      internalID: 2071085793087248035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeatherIcons_1
+      name: Clippers Using
       rect:
         serializedVersion: 2
         x: 16
@@ -141,35 +138,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e8e5f31aac4c3e90800000000000000
-      internalID: -7044671423751264024
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WeatherIcons_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d16ef06f7f57c7e10800000000000000
-      internalID: 2196760426095568413
+      spriteID: 13c2865caccfc9530800000000000000
+      internalID: 3863240528202574897
       vertices: []
       indices: 
       edges: []
