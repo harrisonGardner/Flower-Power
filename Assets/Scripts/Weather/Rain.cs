@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Rain : IWeather
 {
-    public WeatherType Type { get; set; } = WeatherType.rain;
+    public WeatherType Type { get; set; } = WeatherType.RAIN;
 
-    public void setDaysWeather(Garden garden)
+    public void SetDaysWeather(Garden garden)
     {
         garden.WaterAllPlots(7);
     }
