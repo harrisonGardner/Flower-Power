@@ -16,24 +16,25 @@ public enum PlantType { Flower, Weed }
 public class Plant : MonoBehaviour
 {
     // TYPE
-    public PlantType PlantType { get; }
+    public PlantType PlantType { get; set; }
 
     // GAME OBJECTS
     public GameObject plantPrefab;
 
     // LOCATION
-    public Plot MyPlot { get; }
+    public Plot MyPlot { get; set; }
 
     // STATE of the PLANT
     public IPlantHealth Health { get; set; }
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
 
-    public Plant(PlantType plantType, IPlantHealth health, Plot plot, Color color)
+    public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color)
     {
         PlantType = plantType;
         Health = health;
         MyPlot = plot;
+        this.plantPrefab = plantPrefab;
 
         // ENSURE WEED has no COLOR
         if (PlantType == PlantType.Weed)
@@ -58,7 +59,7 @@ public class Plant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     /// <summary>
@@ -109,10 +110,8 @@ public class Plant : MonoBehaviour
 
     public void KillPlant()
     {
-        Debug.Log("Try to kill plant");
         while (CurrentStage.CurrentStage != StageType.DEAD)
         {
-            Debug.Log("Hasn't died yet");
             CurrentStage = CurrentStage.GetNextStage();
         }
     }
