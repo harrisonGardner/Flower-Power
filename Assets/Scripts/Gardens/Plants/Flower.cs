@@ -12,6 +12,6 @@ public class Flower : Plant
 
     public void Start()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(WeatherType.rain);
+        gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(WeatherType.RAIN);
     }
 }
