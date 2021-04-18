@@ -48,6 +48,7 @@ public class PlotInteraction : MonoBehaviour
                     Plot.plantHere.KillPlant();
                 Clippers.useTool = true;
             }
+            //Seed holding click
             if (SeedPouch.holding == true)
             {
                 if (Plot.IsEmpty)
