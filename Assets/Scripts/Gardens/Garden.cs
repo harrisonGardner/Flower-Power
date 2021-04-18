@@ -19,7 +19,8 @@ public class Garden : MonoBehaviour
     public int height;
     public int width;
     public int plotLength;
-    public GameObject[,] plots;
+    public GameObject[,] plotGameObjects;
+    public Plot[,] plots;
 
     /// <summary>
     /// n.b. Having these lists of Plants lets us iterate through the plant-based
@@ -45,10 +46,6 @@ public class Garden : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(GameObject plot in plots)
-        {
-            plot.GetComponent<Plot>().UpdatePlot();
-        }
         UpdatePlantSprites();
     }
 
@@ -66,8 +63,8 @@ public class Garden : MonoBehaviour
         // New 2d Array of Plots
         //this.height = height;
         //this.width = width;
-        this.plots = new GameObject[this.width, this.height];
-        
+        this.plotGameObjects = new GameObject[this.width, this.height];
+        this.plots = new Plot[this.width, this.height];
 
         // Iterate through array and add plots                                           
         for (int y = 0; y < this.height; y++)
@@ -81,10 +78,11 @@ public class Garden : MonoBehaviour
                 // Hierarchy
                 prefab.transform.parent = gameObject.transform;
 
-                // ADD to ARRAY              
-                this.plots[x, y] = prefab;
-                prefab.GetComponent<Plot>().Garden = this;
-                prefab.GetComponent<Plot>().PlotObject = prefab;
+                // ADD to ARRAY
+                this.plotGameObjects[x, y] = prefab;
+                this.plots[x, y] = prefab.GetComponent<Plot>();
+
+                this.plots[x, y].InitializePlotSettings(this, prefab);
             }
         }
 
@@ -107,16 +105,15 @@ public class Garden : MonoBehaviour
                     // IF NEIGHBOR is in the GARDEN 
                     if (isInGarden(newX, newY))
                     {
-                        surroundingPlots[i] = new Neighbor(direction, plots[newX, newY].GetComponent<Plot>());
+                        surroundingPlots[i] = new Neighbor(direction, plotGameObjects[newX, newY].GetComponent<Plot>());
                     }
                     else // USE SPECIAL CONSTRUCTOR INDICATING SPACE is EDGE
                     {
                         surroundingPlots[i] = new Neighbor(direction);
                     }
-
                 }
                 // APPEND NEIGHBORS to PLOT
-                this.plots[x, y].GetComponent<Plot>().AdjacentPlots = new Neighbors(surroundingPlots);
+                this.plots[x, y].AdjacentPlots = new Neighbors(surroundingPlots);
             }
         }
     }
@@ -158,7 +155,8 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[x, y].GetComponent<Plot>().addWater(waterAmount);
+                //this.plotGameObjects[x, y].GetComponent<Plot>().addWater(waterAmount);
+                this.plots[x, y].addWater(waterAmount);
             }
         }
     }
@@ -177,7 +175,8 @@ public class Garden : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                this.plots[x, y].GetComponent<Plot>().SunEnergyToday = sunAmount;
+                //this.plotGameObjects[x, y].GetComponent<Plot>().SunEnergyToday = sunAmount;
+                this.plots[x, y].SunEnergyToday = sunAmount;
             }
         }
     }
@@ -199,6 +198,7 @@ public class Garden : MonoBehaviour
         IList<Plant> removedPlants = new List<Plant>();
         foreach (Plant flower in this.Flowers)
         {
+            // TODO: REVISIT FLOWER vs. PLANT
             Flower tempFlower = (Flower)flower;
             tempFlower.SpriteUpdate();
             if (flower.CurrentStage.CurrentStage == StageType.DEAD)
@@ -214,13 +214,12 @@ public class Garden : MonoBehaviour
     /// All of the weeds in the garden take sun and water from
     /// plots before the flowers are able to do so
     /// </summary>
-    public void weedsEatDrink()
+    public void WeedsEatDrink()
     {
-        // TODO: FINISH THIS METHOD WHEN WEED CLASS IS DONE
-        // Iterate through the flowers list
+        // Iterate through the weeds list
         foreach (Plant weed in this.Weeds)
         {
-
+            weed.Feed();
         }
     }
 
@@ -228,19 +227,18 @@ public class Garden : MonoBehaviour
     /// After the weeds have taken their share, the flowers
     /// take in the remaining water and sunenergy
     /// </summary>
-    public void flowersEatDrink()
+    public void FlowersEatDrink()
     {
-        // TODO: FINISH THIS METHOD WHEN FLOWER CLASS IS DONE
         // Iterate through the flowers list
         foreach (Plant flower in this.Flowers)
         {
-
+            flower.Feed();
         }
     }
 
-    public void addPlant(Plant plant)
+    public void AddPlant(Plant plant)
     {
-        Debug.Log("Add Plant in garden called");
+        //Debug.Log("Add Plant in garden called");
         // if the plant is a weed
         if (plant.PlantType == PlantType.Weed)
         {
@@ -257,7 +255,7 @@ public class Garden : MonoBehaviour
     /// Removes a plant from the garden.
     /// </summary>
     /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
-    public void removePlant(Plant removeMe)
+    public void RemovePlant(Plant removeMe)
     {
         if (removeMe.PlantType == PlantType.Weed)
         {
@@ -265,7 +263,6 @@ public class Garden : MonoBehaviour
         }
         else if (removeMe.PlantType == PlantType.Flower)
         {
-
             this.Flowers.Remove(removeMe);
         }
     }
