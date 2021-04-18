@@ -196,6 +196,7 @@ public class Garden : MonoBehaviour
     public void UpdatePlantSprites()
     {
         IList<Plant> removedPlants = new List<Plant>();
+
         foreach (Plant flower in this.Flowers)
         {
             // TODO: REVISIT FLOWER vs. PLANT

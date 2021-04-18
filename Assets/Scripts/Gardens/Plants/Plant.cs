@@ -17,6 +17,7 @@ public class Plant : MonoBehaviour
 {
     // TYPE
     public PlantType PlantType { get; set; }
+    public ISpriteUpdate spriteUpdate;
 
     // GAME OBJECTS
     public GameObject plantPrefab;
@@ -76,7 +77,10 @@ public class Plant : MonoBehaviour
             if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
                 MyPlot.removePlant(); // REMOVE from PLOT
             else
+            {
                 CurrentStage = temp;
+                SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
+            }
         }
     }
 
@@ -113,10 +117,11 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void KillPlant()
     {
-        while (CurrentStage.CurrentStage != StageType.DEAD)
-        {
-            CurrentStage = CurrentStage.GetNextStage();
-        }
+        MyPlot.removePlant();
+        //while (CurrentStage.CurrentStage != StageType.DEAD)
+        //{
+        //    CurrentStage = CurrentStage.GetNextStage();
+        //}
     }
 
     /// <summary>
