@@ -12,13 +12,14 @@ public class Plot : MonoBehaviour
 {
     // GRAPHICS
     public GameObject PlotObject { get; set; }
+    public PlotInteraction PlotInteraction { get; set; }
 
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
     public Garden Garden { get; set; }
 
     // Metrics
-    int waterLevel = 0;
+    public int waterLevel = 0;
     private const int WATER_CAPCITY = 12;
     public int SunEnergyToday { get; set; } = 0;
 
@@ -27,53 +28,20 @@ public class Plot : MonoBehaviour
     public GameObject plantPrefab;
     public bool IsEmpty = true;
     public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
-    public enum PlantAction { NONE, CUT, WILT }
-    public PlantAction plotPlantAction = PlantAction.NONE;
+    //public enum PlantAction { NONE, CUT, WILT }
+    //public PlantAction plotPlantAction = PlantAction.NONE;
 
     // Pest Related Fields
     // TODO: the pest in this space
     public bool clashingFlowerColorHere = false;
 
-    // Start is called before the first frame update
-    void Start()
+    // PLOT SETTINGS
+    public void InitializePlotSettings(Garden garden, GameObject plotObject)
     {
-        
-    }  
-
-    public void UpdatePlot()
-    {
-        PlotClickedOnCheck();
-    }
-
-    //Mouse click on plot check
-    private void PlotClickedOnCheck()
-    {
-        if (this.PlotObject.GetComponent<PlotInteraction>().hasBeenClicked)
-        {
-            //Watering Can Click
-            if (WateringCan.holding)
-            {
-                waterLevel = WATER_CAPCITY;
-                WateringCan.useTool = true;
-            }
-            //Clippers Click
-            if (Clippers.holding)
-            {
-                if(!IsEmpty)
-                    this.plantHere.KillPlant();
-                Clippers.useTool = true;
-            }
-            if (SeedPouch.holding == true)
-            {
-                if (IsEmpty)
-                {
-                    addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
-                    SeedPouch.holding = false;
-                }
-            }
-            this.PlotObject.GetComponent<PlotInteraction>().hasBeenClicked = false;
-        }
-        SpriteUpdate();
+        this.Garden = garden;
+        this.PlotObject = plotObject;
+        this.PlotInteraction = PlotObject.GetComponent<PlotInteraction>();
+        this.PlotInteraction.Plot = this;
     }
 
     //Sprite Update Check
@@ -90,16 +58,6 @@ public class Plot : MonoBehaviour
     }
 
     /// <summary>
-    /// Constructor method to create a new Plot object.
-    /// </summary>
-    /// <param name="garden">The Garden to which this plot belongs</param>
-    //public Plot(Garden garden, GameObject prefab)
-    //{
-    //    this.Garden = garden;
-    //    this.PlotObject = prefab;
-    //}
-
-    /// <summary>
     /// Logic for putting a plot (as game object) into the game.
     /// </summary>
     /// <param name="x"></param>
@@ -112,24 +70,36 @@ public class Plot : MonoBehaviour
         this.PlotObject.transform.localScale.Set(width, height, 1);
     }
 
+    // PLANT-RELATED METHODS
+
     /// <summary>
     /// If there is not already a plant in this plot, places
     /// the inputted plant into this plot.
     /// </summary>
-    /// <param name="plant"></param>
+    /// <param name="pt">PlantType</param>
+    /// <param name="cn">ColorName</param>
     public void addPlant(PlantType pt, ColorName cn)
     {
         // Add the plant to the appropriate list (weed or flower) in the garden
         if (this.IsEmpty)
         {
-            plantPrefab = Instantiate(Resources.Load("Prefabs/FlowerPrefab") as GameObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1), new Quaternion());
-            Flower flowerObject = plantPrefab.GetComponent<Flower>();
-            flowerObject.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn));
-            plantPrefab.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SeedPouch.GetSeedColor(), plantPrefab.GetComponent<Flower>().CurrentStage.CurrentStage);
+            // TODO: ADD LOGIC to INSTANTIATE WEED as WELL based on PLANTTYPE
+            plantPrefab = Instantiate(Resources.Load("Prefabs/FlowerPrefab") as GameObject,
+                new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1), new Quaternion());
+
+            // GET UNDERLYING PLANT from GAME OBJECT
+            Flower flower = plantPrefab.GetComponent<Flower>();
+            //INITIALIZE FLOWER SETTINGS
+            flower.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
+
+            // SET the SPRITE for the PLANT PREFAB
+            plantPrefab.GetComponent<SpriteRenderer>().sprite =
+                SpriteFetcher.GetSprite(SeedPouch.GetSeedColor(),
+                plantPrefab.GetComponent<Flower>().CurrentStage.CurrentStage);
 
             this.IsEmpty = false;
-            this.plantHere = flowerObject;
-            Garden.addPlant(flowerObject);
+            this.plantHere = flower;
+            Garden.AddPlant(flower);
         }
     }
 
@@ -152,6 +122,8 @@ public class Plot : MonoBehaviour
         IsEmpty = true;
         this.plantHere = null;
     }
+
+    // WATER-RELATED METHODS
 
     public int GetWaterLevel()
     {
@@ -195,6 +167,8 @@ public class Plot : MonoBehaviour
         }
     }
 
+    // SUN-RELATED METHODS
+
     /// <summary>
     /// Allows for sun energy to leave the plot, for
     /// example to be consumed by the plant.
@@ -217,6 +191,8 @@ public class Plot : MonoBehaviour
             return temp;
         }
     }
+
+    // POLLEN-RELATED METHODS
 
     /// <summary>
     /// Deposits pollen in this space.

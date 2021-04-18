@@ -29,7 +29,7 @@ public class Plant : MonoBehaviour
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
 
-    public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color)
+    public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color, GameObject plantPrefab)
     {
         PlantType = plantType;
         Health = health;

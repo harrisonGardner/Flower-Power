@@ -62,7 +62,7 @@ public class Pollen
             currentPlot = next;
             return true;
         }
-        catch(IndexOutOfRangeException e)
+        catch(IndexOutOfRangeException)
         {
             return false;
         }
