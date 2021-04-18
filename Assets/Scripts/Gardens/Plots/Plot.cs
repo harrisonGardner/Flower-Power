@@ -89,6 +89,8 @@ public class Plot : MonoBehaviour
 
             // GET UNDERLYING PLANT from GAME OBJECT
             Flower flower = plantPrefab.GetComponent<Flower>();
+            flower.spriteUpdate = plantPrefab.GetComponent<PlantSpriteUpdater>();
+
             //INITIALIZE FLOWER SETTINGS
             flower.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
 
@@ -109,17 +111,20 @@ public class Plot : MonoBehaviour
     public void removePlant()
     {
         // REMOVE the PLANT FROM THE GARDEN
-        if (this.plantHere.PlantType == PlantType.Weed)
-        {
-            Garden.Weeds.Remove(this.plantHere);
-        }
-        else if (this.plantHere.PlantType == PlantType.Flower)
-        {
-            Garden.Flowers.Remove(this.plantHere);
-        }
+        Garden.RemovePlant(this.plantHere);
+        
+        //if (this.plantHere.PlantType == PlantType.Weed)
+        //{
+        //    Garden.Weeds.Remove(this.plantHere);
+        //}
+        //else if (this.plantHere.PlantType == PlantType.Flower)
+        //{
+        //    Garden.Flowers.Remove(this.plantHere);
+        //}
 
         // REMOVE from this PLOT
         IsEmpty = true;
+        Destroy(plantPrefab);
         this.plantHere = null;
     }
 

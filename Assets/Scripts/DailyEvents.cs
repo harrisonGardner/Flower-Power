@@ -9,6 +9,7 @@ public enum DailyEventType
     WEEDPOLLINATION, FLOWERPOLLINATION,
     WEEDSEEDING, FLOWERSEEDING,
     COLORCLASH, DYING, ENDDAY
+        // ADD GROWTH
 }
 
 public class EventInfo
@@ -55,9 +56,9 @@ public class DailyEvents : MonoBehaviour
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERFEEDING)},
             { DailyEventType.COLORCLASH,
                 new EventInfo (this.intervalTime * (int) DailyEventType.COLORCLASH) },
-            { DailyEventType.DYING ,
+            { DailyEventType.DYING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.DYING) },
-            { DailyEventType.ENDDAY ,
+            { DailyEventType.ENDDAY,
                 new EventInfo (this.dayLengthMilliseconds) }
         };
     }
