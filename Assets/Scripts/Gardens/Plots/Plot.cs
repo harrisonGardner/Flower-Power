@@ -27,7 +27,7 @@ public class Plot : MonoBehaviour
     public Plant plantHere;
     public GameObject plantPrefab;
     public bool IsEmpty = true;
-    public TalliedSet<ColorName> PollenHere { get; private set; } = new TalliedSet<ColorName>();
+    public TalliedSet<ColorName> PollenHere { get; set; } = new TalliedSet<ColorName>();
     //public enum PlantAction { NONE, CUT, WILT }
     //public PlantAction plotPlantAction = PlantAction.NONE;
 
