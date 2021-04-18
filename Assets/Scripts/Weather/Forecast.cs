@@ -10,34 +10,49 @@ public enum WeatherType { RAIN, SUN, WIND }
 /// </summary>
 public class Forecast : MonoBehaviour
 {
-    private System.Random RandomNum { get; } = new System.Random();
-    public int numDaysInForecast = 5;
+    static System.Random RandomNum { get; } = new System.Random();
+    public static int numDaysInForecast = 5;
 
-    private IWeather[] weathers = new IWeather[] { new Rain(), new Sun(), new Wind() };
+    private static IWeather[] weathers = new IWeather[] { new Rain(), new Sun(), new Wind() };
 
-    public Queue<IWeather> FiveDayForecast { get; }  = new Queue<IWeather>();
+    public static Queue<IWeather> FiveDayForecast { get; set; } = LoadFiveDaysWeather();
 
-    public void LoadFiveDaysWeather()
+    public static Queue<IWeather> LoadFiveDaysWeather()
     {
+        Queue<IWeather> forecast = new Queue<IWeather>();
+
         for (int i = 0; i < numDaysInForecast; i++)
         {
-            AddRandomWeather();
+            forecast.Enqueue(GetRandomWeather());
         }
+
+        return forecast;
     }
 
-    public void AddRandomWeather()
+    public static IWeather GetRandomWeather()
     {
         int numWeatherTypes = weathers.Length;
         int weatherVal = RandomNum.Next(0, numWeatherTypes);
-        FiveDayForecast.Enqueue(weathers[weatherVal]);
+        return weathers[weatherVal];
+    }
+
+    public static IWeather AddRandomWeather()
+    {
+        IWeather temp = GetRandomWeather();
+        FiveDayForecast.Enqueue(temp);
+        return temp;
     }
 
     /// <summary>
     /// Returns the weather today, removing it from the queue.
     /// </summary>
     /// <returns></returns>
-    public IWeather GetTodaysWeather()
+    public static IWeather GetTodaysWeather()
     {
+        // TODO: ADD RANDOM WEATHER
+        // TODO: GET the new WEATHER to the end of the Five Day Forecast
+        // TODO: UPDATE SPRITES
+        //AddRandomWeather();
         return FiveDayForecast.Dequeue();
     }
 }
