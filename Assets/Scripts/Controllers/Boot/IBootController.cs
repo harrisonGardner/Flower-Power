@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IBootController : MonoBehaviour
+public interface IBootController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // BOOT GARDEN -- we will need the garden for our day controller
+    // BOOT ORDER -- update sprites ?
+    // BOOT WEATHER -- needs to be given to our day controller
+    // BOOT COLORS? -- keep an instance somewhere
+    // BOOT WIND DIRECTION -- set in the garden
+    // INITIAL SEED POUCH -- update sprites?
+
+    // BOOT DAY CONTROLLER -- give it our garden, order info, weather, wind direction
+
+    // BOOT SPRITE CONTROLLER?
+
 }

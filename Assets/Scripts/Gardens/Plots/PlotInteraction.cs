@@ -22,12 +22,41 @@ public class PlotInteraction : MonoBehaviour
     // PREFERRED -- on a click event via the OnMouseDown function, determine which action to perform and do it then
     void Update()
     {
-        PlotClickedOnCheck();
+        //PlotClickedOnCheck();
     }
 
     private void OnMouseDown()
     {
-        hasBeenClicked = true;
+        //hasBeenClicked = true;
+
+        //if (hasBeenClicked)
+        //{
+            //Watering Can Click
+            if (WateringCan.holding)
+            {
+                Plot.addWater(3);
+                WateringCan.useTool = true;
+            }
+            //Clippers Click
+            if (Clippers.holding)
+            {
+                if (!Plot.IsEmpty)
+                    Plot.plantHere.KillPlant();
+                Clippers.useTool = true;
+            }
+            if (SeedPouch.holding == true)
+            {
+                if (Plot.IsEmpty)
+                {
+                    Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
+                    SeedPouch.holding = false;
+                }
+            }
+
+            this.hasBeenClicked = false; // RESET
+        //}
+
+        Plot.SpriteUpdate();
     }
 
     //Mouse click on plot check

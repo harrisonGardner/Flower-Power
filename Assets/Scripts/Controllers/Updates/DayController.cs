@@ -5,12 +5,14 @@ using UnityEngine;
 public class DayController : IUpdateController
 {
     private DailyEvents schedule;
-    private int timeOfDay;
-    private int dayNumber;
+    public int TimeOfDay { get; private set; }
+    public int dayNumber { get; private set; }
+    public Garden garden;
 
-    public DayController()
+    public DayController(Garden garden)
     {
         schedule = new DailyEvents();
+        this.garden = garden;
     }
 
     public void ActionOnUpdate()
@@ -23,6 +25,8 @@ public class DayController : IUpdateController
 
             // IF END of DAY is RETURNED, RESET TIME of DAY to zero
             // INCREMENT DAY NUMBER
+
+        // CHECK if VICTORY CONDITIONS MET
 
         throw new System.NotImplementedException();
     }

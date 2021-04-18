@@ -20,6 +20,6 @@ public class Flower : Plant
     }
     public void SpriteUpdate()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(this.PlantColor.Name, this.CurrentStage.CurrentStage);
+        //gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(this.PlantColor.Name, this.CurrentStage.CurrentStage);
     }
 }

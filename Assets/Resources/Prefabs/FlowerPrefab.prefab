@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5123321938046248460}
   - component: {fileID: 3936627560590426246}
   - component: {fileID: 3246790943952915867}
+  - component: {fileID: -7377330112056025439}
   m_Layer: 0
   m_Name: FlowerPrefab
   m_TagString: Untagged
@@ -96,3 +97,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 1759401141460295565}
+--- !u!114 &-7377330112056025439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759401141460295565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5771ef64aff44039f28dc3f84368a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
