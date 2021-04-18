@@ -54,6 +54,12 @@ public class SeedPouch : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        if (Input.GetMouseButton(1))
+            DropTool();
+    }
+
     void FixedUpdate()
     {
         if (holding)
@@ -62,7 +68,7 @@ public class SeedPouch : MonoBehaviour
             seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
         }
         else
-            seedObject.transform.position = defaultPosition;
+            seedObject.transform.position = Vector3.MoveTowards(seedObject.transform.position, defaultPosition, 0.2f);
 
     }
 
@@ -79,11 +85,22 @@ public class SeedPouch : MonoBehaviour
         }
     }
 
+    public static void DropTool()
+    {
+        holding = false;
+    }
+
     private void OnMouseDown()
     {
-        if (holding)
-            holding = false;
-        else if(!WateringCan.holding && !Clippers.holding)
+        if (!holding)
+        {
+            WateringCan.DropTool();
+            Clippers.DropTool();
             holding = true;
+        }
+        else
+        {
+            DropTool();
+        }
     }
 }

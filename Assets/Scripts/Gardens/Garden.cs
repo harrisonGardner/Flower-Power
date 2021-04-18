@@ -66,7 +66,7 @@ public class Garden : MonoBehaviour
         this.plotGameObjects = new GameObject[this.width, this.height];
         this.plots = new Plot[this.width, this.height];
 
-        // Iterate through array and add plots
+        // Iterate through array and add plots                                           
         for (int y = 0; y < this.height; y++)
         {
             for (int x = 0; x < this.width; x++)

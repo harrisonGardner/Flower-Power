@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used for adding water the plots.
+/// </summary>
+/// <author>Harrison Gardner</author>
 public class WateringCan : MonoBehaviour
 {
     public SpriteFetcher.ToolType tool = SpriteFetcher.ToolType.WATERINGCAN;
@@ -10,7 +14,7 @@ public class WateringCan : MonoBehaviour
     public static bool useTool = false;
 
     public int itemUseDelay = 120;
-    public int itemUseTimer = 0;
+    public static int itemUseTimer = 0;
 
     private Vector3 defaultPosition;
 
@@ -22,25 +26,39 @@ public class WateringCan : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+            DropTool();
+    }
+
     void FixedUpdate()
     {
-        if (holding == true || itemUseTimer > 0)
+        if (Input.GetMouseButtonDown(1))
+            DropTool();
+        if (holding == true)
         {
             if (!useTool)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
                 itemUseTimer = itemUseDelay;
+                toolDrag.GetComponent<SpriteRenderer>().sprite =
+                    SpriteFetcher.GetSprite(tool, false);
+            }
+            else if (itemUseTimer > 0)
+            {
+                UseTool();
             }
             else
             {
-                UseTool();
+                useTool = false;
             }
         }
         else
         {
             useTool = false;
-            toolDrag.transform.position = defaultPosition;
+            toolDrag.transform.position = Vector3.MoveTowards(toolDrag.transform.position, defaultPosition, 0.2f);
             toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSprite(tool, false);
         }
@@ -48,18 +66,29 @@ public class WateringCan : MonoBehaviour
 
     private void UseTool()
     {
-        holding = false;
         toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSprite(tool, true);
         itemUseTimer--;
     }
 
+    public static void DropTool()
+    {
+        holding = false;
+        itemUseTimer = 0;
+    }
+
     private void OnMouseDown()
     {
-        if (!holding && !Clippers.holding && !SeedPouch.holding)
+        if (!holding)
         {
+            Clippers.DropTool();
+            SeedPouch.DropTool();
             itemUseTimer = itemUseDelay;
             holding = true;
+        }
+        else
+        {
+            DropTool();
         }
     }
 }

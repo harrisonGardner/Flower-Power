@@ -202,7 +202,7 @@ public class Plot : MonoBehaviour
     public void addPollen(int amount, ColorName color)
     {
         // ONLY DEPOSIT POLLEN if THERE IS A PLANT HERE
-        if (this.plantHere != null)
+        if (!this.IsEmpty)
         {
             for (int i = 0; i < amount; i++)
             {
@@ -217,9 +217,9 @@ public class Plot : MonoBehaviour
     public void emptyPollen()
     {
         // IF PLANT is HERE, NEED TO EMPTY PLOT of POLLEN
-        if (this.plantHere != null)
+        if (!this.IsEmpty)
         {
-            // SET the OLD DATA LOOSE for GARBAGE COLLECTIOn
+            // SET the OLD DATA LOOSE for GARBAGE COLLECTION
             PollenHere = new TalliedSet<ColorName>();
         }
     }

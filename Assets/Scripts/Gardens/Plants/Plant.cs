@@ -108,6 +108,9 @@ public class Plant : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Skips to the dead plant stage
+    /// </summary>
     public void KillPlant()
     {
         while (CurrentStage.CurrentStage != StageType.DEAD)
