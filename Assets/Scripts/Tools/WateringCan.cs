@@ -58,7 +58,7 @@ public class WateringCan : MonoBehaviour
         else
         {
             useTool = false;
-            toolDrag.transform.position = defaultPosition;
+            toolDrag.transform.position = Vector3.MoveTowards(toolDrag.transform.position, defaultPosition, 0.2f);
             toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSprite(tool, false);
         }

@@ -68,7 +68,7 @@ public class SeedPouch : MonoBehaviour
             seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
         }
         else
-            seedObject.transform.position = defaultPosition;
+            seedObject.transform.position = Vector3.MoveTowards(seedObject.transform.position, defaultPosition, 0.2f);
 
     }
 
