@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Clipper object that is used for cutting down flowers.
+/// </summary>
+/// <author>Harrison Gardner</author>
 public class Clippers : MonoBehaviour
 {
     public SpriteFetcher.ToolType tool = SpriteFetcher.ToolType.CLIPPERS;
