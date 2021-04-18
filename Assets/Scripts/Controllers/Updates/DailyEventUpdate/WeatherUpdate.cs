@@ -8,7 +8,11 @@ public class WeatherUpdate : IGardenUpdate
 
     public void ActionOnUpdate(Garden garden)
     {
-        IWeather todaysWeather = Forecast.GetTodaysWeather();
-        todaysWeather.SetDaysWeather(garden);
+        //IWeather todaysWeather = Forecast.GetTodaysWeather();
+        //todaysWeather.SetDaysWeather(garden);
+
+        garden.SunAllPlots(5);
+        garden.WaterAllPlots(1);
+
     }
 }

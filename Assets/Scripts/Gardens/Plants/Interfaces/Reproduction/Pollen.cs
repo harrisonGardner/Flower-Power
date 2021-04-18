@@ -32,6 +32,7 @@ public class Pollen
     /// </summary>
     public void Spread()
     {
+        Debug.Log("SPREADING POLLEN");
         bool inBounds = true;
         while (MovesLeft >= 0 && inBounds)
         {
@@ -41,12 +42,14 @@ public class Pollen
         }
     }
 
-    
     private void DepositPollen()
     {
         // ONLY ADD POLLEN if PLANT in the SPACE
         if (currentPlot.plantHere != null)
-            currentPlot.addPollen(Intensity,this.color);
+        { 
+            currentPlot.addPollen(Intensity, this.color);
+            Debug.Log("POLLEN DEPOSITED");
+        }
     }
 
     /// <summary>

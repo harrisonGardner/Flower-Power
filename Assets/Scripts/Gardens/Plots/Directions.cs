@@ -105,8 +105,8 @@ public class Directions
         }
         else
         {
-            throw new NullReferenceException("Inputted value is \"None\" "
-                + "and threfore has no adjacent directions");
+            throw new NullReferenceException("Inputted value is \"None\" ("
+                + direction + ") and threfore has no adjacent directions");
         }
 
         return adjacent;
