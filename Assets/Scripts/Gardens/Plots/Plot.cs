@@ -13,6 +13,7 @@ public class Plot : MonoBehaviour
     // GRAPHICS
     public GameObject PlotObject { get; set; }
     public PlotInteraction PlotInteraction { get; set; }
+    public ISpriteUpdate spriteUpdate;
 
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
@@ -42,19 +43,7 @@ public class Plot : MonoBehaviour
         this.PlotObject = plotObject;
         this.PlotInteraction = PlotObject.GetComponent<PlotInteraction>();
         this.PlotInteraction.Plot = this;
-    }
-
-    //Sprite Update Check
-    public void SpriteUpdate()
-    {
-        if (waterLevel <= 0)
-            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(0);
-        else if (waterLevel <= 4)
-            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(1);
-        else if (waterLevel <= 8)
-            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(2);
-        else if (waterLevel <= 12)
-            this.PlotObject.gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(3);
+        this.spriteUpdate = gameObject.GetComponent<PlotSpriteUpdater>();
     }
 
     /// <summary>
@@ -96,7 +85,7 @@ public class Plot : MonoBehaviour
 
             // SET the SPRITE for the PLANT PREFAB
             plantPrefab.GetComponent<SpriteRenderer>().sprite =
-                SpriteFetcher.GetSprite(SeedPouch.GetSeedColor(),
+                SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
                 plantPrefab.GetComponent<Flower>().CurrentStage.CurrentStage);
 
             this.IsEmpty = false;
