@@ -69,7 +69,7 @@ public class Garden : MonoBehaviour
         this.plots = new GameObject[this.width, this.height];
         
 
-        // Iterate through array and add plots
+        // Iterate through array and add plots                                           
         for (int y = 0; y < this.height; y++)
         {
             for (int x = 0; x < this.width; x++)
@@ -81,7 +81,7 @@ public class Garden : MonoBehaviour
                 // Hierarchy
                 prefab.transform.parent = gameObject.transform;
 
-                // ADD to ARRAY
+                // ADD to ARRAY              
                 this.plots[x, y] = prefab;
                 prefab.GetComponent<Plot>().Garden = this;
                 prefab.GetComponent<Plot>().PlotObject = prefab;
