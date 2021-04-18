@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used for adding water the plots.
+/// </summary>
+/// <author>Harrison Gardner</author>
 public class WateringCan : MonoBehaviour
 {
     public SpriteFetcher.ToolType tool = SpriteFetcher.ToolType.WATERINGCAN;
