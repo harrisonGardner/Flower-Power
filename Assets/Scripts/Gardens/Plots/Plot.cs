@@ -100,7 +100,7 @@ public class Plot : MonoBehaviour
     public void removePlant()
     {
         // REMOVE the PLANT FROM THE GARDEN
-        Garden.RemovePlant(this.plantHere);
+        Garden.AddToRemove(this.plantHere);
         
         //if (this.plantHere.PlantType == PlantType.Weed)
         //{

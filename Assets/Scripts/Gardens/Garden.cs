@@ -29,9 +29,10 @@ public class Garden : MonoBehaviour
     /// </summary>
     public IList<Plant> Flowers { get; } = new List<Plant>();
     public IList<Plant> Weeds { get; } = new List<Plant>();
+    public IList<Plant> Remove { get; set; } = new List<Plant>();
 
     // WEATHER
-    public Direction WindDirection { get; set; }
+    public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.downLeft);
     public bool WindyToday { get; set; }
 
     // RANDOM
@@ -287,6 +288,21 @@ public class Garden : MonoBehaviour
                 flower.Grow();
             }
         }
+
+        // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
+        foreach (Plant plant in Remove)
+        {
+            if (plant.PlantType == PlantType.Flower)
+            {
+                Flowers.Remove(plant);
+            }
+            else if (plant.PlantType == PlantType.Weed)
+            {
+                Weeds.Remove(plant);
+            }
+        }
+
+        Remove = new List<Plant>(); // RESET REMOVAL LIST
     }
 
     // ADD AND REMOVE PLANTS from GARDEN
@@ -315,16 +331,18 @@ public class Garden : MonoBehaviour
     /// it is a flower or weed.
     /// </summary>
     /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
-    public void RemovePlant(Plant removeMe)
+    public void AddToRemove(Plant removeMe)
     {
-        if (removeMe.PlantType == PlantType.Weed)
-        {
-            this.Weeds.Remove(removeMe);
-        }
-        else if (removeMe.PlantType == PlantType.Flower)
-        {
-            this.Flowers.Remove(removeMe);
-        }
+        //if (removeMe.PlantType == PlantType.Weed)
+        //{
+        //    this.Weeds.Remove(removeMe);
+        //}
+        //else if (removeMe.PlantType == PlantType.Flower)
+        //{
+        //    this.Flowers.Remove(removeMe);
+        //}
+
+        Remove.Add(removeMe);
     }
 
     /// <summary>

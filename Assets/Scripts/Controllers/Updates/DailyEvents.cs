@@ -35,7 +35,7 @@ public class EventInfo
 /// Dictates when events should occur within a given day.
 /// </summary>
 /// <author>Nicholas Gliserman</author>
-public class DailyEvents : MonoBehaviour
+public class DailyEvents //: MonoBehaviour
 {
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
@@ -61,7 +61,7 @@ public class DailyEvents : MonoBehaviour
             { DailyEventType.WEEDSEEDING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDSEEDING) },
             { DailyEventType.FLOWERSEEDING,
-                new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERFEEDING)},
+                new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERSEEDING)},
             { DailyEventType.WEEDGROW,
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDGROW) },
             { DailyEventType.FLOWERGROW,
@@ -73,6 +73,12 @@ public class DailyEvents : MonoBehaviour
             { DailyEventType.ENDDAY,
                 new EventInfo (this.dayLengthSeconds) }
         };
+
+        Debug.Log("CREATED DaysEvents Dictionary");
+        //foreach (KeyValuePair<DailyEventType, EventInfo> pair in daysEvents)
+        //{
+        //    // Debug.Log("Name: " + pair.Key + " Length: " + pair.Value.scheduledTime + " Happened Today: " + pair.Value.happenedToday);
+        //}
     }
 
     /// <summary>
@@ -82,13 +88,18 @@ public class DailyEvents : MonoBehaviour
     /// <returns></returns>
     public DailyEventType GetCurrentEvent(float timeOfDay)
     {
+        //Debug.Log("LOOKING for CURRENT EVENT at " + timeOfDay);
         // ITERATE THROUGH ALL EVENT TYPES
         foreach (KeyValuePair<DailyEventType, EventInfo> pair in daysEvents)
         {
+            //Debug.Log("Name: " + pair.Key + " Length: " + pair.Value.scheduledTime + " Happened Today: " + pair.Value.happenedToday);
+
             // IF THE TIME IS AT or AFTER the EVENT's SCHEDULE TIME
             // AND the EVENT has NOT YET HAPPENED
-            if (pair.Value.scheduledTime >= timeOfDay && !pair.Value.happenedToday)
+            if (timeOfDay > pair.Value.scheduledTime && !pair.Value.happenedToday)
             {
+                //Debug.Log(pair.Value.scheduledTime + " is less than "
+                  //  + timeOfDay + " AND " + "Pair Value has not happened today: " + !pair.Value.happenedToday);
                 // SPECIAL CASES:
                 // BEGINNING of DAY -- MUST INDICATE ALL OTHER EVENTS HAVE NOT YET HAPPENED
                 if (pair.Key == DailyEventType.NEWDAY) // IF THE EVENT is a NEW DAY, RESET HAPPENED TODAY BOOL
