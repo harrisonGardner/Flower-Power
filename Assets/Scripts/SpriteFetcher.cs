@@ -16,11 +16,11 @@ public class SpriteFetcher : MonoBehaviour
 {
     public SpriteFetcher()
     {
-        
+
     }
 
     //Flower Sprite Getter
-    public static Sprite GetSprite(ColorName color, StageType type)
+    public static Sprite GetSpriteFlower(ColorName color, StageType type)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/{KeyWordFormat(color.ToString())} Flower";
@@ -29,18 +29,11 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
 
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
     }
 
     //Plot Sprite Getter
-    public static Sprite GetSprite(int waterLevel)
+    public static Sprite GetSpritePlot(int waterLevel)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/Plots";
@@ -49,43 +42,29 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"Plot Water {waterLevel}";
 
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
     }
 
     //Tool Sprite Getter
     public enum ToolType { WATERINGCAN, CLIPPERS }
-    public static Sprite GetSprite(ToolType tool, bool toolAction)
+    public static Sprite GetSpriteTool(ToolType tool, bool toolAction)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/{KeyWordFormat(tool.ToString())}";
         Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
 
         //Change the spriteName to the name of the specific sprite in that array
-        if(toolAction)
+        if (toolAction)
             spriteName = $"{KeyWordFormat(tool.ToString())} Using";
         else
             spriteName = $"{KeyWordFormat(tool.ToString())} Idle";
 
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
     }
 
     //Seed/SeedPouch sprite getter
     public enum SeedOrPouch { SEED, SEEDPOUCH }
-    public static Sprite GetSprite(SeedOrPouch seedOrPouch, ColorName color)
+    public static Sprite GetSpriteSeedOrPouch(SeedOrPouch seedOrPouch, ColorName color)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/{KeyWordFormat(seedOrPouch.ToString())}";
@@ -94,20 +73,13 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"{KeyWordFormat(seedOrPouch.ToString())} {KeyWordFormat(color.ToString())}";
 
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
     }
 
     //Pest sprite getter
     //Enum here to just make it clear which getter you're using
     public enum Pest { PEST }
-    public static Sprite GetSprite(Pest pest)
+    public static Sprite GetSpritePest(Pest pest)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/Pest";
@@ -116,19 +88,11 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"Pest";
 
-        //Don't need a foreach loop for the pest, I'm just lazy
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
     }
 
     //Weather Icon getter
-    public static Sprite GetSprite(WeatherType weather)
+    public static Sprite GetSpriteWeather(WeatherType weather)
     {
         //Find the Sprites Container and load them into an array
         string spriteName = $"Sprites/WeatherIcons";
@@ -137,14 +101,17 @@ public class SpriteFetcher : MonoBehaviour
         //Change the spriteName to the name of the specific sprite in that array
         spriteName = $"WeatherIcon {KeyWordFormat(weather.ToString())}";
 
-        foreach (Sprite sp in sprites)
-        {
-            if (sp.name.Equals(spriteName))
-            {
-                return sp;
-            }
-        }
-        return null;
+        return SpriteFind(sprites, spriteName);
+    }
+
+    //Uses LINQ to find the sprite that matches the path string
+    private static Sprite SpriteFind(Sprite[] sprites, String spriteName)
+    {
+        IEnumerable<Sprite> sp =
+            from s in sprites
+            where s.name.Equals(spriteName)
+            select s;
+        return sp.First();
     }
 
     //This may not be required but this will format a given string to have the first letter

@@ -27,69 +27,27 @@ public class PlotInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //hasBeenClicked = true;
-
-        //if (hasBeenClicked)
-        //{
-            //Watering Can Click
-            if (WateringCan.holding)
-            {
-                Plot.addWater(3);
-                WateringCan.useTool = true;
-            }
-            //Clippers Click
-            if (Clippers.holding)
-            {
-                if (!Plot.IsEmpty)
-                    Plot.plantHere.KillPlant();
-                Clippers.useTool = true;
-            }
-            if (SeedPouch.holding == true)
-            {
-                if (Plot.IsEmpty)
-                {
-                    Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
-                    SeedPouch.holding = false;
-                }
-            }
-
-            this.hasBeenClicked = false; // RESET
-        //}
-
-        Plot.SpriteUpdate();
-    }
-
-    //Mouse click on plot check
-    private void PlotClickedOnCheck()
-    {
-        if (hasBeenClicked)
+        if(!gameObject.GetComponent<Plot>().IsEmpty) gameObject.GetComponent<Plot>().plantPrefab.GetComponent<Plant>().Grow();
+        //Watering Can Click
+        if (WateringCan.holding)
         {
-            //Watering Can Click
-            if (WateringCan.holding)
-            {
-                Plot.addWater(3);
-                WateringCan.useTool = true;
-            }
-            //Clippers Click
-            if (Clippers.holding)
-            {
-                if (!Plot.IsEmpty)
-                    Plot.plantHere.KillPlant();
-                Clippers.useTool = true;
-            }
-            //Seed holding click
-            if (SeedPouch.holding == true)
-            {
-                if (Plot.IsEmpty)
-                {
-                    Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
-                    SeedPouch.holding = false;
-                }
-            }
-
-            this.hasBeenClicked = false; // RESET
+            Plot.addWater(3);
+            WateringCan.useTool = true;
+            SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
         }
-
-        Plot.SpriteUpdate();
+        //Clippers Click
+        if (Clippers.holding)
+        {
+            if (!Plot.IsEmpty)
+                Plot.plantHere.KillPlant();
+            Clippers.useTool = true;
+        }
+        if (SeedPouch.holding == true)
+        {
+            if (Plot.IsEmpty)
+            {
+                Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
+            }
+        }
     }
 }

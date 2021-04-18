@@ -46,7 +46,7 @@ public class Garden : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdatePlantSprites();
+        UpdateAllSpriteTemp();
     }
 
     /// <summary>
@@ -193,22 +193,25 @@ public class Garden : MonoBehaviour
         SunAllPlots(1);
     }
 
-    public void UpdatePlantSprites()
+    public void UpdateAllSpriteTemp()
     {
-        IList<Plant> removedPlants = new List<Plant>();
+        SpriteUpdateController.TempSpriteUpdate();
 
-        foreach (Plant flower in this.Flowers)
-        {
-            // TODO: REVISIT FLOWER vs. PLANT
-            Flower tempFlower = (Flower)flower;
-            tempFlower.SpriteUpdate();
-            if (flower.CurrentStage.CurrentStage == StageType.DEAD)
-                removedPlants.Add(flower);
-        }
-        foreach (Plant remove in removedPlants)
-        {
-            remove.MyPlot.removePlant();
-        }
+        //Old Code, was for updating flowers only
+        //IList<Plant> removedPlants = new List<Plant>();
+
+        //foreach (Plant flower in this.Flowers)
+        //{
+        //    // TODO: REVISIT FLOWER vs. PLANT
+        //    //Flower tempFlower = (Flower)flower;
+        //    //tempFlower.SpriteUpdate();
+        //    if (flower.CurrentStage.CurrentStage == StageType.DEAD)
+        //        removedPlants.Add(flower);
+        //}
+        //foreach (Plant remove in removedPlants)
+        //{
+        //    remove.MyPlot.removePlant();
+        //}
     }
 
     /// <summary>

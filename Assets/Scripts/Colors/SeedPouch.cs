@@ -80,8 +80,8 @@ public class SeedPouch : MonoBehaviour
             if (bagColorArrayHead > bagColors.Length-1)
                 bagColorArrayHead = 0;
 
-            gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SpriteFetcher.SeedOrPouch.SEEDPOUCH, bagColors[bagColorArrayHead]);
-            seedObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(SpriteFetcher.SeedOrPouch.SEED, bagColors[bagColorArrayHead]);
+            gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteSeedOrPouch(SpriteFetcher.SeedOrPouch.SEEDPOUCH, bagColors[bagColorArrayHead]);
+            seedObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteSeedOrPouch(SpriteFetcher.SeedOrPouch.SEED, bagColors[bagColorArrayHead]);
         }
     }
 

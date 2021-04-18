@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4413411524221007620}
   - component: {fileID: 4413411524221007621}
   - component: {fileID: 3535745540569860849}
+  - component: {fileID: 9092568805033261420}
   m_Layer: 0
   m_Name: PlotPrefab
   m_TagString: Untagged
@@ -97,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95308f9df062824f9b8a4d705b335a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plotPlantAction: 0
+  currentAction: 0
   hasBeenClicked: 0
 --- !u!61 &4413411524221007621
 BoxCollider2D:
@@ -136,7 +139,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38efb71d9e8e46b392f068172796a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plotObject: {fileID: 4413411524221007625}
+  waterLevel: 0
   plantHere: {fileID: 0}
-  plotPlantAction: 0
+  plantPrefab: {fileID: 0}
+  IsEmpty: 1
   clashingFlowerColorHere: 0
+--- !u!114 &9092568805033261420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413411524221007625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35480276842bf54180b5a3b2c88fceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

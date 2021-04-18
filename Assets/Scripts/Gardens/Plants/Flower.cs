@@ -13,13 +13,4 @@ public class Flower : Plant
     //{
         
     //}
-
-    private void Start()
-    {
-        
-    }
-    public void SpriteUpdate()
-    {
-        //gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSprite(this.PlantColor.Name, this.CurrentStage.CurrentStage);
-    }
 }

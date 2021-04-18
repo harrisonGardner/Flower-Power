@@ -44,7 +44,7 @@ public class WateringCan : MonoBehaviour
                 toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
                 itemUseTimer = itemUseDelay;
                 toolDrag.GetComponent<SpriteRenderer>().sprite =
-                    SpriteFetcher.GetSprite(tool, false);
+                    SpriteFetcher.GetSpriteTool(tool, false);
             }
             else if (itemUseTimer > 0)
             {
@@ -60,14 +60,14 @@ public class WateringCan : MonoBehaviour
             useTool = false;
             toolDrag.transform.position = Vector3.MoveTowards(toolDrag.transform.position, defaultPosition, 0.2f);
             toolDrag.GetComponent<SpriteRenderer>().sprite =
-                SpriteFetcher.GetSprite(tool, false);
+                SpriteFetcher.GetSpriteTool(tool, false);
         }
     }
 
     private void UseTool()
     {
         toolDrag.GetComponent<SpriteRenderer>().sprite =
-                SpriteFetcher.GetSprite(tool, true);
+                SpriteFetcher.GetSpriteTool(tool, true);
         itemUseTimer--;
     }
 
