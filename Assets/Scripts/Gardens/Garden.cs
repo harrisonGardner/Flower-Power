@@ -103,7 +103,7 @@ public class Garden : MonoBehaviour
                     int newX = x + direction.X;
 
                     // IF NEIGHBOR is in the GARDEN 
-                    if (isInGarden(newX, newY))
+                    if (IsInGarden(newX, newY))
                     {
                         surroundingPlots[i] = new Neighbor(direction, plotGameObjects[newX, newY].GetComponent<Plot>());
                     }
@@ -118,28 +118,12 @@ public class Garden : MonoBehaviour
         }
     }
 
-    private bool isInGarden(int x, int y)
+    private bool IsInGarden(int x, int y)
     {
         return (y < height && y >= 0 && x < width && x >= 0);
     }
 
-    /// <summary>
-    /// Manages all of the automated events that
-    /// happen at the start of the day
-    /// </summary>
-    public void newDay() // TODO: PUT THIS INTO A NEW MANAGER CLASS
-    {
-        // Set weather
-        // Plants eat and drink
-        // Plants health determined
-        // Pollination
-        // Plant reproduction -- seeds made and placed
-        // Random chance of new weed in empty plot
-
-        // Find clashing plant colors
-            // Generate pests in each space
-        // Pest eats plant and goes to new space
-    }
+    // WEATHER RELATED METHODS
 
     /// <summary>
     /// Rainy weather restores the water level in each plot of land.
@@ -193,6 +177,7 @@ public class Garden : MonoBehaviour
         SunAllPlots(1);
     }
 
+    // TODO: REVISIT after UPDATE SPRITE INTERFACEs IMPLEMENTED
     public void UpdatePlantSprites()
     {
         IList<Plant> removedPlants = new List<Plant>();
@@ -211,35 +196,106 @@ public class Garden : MonoBehaviour
         }
     }
 
+    // PLANT UPDATE METHODS
     /// <summary>
-    /// All of the weeds in the garden take sun and water from
-    /// plots before the flowers are able to do so
+    /// Plants take in sun energy and water based on their
+    /// feeding behavior.
     /// </summary>
-    public void WeedsEatDrink()
+    /// <param name="plantType">Flower or Weed</param>
+    public void PlantsFeed(PlantType plantType)
     {
-        // Iterate through the weeds list
-        foreach (Plant weed in this.Weeds)
+        if (plantType == PlantType.Weed)
         {
-            weed.Feed();
+            foreach (Plant weed in this.Weeds)
+            {
+                weed.Feed();
+            }
+        }
+        else if (plantType == PlantType.Flower)
+        {
+            foreach (Plant flower in this.Flowers)
+            {
+                flower.Feed();
+            }
         }
     }
 
     /// <summary>
-    /// After the weeds have taken their share, the flowers
-    /// take in the remaining water and sunenergy
+    /// Plants in the garden give off pollen depending on their life stage
     /// </summary>
-    public void FlowersEatDrink()
+    /// <param name="plantType"></param>
+    public void SpreadPollen(PlantType plantType)
     {
-        // Iterate through the flowers list
-        foreach (Plant flower in this.Flowers)
+        if (plantType == PlantType.Weed)
         {
-            flower.Feed();
+            foreach (Plant weed in this.Weeds)
+            {
+                weed.SpreadPollen(WindDirection, WindyToday);
+            }
+        }
+        else if (plantType == PlantType.Flower)
+        {
+            foreach (Plant flower in this.Flowers)
+            {
+                flower.SpreadPollen(WindDirection, WindyToday);
+            }
         }
     }
 
+    /// <summary>
+    /// Plants in the garden make seeds based on their life stage and
+    /// the pollen currently in their plot.
+    /// </summary>
+    /// <param name="plantType"></param>
+    public void SpreadSeeds(PlantType plantType)
+    {
+        if (plantType == PlantType.Weed)
+        {
+            foreach (Plant weed in this.Weeds)
+            {
+                weed.MakeSeeds();
+            }
+        }
+        else if (plantType == PlantType.Flower)
+        {
+            foreach (Plant flower in this.Flowers)
+            {
+                flower.MakeSeeds();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Plants grow according to their plant stage and health.
+    /// </summary>
+    /// <param name="plantType"></param>
+    public void PlantsGrow(PlantType plantType)
+    {
+        if (plantType == PlantType.Weed)
+        {
+            foreach (Plant weed in this.Weeds)
+            {
+                weed.Grow();
+            }
+        }
+        else if (plantType == PlantType.Flower)
+        {
+            foreach (Plant flower in this.Flowers)
+            {
+                flower.Grow();
+            }
+        }
+    }
+
+    // ADD AND REMOVE PLANTS from GARDEN
+
+    /// <summary>
+    /// Appends plant to the appropriate list, depending on whether
+    /// it is a flower or weed.
+    /// </summary>
+    /// <param name="plant"></param>
     public void AddPlant(Plant plant)
     {
-        //Debug.Log("Add Plant in garden called");
         // if the plant is a weed
         if (plant.PlantType == PlantType.Weed)
         {
@@ -253,7 +309,8 @@ public class Garden : MonoBehaviour
     }
 
     /// <summary>
-    /// Removes a plant from the garden.
+    /// Deletes plant from the appropriate list, depending on whether
+    /// it is a flower or weed.
     /// </summary>
     /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
     public void RemovePlant(Plant removeMe)
@@ -265,6 +322,21 @@ public class Garden : MonoBehaviour
         else if (removeMe.PlantType == PlantType.Flower)
         {
             this.Flowers.Remove(removeMe);
+        }
+    }
+
+    /// <summary>
+    /// At the end of the day, removes all pollen from the plots in the garden
+    /// </summary>
+    public void RemovePollen()
+    {
+        // Iterate through plots                                           
+        for (int y = 0; y < this.height; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                this.plots[x, y].PollenHere = new TalliedSet<ColorName>();
+            }
         }
     }
 

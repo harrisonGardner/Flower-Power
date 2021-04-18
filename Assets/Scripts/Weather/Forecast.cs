@@ -38,6 +38,7 @@ public class Forecast : MonoBehaviour
     /// <returns></returns>
     public IWeather GetTodaysWeather()
     {
+        AddRandomWeather();
         return FiveDayForecast.Dequeue();
     }
 }

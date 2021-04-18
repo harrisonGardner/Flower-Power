@@ -63,26 +63,7 @@ public class Plant : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// Ages the plant so that it can eventually reach
-    /// the next stage of its life cycle.
-    /// </summary>
-    public void Grow()
-    {
-        CurrentStage.DecrementDaysToNextStage(Health.WiltingToday);
 
-        if (CurrentStage.IsReadyForNextStage())
-        {
-            IPlantStage temp = CurrentStage.GetNextStage();
-            if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
-                MyPlot.removePlant(); // REMOVE from PLOT
-            else
-            {
-                CurrentStage = temp;
-                SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
-            }
-        }
-    }
 
     /// <summary>
     /// Plant obtains water and energy from the plot,
@@ -113,15 +94,32 @@ public class Plant : MonoBehaviour
     }
 
     /// <summary>
-    /// Skips to the dead plant stage
+    /// Ages the plant so that it can eventually reach
+    /// the next stage of its life cycle.
+    /// </summary>
+    public void Grow()
+    {
+        CurrentStage.DecrementDaysToNextStage(Health.WiltingToday);
+
+        if (CurrentStage.IsReadyForNextStage())
+        {
+            IPlantStage temp = CurrentStage.GetNextStage();
+            if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
+                KillPlant();
+            else
+            {
+                CurrentStage = temp;
+                SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes Plant from Game via the Plot
     /// </summary>
     public void KillPlant()
     {
         MyPlot.removePlant();
-        //while (CurrentStage.CurrentStage != StageType.DEAD)
-        //{
-        //    CurrentStage = CurrentStage.GetNextStage();
-        //}
     }
 
     /// <summary>

@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// List of events occuring within a day
+/// </summary>
 public enum DailyEventType
 {
     NONE, NEWDAY, WEATHER,
     WEEDFEEDING, FLOWERFEEDING,
     WEEDPOLLINATION, FLOWERPOLLINATION,
     WEEDSEEDING, FLOWERSEEDING,
+    WEEDGROW, FLOWERGROW,
     COLORCLASH, DYING, ENDDAY
-        // ADD GROWTH
 }
 
+// TODO: Make into a generic structure
+// IMPROVED Functionality by shuffling the events in a queue structure.
+// GET rid of bool as if the event happened, it will be pushed to the back
+// ONLY 1 ACCESS needed
 public class EventInfo
 {
-    public int scheduledTime;
+    public float scheduledTime;
     public bool happenedToday;
 
-    public EventInfo(int time)
+    public EventInfo(float time)
     {
         scheduledTime = time;
         happenedToday = false;
@@ -27,10 +34,11 @@ public class EventInfo
 /// <summary>
 /// Dictates when events should occur within a given day.
 /// </summary>
+/// <author>Nicholas Gliserman</author>
 public class DailyEvents : MonoBehaviour
 {
-    public int dayLengthMilliseconds = 5000;
-    public int intervalTime = 100;
+    public float dayLengthSeconds = 5.0f;
+    public float intervalTime = 0.1f;
     public bool lastEventHappened;
     public IDictionary<DailyEventType, EventInfo> daysEvents;
 
@@ -52,19 +60,27 @@ public class DailyEvents : MonoBehaviour
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERPOLLINATION) },
             { DailyEventType.WEEDSEEDING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDSEEDING) },
-            { DailyEventType.FLOWERFEEDING,
+            { DailyEventType.FLOWERSEEDING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERFEEDING)},
+            { DailyEventType.WEEDGROW,
+                new EventInfo (this.intervalTime * (int) DailyEventType.WEEDGROW) },
+            { DailyEventType.FLOWERGROW,
+                new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERGROW)},
             { DailyEventType.COLORCLASH,
-                new EventInfo (this.intervalTime * (int) DailyEventType.COLORCLASH) },
+                new EventInfo (this.intervalTime * (int) DailyEventType.COLORCLASH) }, //TODO
             { DailyEventType.DYING,
-                new EventInfo (this.intervalTime * (int) DailyEventType.DYING) },
+                new EventInfo (this.intervalTime * (int) DailyEventType.DYING) }, // TODO
             { DailyEventType.ENDDAY,
-                new EventInfo (this.dayLengthMilliseconds) }
+                new EventInfo (this.dayLengthSeconds) }
         };
     }
 
-    
-    public DailyEventType GetCurrentEvent(int timeOfDay)
+    /// <summary>
+    /// Given the time of the day, will return what event should happen (if any)
+    /// </summary>
+    /// <param name="timeOfDay"></param>
+    /// <returns></returns>
+    public DailyEventType GetCurrentEvent(float timeOfDay)
     {
         // ITERATE THROUGH ALL EVENT TYPES
         foreach (KeyValuePair<DailyEventType, EventInfo> pair in daysEvents)
