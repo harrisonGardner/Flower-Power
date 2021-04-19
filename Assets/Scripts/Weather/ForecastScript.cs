@@ -11,6 +11,7 @@ public class ForecastScript : MonoBehaviour
     {
         Forecast.LoadFiveDaysWeather();
         UpdateWeatherIcons();
+
         //windDirectionIcon.GetComponent<WindIcon>().Direction = DirectionName.left;
         //windDirectionIcon.GetComponent<WindIcon>().spriteUpdate = windDirectionIcon.GetComponent<WeatherIconSpriteUpdater>();
         //SpriteUpdateController.AddSpriteToRedraw(windDirectionIcon.GetComponent<WindIcon>().spriteUpdate);

@@ -22,14 +22,18 @@ public class SpriteFetcher : MonoBehaviour
     //Flower Sprite Getter
     public static Sprite GetSpriteFlower(ColorName color, StageType type)
     {
-        //Find the Sprites Container and load them into an array
-        string spriteName = $"Sprites/{KeyWordFormat(color.ToString())} Flower";
-        Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
+        if (color != ColorName.NONE)
+        {
+            //Find the Sprites Container and load them into an array
+            string spriteName = $"Sprites/{KeyWordFormat(color.ToString())} Flower";
+            Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
 
-        //Change the spriteName to the name of the specific sprite in that array
-        spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
+            //Change the spriteName to the name of the specific sprite in that array
+            spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
 
-        return SpriteFind(sprites, spriteName);
+            return SpriteFind(sprites, spriteName);
+        }
+        throw new Exception("Cannot visualize color.none");
     }
 
     //Plot Sprite Getter
