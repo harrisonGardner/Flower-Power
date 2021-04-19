@@ -9,6 +9,7 @@ public class MasterController : MonoBehaviour
     public GameObject GardenScript;
     Garden garden;
     DayController day;
+    Colors allColors;
 
     //private IList<IBootController> creates = new List<IBootController>();
     private IList<IUpdateController> updates = new List<IUpdateController>();
@@ -18,6 +19,7 @@ public class MasterController : MonoBehaviour
         garden = GardenScript.GetComponent<Garden>();
         day = new DayController(garden);
         updates.Add(day);
+        allColors = new Colors();
     }
 
     // Start is called before the first frame update

@@ -19,6 +19,7 @@ public class FlowerReproduction : IReproductionBehavior
         // TODO: TWEAK INPUTS AS FITS GAMEPLAY
         int distance = 2;
         int pollenIntensity = 2;
+        ColorName color = plot.plantHere.PlantColor.Name;
 
         if (windyDay)
         {
@@ -27,13 +28,13 @@ public class FlowerReproduction : IReproductionBehavior
         }
 
         // STRONG STREAM of POLLEN
-        Pollen strong = new Pollen(direction, distance, pollenIntensity); 
+        Pollen strong = new Pollen(direction, distance, pollenIntensity, color); 
         strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
         strong.Spread();
 
         // TWO WEAKER STREAMS
-        Pollen weak1 = new Pollen(direction, distance, (pollenIntensity - 1));
-        Pollen weak2 = new Pollen(direction, distance, (pollenIntensity - 1));
+        Pollen weak1 = new Pollen(direction, distance, (pollenIntensity - 1), color);
+        Pollen weak2 = new Pollen(direction, distance, (pollenIntensity - 1), color);
 
         DirectionName[] weakStarts = Directions.GetAdjacentDirections(direction.Name);
         weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
@@ -58,7 +59,7 @@ public class FlowerReproduction : IReproductionBehavior
         TalliedSet<ColorName> flowerPollen = plot.PollenHere;
 
         int pollenCount = flowerPollen.N;
-        Debug.Log("Number of Pollen: " + pollenCount);
+        //Debug.Log("Number of Pollen: " + pollenCount);
         TalliedSet<ColorName> seeds = new TalliedSet<ColorName>();
 
         // TODO: TWEAK NUMBERS to FIT GAMEPLAY
@@ -69,10 +70,13 @@ public class FlowerReproduction : IReproductionBehavior
             if (i % 3 == randNumber.Next(0, 3))
             {
                 ColorName pollenColor = flowerPollen.RemoveRandomElement();
-
-                // ENSURE POLLEN did not BELONG to a WEED
-                if (pollenColor != ColorName.NONE)
+                
+            // ENSURE POLLEN did not BELONG to a WEED
+            if (pollenColor != ColorName.NONE)
                 {
+                    Debug.Log("Pollen color is " + pollenColor);
+                    Debug.Log("Flower color is " + thisPlantsColor.Name);
+
                     ColorName PollenFlowerBlend = Colors.GetColorBlend(thisPlantsColor,
                         Colors.GetColor(pollenColor));
                     seeds.Add(PollenFlowerBlend);

@@ -25,13 +25,13 @@ public class WeedReproduction : IReproductionBehavior
         }
 
         // STRONG STREAM of POLLEN
-        Pollen strong = new Pollen(direction, distance, pollenIntensity); 
+        Pollen strong = new Pollen(direction, distance, pollenIntensity, ColorName.NONE); 
         strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
         strong.Spread();
 
         // TWO WEAKER STREAMS
-        Pollen weak1 = new Pollen(direction, (distance - 1), (pollenIntensity -1));
-        Pollen weak2 = new Pollen(direction, (distance - 1), (pollenIntensity - 1));
+        Pollen weak1 = new Pollen(direction, (distance - 1), (pollenIntensity -1), ColorName.NONE);
+        Pollen weak2 = new Pollen(direction, (distance - 1), (pollenIntensity - 1), ColorName.NONE);
 
         DirectionName[] weakStarts = Directions.GetAdjacentDirections(direction.Name);
         weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
