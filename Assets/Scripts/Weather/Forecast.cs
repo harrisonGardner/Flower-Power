@@ -16,6 +16,7 @@ public class Forecast : MonoBehaviour
     private static IWeather[] weathers = new IWeather[] { new Rain(), new Sun(), new Wind() };
 
     public static Queue<IWeather> FiveDayForecast { get; set; } = LoadFiveDaysWeather();
+    public static DirectionName WindDirection { get; set; } = DirectionName.right;
 
     public static Queue<IWeather> LoadFiveDaysWeather()
     {

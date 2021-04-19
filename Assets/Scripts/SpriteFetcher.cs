@@ -104,6 +104,18 @@ public class SpriteFetcher : MonoBehaviour
         return SpriteFind(sprites, spriteName);
     }
 
+    public static Sprite GetSpriteWind(DirectionName direction)
+    {
+        //Find the Sprites Container and load them into an array
+        string spriteName = $"Sprites/Wind Arrow";
+        Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
+
+        //Change the spriteName to the name of the specific sprite in that array
+        spriteName = $"Wind {KeyWordFormat(direction.ToString())}";
+
+        return SpriteFind(sprites, spriteName);
+    }
+
     //Uses LINQ to find the sprite that matches the path string
     private static Sprite SpriteFind(Sprite[] sprites, String spriteName)
     {
