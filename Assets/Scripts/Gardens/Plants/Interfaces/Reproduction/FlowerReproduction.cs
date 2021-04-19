@@ -58,6 +58,7 @@ public class FlowerReproduction : IReproductionBehavior
         TalliedSet<ColorName> flowerPollen = plot.PollenHere;
 
         int pollenCount = flowerPollen.N;
+        Debug.Log("Number of Pollen: " + pollenCount);
         TalliedSet<ColorName> seeds = new TalliedSet<ColorName>();
 
         // TODO: TWEAK NUMBERS to FIT GAMEPLAY
@@ -85,6 +86,7 @@ public class FlowerReproduction : IReproductionBehavior
 
         // SPREAD SEEDS
         int seedCount = seeds.N;
+        Debug.Log("Number of Seeds: " + seedCount);
 
         for (int i = 0; i < seedCount; i++)
         {

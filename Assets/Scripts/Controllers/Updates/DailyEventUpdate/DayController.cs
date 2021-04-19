@@ -8,8 +8,8 @@ using UnityEngine;
 public class DayController : IUpdateController
 {
     private DailyEvents schedule = new DailyEvents();
-    public float TimeOfDay { get; private set; }
-    public int dayNumber { get; private set; }
+    public float TimeOfDay { get; private set; } = 0;
+    public int dayNumber { get; private set; } = 0;
     public Garden garden;
     public IDictionary<DailyEventType, IGardenUpdate> dailyEvents =
         new Dictionary<DailyEventType, IGardenUpdate>()
@@ -39,20 +39,29 @@ public class DayController : IUpdateController
         // UPDATE the TIME
         TimeOfDay += Time.deltaTime;
         // FIND OUT WHAT EVENT to INSTIGATE
+        //Debug.Log("ASKING for CURRENT EVENT");
         DailyEventType currentEvent = this.schedule.GetCurrentEvent(TimeOfDay);
+        //Debug.Log("Current Event is: " + currentEvent);
 
         // IF NOT NONE...
         if (currentEvent != DailyEventType.NONE)
         {
+            //Debug.Log("Time # " + TimeOfDay + " Event " + currentEvent);
+
             if (currentEvent == DailyEventType.ENDDAY)// IF END of DAY       
             {
                 TimeOfDay = 0.0f; // RESET TIME of DAY to zero
                 dayNumber++; // INCREMENT DAY NUMBER
+                Debug.Log("END of DAY, New day is: " + dayNumber);
             }
             else // LAUNCH APPROPRIATE ACTION
             {
                 dailyEvents[currentEvent].ActionOnUpdate(garden);
             }
+        }
+        else
+        {
+            //Debug.Log("Time # " + TimeOfDay + " Event " + currentEvent);
         }
         // TODO: HERE or ELSEWHERE...CHECK if VICTORY CONDITIONS MET 
     }
