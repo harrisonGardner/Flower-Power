@@ -40,7 +40,6 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
             spritesToRedraw.Clear();
         }
 
-
         throw new System.NotImplementedException();
     }
 
