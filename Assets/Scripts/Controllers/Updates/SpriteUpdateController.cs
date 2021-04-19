@@ -30,7 +30,10 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
 
             foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
             {
-                needsRedraw.SpriteUpdate();
+                if (needsRedraw != null)
+                {
+                    needsRedraw.SpriteUpdate();
+                }
             }
 
             // REMOVE ELEMENTS from LIST AFTER UPDATES

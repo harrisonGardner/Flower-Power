@@ -31,6 +31,10 @@ public class Garden : MonoBehaviour
     public IList<Plant> Weeds { get; } = new List<Plant>();
     public IList<Plant> Remove { get; set; } = new List<Plant>();
 
+    // Temporary holding lists for new plants while iteration through existing lists is still occurring
+    //public IList<Plant> newFlowers { get; set; } = new List<Plant>();
+    //public IList<Plant> newWeeds { get; set; } = new List<Plant>();
+
     // WEATHER
     public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.downLeft);
     public bool WindyToday { get; set; }
@@ -248,23 +252,41 @@ public class Garden : MonoBehaviour
     /// <summary>
     /// Plants in the garden make seeds based on their life stage and
     /// the pollen currently in their plot.
+    ///
+    /// Does not iterate through the instance plant lists directly as
+    /// the MakeSeeds method can expand the size of those lists as the
+    /// method is running.
     /// </summary>
     /// <param name="plantType"></param>
     public void SpreadSeeds(PlantType plantType)
     {
+        Plant[] temporary;
+
         if (plantType == PlantType.Weed)
         {
-            foreach (Plant weed in this.Weeds)
-            {
-                weed.MakeSeeds();
-            }
+            temporary = new Plant[this.Weeds.Count];
+            this.Weeds.CopyTo(temporary, 0);
+
+
+            //foreach (Plant weed in this.Weeds)
+            //{
+            //    weed.MakeSeeds();
+            //}
         }
         else if (plantType == PlantType.Flower)
         {
-            foreach (Plant flower in this.Flowers)
-            {
-                flower.MakeSeeds();
-            }
+            temporary = new Plant[this.Flowers.Count];
+            this.Flowers.CopyTo(temporary, 0);
+            //foreach (Plant flower in this.Flowers)
+            //{
+            //    flower.MakeSeeds();
+            //}
+        }
+        else { temporary = new Plant[0]; }
+
+        for (int i = 0; i < temporary.Length; i++)
+        {
+            temporary[i].MakeSeeds();
         }
     }
 
