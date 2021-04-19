@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Types of colors that a plant object can be.
@@ -75,6 +76,7 @@ public class Color
 /// <author>Lisette Peck & Nicholas Gliserman</author
 public class Colors
 {
+
     private static Color[] allColors = new Color[] {
         new Color(ColorName.NONE, ColorType.NONE, ""), // NONE
         new Color(ColorName.RED, ColorType.PRIMARY, ""),
@@ -91,6 +93,8 @@ public class Colors
     /// </summary>
     public Colors()
     {
+        Debug.Log("NEW COLORS CLASS");
+
         // RED & GREEN are OPPOSITES
         GetColor(ColorName.GREEN).setOpposite(GetColor(ColorName.RED));
         // ORANGE & BLUE are OPPOSITES
@@ -102,14 +106,17 @@ public class Colors
         Color red = GetColor(ColorName.RED);
         red.Blends.Add(ColorName.BLUE, GetColor(ColorName.PURPLE));
         red.Blends.Add(ColorName.YELLOW, GetColor(ColorName.ORANGE));
+        red.Blends.Add(ColorName.RED, GetColor(ColorName.RED));
 
         Color yellow = GetColor(ColorName.YELLOW);
         yellow.Blends.Add(ColorName.RED, GetColor(ColorName.ORANGE));
         yellow.Blends.Add(ColorName.BLUE, GetColor(ColorName.GREEN));
+        yellow.Blends.Add(ColorName.YELLOW, GetColor(ColorName.YELLOW));
 
         Color blue = GetColor(ColorName.BLUE);
         blue.Blends.Add(ColorName.RED, GetColor(ColorName.PURPLE));
         blue.Blends.Add(ColorName.YELLOW, GetColor(ColorName.GREEN));
+        blue.Blends.Add(ColorName.BLUE, GetColor(ColorName.BLUE));
     }
 
     /// <summary>
@@ -140,6 +147,7 @@ public class Colors
     public static ColorName GetColorBlend(Color color1, Color color2)
     {
         // TODO: Add in functionality for secondary colors
+        
         if (color1.Type == ColorType.PRIMARY && color2.Type == ColorType.PRIMARY)
         {
             return color1.Blends[color2.Name].Name;

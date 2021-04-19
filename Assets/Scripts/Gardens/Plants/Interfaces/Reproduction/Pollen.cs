@@ -16,11 +16,12 @@ public class Pollen
     private int Intensity { get; set; }
     public Plot currentPlot { get; set; }
 
-    public Pollen(Direction direction, int totalMoves, int intensity)
+    public Pollen(Direction direction, int totalMoves, int intensity, ColorName pollenColor)
     {
         Move = direction;
         MovesLeft = totalMoves;
         Intensity = intensity;
+        color = pollenColor;
     }
 
     /// <summary>
