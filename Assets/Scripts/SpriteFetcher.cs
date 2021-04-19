@@ -33,6 +33,7 @@ public class SpriteFetcher : MonoBehaviour
 
             return SpriteFind(sprites, spriteName);
         }
+
         throw new Exception("Cannot visualize color.none");
     }
 
