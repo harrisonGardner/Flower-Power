@@ -8,6 +8,7 @@ public class PlantSpriteUpdater : MonoBehaviour, ISpriteUpdate
     {
         Color plantColor = gameObject.GetComponent<Flower>().PlantColor;
         StageType currentStage = gameObject.GetComponent<Flower>().CurrentStage.CurrentStage;
+        Debug.Log($"Stage: {currentStage}, Color: {plantColor}");
         gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteFlower(plantColor.Name, currentStage);
     }
 }

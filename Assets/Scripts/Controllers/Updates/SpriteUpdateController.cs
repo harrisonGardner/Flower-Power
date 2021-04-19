@@ -16,7 +16,8 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
 
     public static void AddSpriteToRedraw(ISpriteUpdate spriteToRedraw)
     {
-        spritesToRedraw.Add(spriteToRedraw);
+        if(spritesToRedraw != null)
+            spritesToRedraw.Add(spriteToRedraw);
     }
 
     public void ActionOnUpdate()
@@ -50,12 +51,12 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
             // ITERATE through LIST to UPDATE SPRITES
             foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
             {
-                //Debug.Log($"Sprite to redraw: {needsRedraw}");
+                Debug.Log($"Sprite to redraw: {needsRedraw}");
                 needsRedraw.SpriteUpdate();
             }
 
             // REMOVE ELEMENTS from LIST AFTER UPDATES
-            spritesToRedraw.Clear();
+            spritesToRedraw = new List<ISpriteUpdate>();
         }
         //throw new System.NotImplementedException();
     }
