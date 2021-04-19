@@ -7,25 +7,25 @@ TextureImporter:
     second: Wind Right
   - first:
       213: -7302658359591948368
-    second: Wind Down Right
+    second: Wind Downright
   - first:
       213: 998915776792523057
     second: Wind Down
   - first:
       213: 5122972627367776974
-    second: Wind Down Left
+    second: Wind Downleft
   - first:
       213: -6544745386975862197
     second: Wind Left
   - first:
       213: 5086546577028691454
-    second: Wind Up Left
+    second: Wind Upleft
   - first:
       213: 8443672509440508419
     second: Wind Up
   - first:
       213: 7950161314991796418
-    second: Wind Up Right
+    second: Wind Upright
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,7 +148,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Down Right
+      name: Wind Downright
       rect:
         serializedVersion: 2
         x: 16
@@ -190,7 +190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Down Left
+      name: Wind Downleft
       rect:
         serializedVersion: 2
         x: 48
@@ -232,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Up Left
+      name: Wind Upleft
       rect:
         serializedVersion: 2
         x: 80
@@ -274,7 +274,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wind Up Right
+      name: Wind Upright
       rect:
         serializedVersion: 2
         x: 112

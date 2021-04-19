@@ -36,7 +36,7 @@ public class Garden : MonoBehaviour
     //public IList<Plant> newWeeds { get; set; } = new List<Plant>();
 
     // WEATHER
-    public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.downLeft);
+    public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.right);
     public bool WindyToday { get; set; }
 
     // RANDOM
