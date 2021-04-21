@@ -25,20 +25,35 @@ public class WeedReproduction : IReproductionBehavior
         }
 
         // STRONG STREAM of POLLEN
-        Pollen strong = new Pollen(direction, distance, pollenIntensity, ColorName.NONE); 
-        strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
-        strong.Spread();
+        Pollen strong = new Pollen(direction, distance, pollenIntensity, ColorName.NONE);
 
-        // TWO WEAKER STREAMS
+        // SPREAD -- IF THERE IS A STARTING SPACE for GIVEN PLOT POSITION & WIND DIRECTION
+        try
+        {
+            strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
+            strong.Spread();
+        }
+        catch (IndexOutOfRangeException) { }
+
+
+        // TWO WEAKER STREAMS of POLLEN
         Pollen weak1 = new Pollen(direction, (distance - 1), (pollenIntensity -1), ColorName.NONE);
         Pollen weak2 = new Pollen(direction, (distance - 1), (pollenIntensity - 1), ColorName.NONE);
-
         DirectionName[] weakStarts = Directions.GetAdjacentDirections(direction.Name);
-        weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
-        weak2.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[1]);
 
-        weak1.Spread();
-        weak2.Spread();
+        // SPREAD -- IF THERE IS A STARTING SPACE for GIVEN PLOT POSITION & WIND DIRECTION
+        try
+        {
+            weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
+            weak1.Spread();
+        }
+        catch (IndexOutOfRangeException) { }
+        try
+        {
+            weak2.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[1]);
+            weak2.Spread();
+        }
+        catch { }
     }
 
     public void Seed(Plot plot)

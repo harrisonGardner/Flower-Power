@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Initializes important game objects and classes; controls the flow of the game state.
+/// </summary>
 public class MasterController : MonoBehaviour
 {
     // FIELD to KEEP TRACK of TIME
@@ -11,23 +14,24 @@ public class MasterController : MonoBehaviour
     DayController day;
     Colors allColors;
 
-    //private IList<IBootController> creates = new List<IBootController>();
+    public static float TimeOfDay { get; private set; } = 0;
+    public static int DayNumber { get; private set; } = 0;
+
     private IList<IUpdateController> updates = new List<IUpdateController>();
 
     void Awake()
     {
+        // GET the GARDEN from the GARDENSCRIPT GAME OBJECT
         garden = GardenScript.GetComponent<Garden>();
+
+        // CREATE A DAY CONTROLLER
         day = new DayController(garden);
         updates.Add(day);
-        allColors = new Colors();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // ITEREATE THROUGH the IBOOTCONTROLLER CLASSES
-            // THEY NEED TO INSTANTIATE RELEVANT OBJECTS (e.g. garden, plot, colors, etc.)
-            // THEY ALSO NEED TO ADD RELEVANT IUPDATE CONTROLLERS to the UPDATES list
+        // TODO: Add a sprite update controller
+
+        // COLORS
+        allColors = new Colors();
     }
 
     // Update is called once per frame
@@ -37,5 +41,8 @@ public class MasterController : MonoBehaviour
         {
             control.ActionOnUpdate();
         }
+
+        TimeOfDay = day.TimeOfDay;
+        DayNumber = day.dayNumber;
     }
 }

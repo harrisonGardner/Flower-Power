@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,20 +29,36 @@ public class FlowerReproduction : IReproductionBehavior
         }
 
         // STRONG STREAM of POLLEN
-        Pollen strong = new Pollen(direction, distance, pollenIntensity, color); 
-        strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
-        strong.Spread();
+        Pollen strong = new Pollen(direction, distance, pollenIntensity, color);
+        try
+        {
+            strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);
+            strong.Spread();
+        }
+        catch (IndexOutOfRangeException) { }
+        
 
         // TWO WEAKER STREAMS
         Pollen weak1 = new Pollen(direction, distance, (pollenIntensity - 1), color);
         Pollen weak2 = new Pollen(direction, distance, (pollenIntensity - 1), color);
 
         DirectionName[] weakStarts = Directions.GetAdjacentDirections(direction.Name);
-        weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
-        weak2.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[1]);
 
-        weak1.Spread();
-        weak2.Spread();
+        try
+        {
+            weak1.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[0]);
+            weak1.Spread();
+        }
+        catch (IndexOutOfRangeException) { }
+
+        try
+        {
+            weak2.currentPlot = plot.AdjacentPlots.getNeighbor(weakStarts[1]);
+            weak2.Spread();
+        }
+        catch (IndexOutOfRangeException) { };
+
+
     }
 
     /// <summary>
@@ -66,8 +83,8 @@ public class FlowerReproduction : IReproductionBehavior
         // ITERATE through POLLEN in SPACE
         for (int i = 0; i < pollenCount; i++)
         {
-            // 1 in 3 chance flower will receive the pollen
-            if (i % 3 == randNumber.Next(0, 3))
+            // 1 in 2 chance flower will receive the pollen
+            if (0 == randNumber.Next(0, 2))
             {
                 ColorName pollenColor = flowerPollen.RemoveRandomElement();
                 

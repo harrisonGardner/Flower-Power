@@ -10,6 +10,8 @@ using UnityEngine;
 /// GetSprite() method. The GetSprite() method has a few 
 /// different overloads to account for sprites that have 
 /// different purposes.
+///
+/// n.b. Uses LINQ in fulfillment of project requirements.
 /// </summary>
 /// <author>Harrison Gardner</author>
 public class SpriteFetcher : MonoBehaviour

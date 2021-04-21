@@ -255,35 +255,29 @@ public class Garden : MonoBehaviour
     ///
     /// Does not iterate through the instance plant lists directly as
     /// the MakeSeeds method can expand the size of those lists as the
-    /// method is running.
+    /// method is running. Insteads performs a shallow copy of the official
+    /// lists into a temporary list -- then iterates through the temporary list.
     /// </summary>
     /// <param name="plantType"></param>
     public void SpreadSeeds(PlantType plantType)
     {
+        // declare the temporary array of plants
         Plant[] temporary;
 
+        // Shallow copy of the official plant list
         if (plantType == PlantType.Weed)
         {
             temporary = new Plant[this.Weeds.Count];
             this.Weeds.CopyTo(temporary, 0);
-
-
-            //foreach (Plant weed in this.Weeds)
-            //{
-            //    weed.MakeSeeds();
-            //}
         }
         else if (plantType == PlantType.Flower)
         {
             temporary = new Plant[this.Flowers.Count];
             this.Flowers.CopyTo(temporary, 0);
-            //foreach (Plant flower in this.Flowers)
-            //{
-            //    flower.MakeSeeds();
-            //}
         }
         else { temporary = new Plant[0]; }
 
+        // MAKE SEEDS by iterating through temporary list
         for (int i = 0; i < temporary.Length; i++)
         {
             temporary[i].MakeSeeds();
@@ -314,16 +308,14 @@ public class Garden : MonoBehaviour
         // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
         foreach (Plant plant in Remove)
         {
-            if (plant.PlantType == PlantType.Flower)
+            if (plant != null)
             {
-                Flowers.Remove(plant);
-            }
-            else if (plant.PlantType == PlantType.Weed)
-            {
-                Weeds.Remove(plant);
+                if (plant.PlantType == PlantType.Flower)
+                    Flowers.Remove(plant);
+                else if (plant.PlantType == PlantType.Weed)
+                    Weeds.Remove(plant);
             }
         }
-
         Remove = new List<Plant>(); // RESET REMOVAL LIST
     }
 
@@ -338,14 +330,10 @@ public class Garden : MonoBehaviour
     {
         // if the plant is a weed
         if (plant.PlantType == PlantType.Weed)
-        {
             this.Weeds.Add(plant);
-        }
         // plant is a flower
         else if (plant.PlantType == PlantType.Flower)
-        {
             this.Flowers.Add(plant);
-        }
     }
 
     /// <summary>
@@ -353,19 +341,7 @@ public class Garden : MonoBehaviour
     /// it is a flower or weed.
     /// </summary>
     /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
-    public void AddToRemove(Plant removeMe)
-    {
-        //if (removeMe.PlantType == PlantType.Weed)
-        //{
-        //    this.Weeds.Remove(removeMe);
-        //}
-        //else if (removeMe.PlantType == PlantType.Flower)
-        //{
-        //    this.Flowers.Remove(removeMe);
-        //}
-
-        Remove.Add(removeMe);
-    }
+    public void AddToRemove(Plant removeMe) { Remove.Add(removeMe); }
 
     /// <summary>
     /// At the end of the day, removes all pollen from the plots in the garden

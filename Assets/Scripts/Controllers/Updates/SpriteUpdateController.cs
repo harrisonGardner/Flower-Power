@@ -53,7 +53,6 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
             // ITERATE through LIST to UPDATE SPRITES
             foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
             {
-                Debug.Log($"Sprite to redraw: {needsRedraw}");
                 needsRedraw.SpriteUpdate();
             }
 

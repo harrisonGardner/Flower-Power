@@ -33,7 +33,6 @@ public class Pollen
     /// </summary>
     public void Spread()
     {
-        Debug.Log("SPREADING POLLEN");
         bool inBounds = true;
         while (MovesLeft >= 0 && inBounds)
         {
@@ -49,7 +48,6 @@ public class Pollen
         if (currentPlot.plantHere != null)
         { 
             currentPlot.addPollen(Intensity, this.color);
-            Debug.Log("POLLEN DEPOSITED");
         }
     }
 

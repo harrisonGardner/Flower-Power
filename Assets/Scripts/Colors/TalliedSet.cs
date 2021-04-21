@@ -112,17 +112,14 @@ public class TalliedSet<T>
         // GET a RANDOM NUMBER
         if (this.Elements.Keys.Count == 0)
         {
-            Debug.Log("No Elements in this TalliedSet");
             return default(T);
         }
 
         int randomColorNum = randomNumber.Next(0, this.Elements.Keys.Count);
-        Debug.Log("NUMBER of KEYS : " + this.Elements.Keys.Count);
         int j = 0;
 
         foreach (KeyValuePair<T, int> el in this.Elements)
         {
-            Debug.Log("j equals " + j + " random value is: " + randomColorNum);
             if (randomColorNum == j)
             {
                 return Remove(el.Key);
