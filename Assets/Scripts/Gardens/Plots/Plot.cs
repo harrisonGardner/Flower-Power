@@ -97,16 +97,24 @@ public class Plot : MonoBehaviour
     /// <summary>
     /// When a plant has died, empties the plot to allow for a new plant.
     /// </summary>
-    public void removePlant()
+    public void RemoveSinglePlant()
     {
-        // REMOVE the PLANT FROM THE GARDEN
+        // BEFORE REMOVING from PLOT, REMOVE from GARDEN
         Garden.AddToRemove(this.plantHere);
+        Garden.RemoveFromGarden();
+    }
 
+    public void RemovePlantDuringGrowth()
+    {
+        Garden.AddToRemove(this.plantHere);
+    }
+
+    // CALLED after REMOVED from GARDEN
+    public void DestroyPlant() {
         // REMOVE from this PLOT
         IsEmpty = true;
-        Destroy(plantPrefab);
         this.plantHere = null;
-    }
+        Destroy(plantPrefab); }
 
     // WATER-RELATED METHODS
 
