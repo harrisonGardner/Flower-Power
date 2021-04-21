@@ -19,7 +19,7 @@ public class Flowering : IPlantStage
     /// </summary>
     public Flowering()
     {
-        DaysToNextStage = 5;
+        DaysToNextStage = 7;
         CutDifficulty = 3;
     }
 
