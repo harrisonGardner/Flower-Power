@@ -42,25 +42,25 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
             numGameObjects = spritesToRedraw.Count;
         }
 
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
 
     //Temp Updater
-    public static void TempSpriteUpdate()
-    {
-        // DOES THE GAME OBJECT have a componenet that implements the IUpdateSprite interface?
-        if (spritesToRedraw.Count > 0)
-        {
-            // ITERATE through LIST to UPDATE SPRITES
-            foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
-            {
-                needsRedraw.SpriteUpdate();
-            }
+    //public static void TempSpriteUpdate()
+    //{
+    //    // DOES THE GAME OBJECT have a componenet that implements the IUpdateSprite interface?
+    //    if (spritesToRedraw.Count > 0)
+    //    {
+    //        // ITERATE through LIST to UPDATE SPRITES
+    //        foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
+    //        {
+    //            needsRedraw.SpriteUpdate();
+    //        }
 
-            // REMOVE ELEMENTS from LIST AFTER UPDATES
-            spritesToRedraw = new List<ISpriteUpdate>();
-        }
-        //throw new System.NotImplementedException();
-    }
+    //        // REMOVE ELEMENTS from LIST AFTER UPDATES
+    //        spritesToRedraw = new List<ISpriteUpdate>();
+    //    }
+    //    //throw new System.NotImplementedException();
+    //}
 }

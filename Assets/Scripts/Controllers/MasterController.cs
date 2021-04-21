@@ -32,8 +32,6 @@ public class MasterController : MonoBehaviour
         spriteUpdate = new SpriteUpdateController();
         updates.Add(spriteUpdate);
 
-        // TODO: Add a sprite update controller
-
         // COLORS
         allColors = new Colors();
     }
