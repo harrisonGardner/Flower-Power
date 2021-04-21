@@ -31,6 +31,10 @@ public class Garden : MonoBehaviour
     public IList<Plant> Weeds { get; } = new List<Plant>();
     public IList<Plant> Remove { get; set; } = new List<Plant>();
 
+    // Temporary holding lists for new plants while iteration through existing lists is still occurring
+    //public IList<Plant> newFlowers { get; set; } = new List<Plant>();
+    //public IList<Plant> newWeeds { get; set; } = new List<Plant>();
+
     // WEATHER
     public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.right);
     public bool WindyToday { get; set; }
@@ -302,23 +306,17 @@ public class Garden : MonoBehaviour
         }
 
         // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
-        if (Remove.Count > 0)
+        foreach (Plant plant in Remove)
         {
-            foreach (Plant plant in Remove)
+            if (plant != null)
             {
-                if (plant != null)
-                {
-                    if (plant.PlantType == PlantType.Flower)
-                    {
-                        Flowers.Remove(plant);
-                    }
-                    else if (plant.PlantType == PlantType.Weed)
-                        Weeds.Remove(plant);
-                }
+                if (plant.PlantType == PlantType.Flower)
+                    Flowers.Remove(plant);
+                else if (plant.PlantType == PlantType.Weed)
+                    Weeds.Remove(plant);
             }
-
-            Remove = new List<Plant>(); // RESET REMOVAL LIST
         }
+        Remove = new List<Plant>(); // RESET REMOVAL LIST
     }
 
     // ADD AND REMOVE PLANTS from GARDEN

@@ -101,6 +101,15 @@ public class Plot : MonoBehaviour
     {
         // REMOVE the PLANT FROM THE GARDEN
         Garden.AddToRemove(this.plantHere);
+        
+        //if (this.plantHere.PlantType == PlantType.Weed)
+        //{
+        //    Garden.Weeds.Remove(this.plantHere);
+        //}
+        //else if (this.plantHere.PlantType == PlantType.Flower)
+        //{
+        //    Garden.Flowers.Remove(this.plantHere);
+        //}
 
         // REMOVE from this PLOT
         IsEmpty = true;
