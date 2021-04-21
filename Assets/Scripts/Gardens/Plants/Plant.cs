@@ -89,7 +89,7 @@ public class Plant : MonoBehaviour
 
         if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
         {
-            MyPlot.removePlant();
+            MyPlot.RemovePlantDuringGrowth();
         }
     }
 
@@ -105,7 +105,7 @@ public class Plant : MonoBehaviour
         {
             IPlantStage temp = CurrentStage.GetNextStage();
             if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
-                KillPlant();
+                MyPlot.RemovePlantDuringGrowth();
             else
             {
                 CurrentStage = temp;
@@ -119,7 +119,7 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void KillPlant()
     {
-        MyPlot.removePlant();
+        MyPlot.RemoveSinglePlant();
     }
 
     /// <summary>
