@@ -34,8 +34,6 @@ public class WateringCan : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(1))
-            DropTool();
         if (holding == true)
         {
             if (!useTool)
