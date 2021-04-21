@@ -5,16 +5,16 @@ using UnityEngine;
 public class ForecastScript : MonoBehaviour
 {
     public GameObject[] days;
-    //public GameObject windDirectionIcon;
+    public GameObject windIcon;
+
+    public GameObject garden;
+
     // Start is called before the first frame update
     void Start()
     {
         Forecast.LoadFiveDaysWeather();
         UpdateWeatherIcons();
-
-        //windDirectionIcon.GetComponent<WindIcon>().Direction = DirectionName.left;
-        //windDirectionIcon.GetComponent<WindIcon>().spriteUpdate = windDirectionIcon.GetComponent<WeatherIconSpriteUpdater>();
-        //SpriteUpdateController.AddSpriteToRedraw(windDirectionIcon.GetComponent<WindIcon>().spriteUpdate);
+        UpdateWindIcon();
     }
 
     public void UpdateWeatherIcons()
@@ -26,5 +26,12 @@ public class ForecastScript : MonoBehaviour
             days[i].GetComponent<WeatherIcon>().spriteUpdate = days[i].GetComponent<WeatherIconSpriteUpdater>();
             SpriteUpdateController.AddSpriteToRedraw(days[i].GetComponent<WeatherIcon>().spriteUpdate);
         }
+    }
+
+    public void UpdateWindIcon()
+    {
+        windIcon.GetComponent<WindIcon>().Direction = garden.GetComponent<Garden>().WindDirection.Name; 
+        windIcon.GetComponent<WindIcon>().spriteUpdate = windIcon.GetComponent<WindIconSpriteUpdater>();
+        SpriteUpdateController.AddSpriteToRedraw(windIcon.GetComponent<WindIcon>().spriteUpdate);
     }
 }

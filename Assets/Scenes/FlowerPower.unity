@@ -866,6 +866,8 @@ MonoBehaviour:
   - {fileID: 1323880519}
   - {fileID: 485260268}
   - {fileID: 1452167086}
+  windIcon: {fileID: 1217178254}
+  garden: {fileID: 14628244}
 --- !u!1 &845334409
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +905,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9294118, g: 0.94117653, b: 0.9607844, a: 0}
+  m_BackGroundColor: {r: 0.23762906, g: 0.5660378, b: 0.34105504, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1339,6 +1341,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1217178255}
   - component: {fileID: 1217178256}
+  - component: {fileID: 1217178258}
+  - component: {fileID: 1217178257}
   m_Layer: 0
   m_Name: Wind Direction
   m_TagString: Untagged
@@ -1411,6 +1415,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1217178257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217178254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4ed9ab13aeedc4ba13f6e0d3cd8ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1217178258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217178254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123b525fcef9bc14d8e667caeda75b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1262167391
 GameObject:
   m_ObjectHideFlags: 0
