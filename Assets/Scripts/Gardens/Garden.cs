@@ -306,6 +306,7 @@ public class Garden : MonoBehaviour
         }
 
         // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
+<<<<<<< HEAD
         foreach (Plant plant in Remove)
         {
             if (plant != null)
@@ -317,6 +318,25 @@ public class Garden : MonoBehaviour
             }
         }
         Remove = new List<Plant>(); // RESET REMOVAL LIST
+=======
+        if (Remove.Count > 0)
+        {
+            foreach (Plant plant in Remove)
+            {
+                if (plant != null)
+                {
+                    if (plant.PlantType == PlantType.Flower)
+                    {
+                        Flowers.Remove(plant);
+                    }
+                    else if (plant.PlantType == PlantType.Weed)
+                        Weeds.Remove(plant);
+                }
+            }
+
+            Remove = new List<Plant>(); // RESET REMOVAL LIST
+        }
+>>>>>>> parent of 8679d33 (Merge pull request #45 from harrisonGardner/Gliserman)
     }
 
     // ADD AND REMOVE PLANTS from GARDEN

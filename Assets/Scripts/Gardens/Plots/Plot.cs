@@ -101,6 +101,7 @@ public class Plot : MonoBehaviour
     {
         // REMOVE the PLANT FROM THE GARDEN
         Garden.AddToRemove(this.plantHere);
+<<<<<<< HEAD
         
         //if (this.plantHere.PlantType == PlantType.Weed)
         //{
@@ -110,6 +111,8 @@ public class Plot : MonoBehaviour
         //{
         //    Garden.Flowers.Remove(this.plantHere);
         //}
+=======
+>>>>>>> parent of 8679d33 (Merge pull request #45 from harrisonGardner/Gliserman)
 
         // REMOVE from this PLOT
         IsEmpty = true;
