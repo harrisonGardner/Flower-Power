@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpriteUpdateController : MonoBehaviour, IUpdateController
 {
     // LIST of GAME OBJECTS w/ SPRITES to UPDATE & CURRENT STATE of LIST
-    private static int numGameObjects = 0;
+    static int numGameObjects = 0;
     public static IList<ISpriteUpdate> spritesToRedraw = new List<ISpriteUpdate>();
 
 
@@ -16,14 +16,15 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
 
     public static void AddSpriteToRedraw(ISpriteUpdate spriteToRedraw)
     {
-        if(spritesToRedraw != null)
+        if (spriteToRedraw != null)
+        {
             spritesToRedraw.Add(spriteToRedraw);
+            numGameObjects++;
+        }
     }
 
     public void ActionOnUpdate()
     {
-        // DOES THE GAME OBJECT have a componenet that implements the IUpdateSprite interface?
-        
         if (spritesToRedraw.Count > 0)
         {
             // ITERATE through LIST to UPDATE SPRITES
@@ -38,28 +39,7 @@ public class SpriteUpdateController : MonoBehaviour, IUpdateController
 
             // REMOVE ELEMENTS from LIST AFTER UPDATES
             spritesToRedraw.Clear();
+            numGameObjects = spritesToRedraw.Count;
         }
-
-
-        throw new System.NotImplementedException();
-    }
-
-
-    //Temp Updater
-    public static void TempSpriteUpdate()
-    {
-        // DOES THE GAME OBJECT have a componenet that implements the IUpdateSprite interface?
-        if (spritesToRedraw.Count > 0)
-        {
-            // ITERATE through LIST to UPDATE SPRITES
-            foreach (ISpriteUpdate needsRedraw in spritesToRedraw)
-            {
-                needsRedraw.SpriteUpdate();
-            }
-
-            // REMOVE ELEMENTS from LIST AFTER UPDATES
-            spritesToRedraw = new List<ISpriteUpdate>();
-        }
-        //throw new System.NotImplementedException();
     }
 }

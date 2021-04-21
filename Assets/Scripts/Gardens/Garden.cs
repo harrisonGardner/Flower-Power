@@ -51,7 +51,7 @@ public class Garden : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAllSpriteTemp();
+        //UpdateAllSpriteTemp();
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ public class Garden : MonoBehaviour
 
     public void UpdateAllSpriteTemp()
     {
-        SpriteUpdateController.TempSpriteUpdate();
+        //SpriteUpdateController.TempSpriteUpdate();
 
         //Old Code, was for updating flowers only
         //IList<Plant> removedPlants = new List<Plant>();

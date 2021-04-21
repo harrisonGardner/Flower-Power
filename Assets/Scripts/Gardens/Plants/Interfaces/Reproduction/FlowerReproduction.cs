@@ -76,7 +76,6 @@ public class FlowerReproduction : IReproductionBehavior
         TalliedSet<ColorName> flowerPollen = plot.PollenHere;
 
         int pollenCount = flowerPollen.N;
-        //Debug.Log("Number of Pollen: " + pollenCount);
         TalliedSet<ColorName> seeds = new TalliedSet<ColorName>();
 
         // TODO: TWEAK NUMBERS to FIT GAMEPLAY
@@ -91,9 +90,6 @@ public class FlowerReproduction : IReproductionBehavior
             // ENSURE POLLEN did not BELONG to a WEED
             if (pollenColor != ColorName.NONE)
                 {
-                    Debug.Log("Pollen color is " + pollenColor);
-                    Debug.Log("Flower color is " + thisPlantsColor.Name);
-
                     ColorName PollenFlowerBlend = Colors.GetColorBlend(thisPlantsColor,
                         Colors.GetColor(pollenColor));
                     seeds.Add(PollenFlowerBlend);
@@ -107,7 +103,6 @@ public class FlowerReproduction : IReproductionBehavior
 
         // SPREAD SEEDS
         int seedCount = seeds.N;
-        Debug.Log("Number of Seeds: " + seedCount);
 
         for (int i = 0; i < seedCount; i++)
         {
