@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class MasterController : MonoBehaviour
 {
-    // FIELD to KEEP TRACK of TIME
-    //
     public GameObject GardenScript;
     Garden garden;
     DayController day;
     Colors allColors;
+    SpriteUpdateController spriteUpdate;
 
+    // FIELDs to KEEP TRACK of TIME
     public static float TimeOfDay { get; private set; } = 0;
     public static int DayNumber { get; private set; } = 0;
 
@@ -28,6 +28,10 @@ public class MasterController : MonoBehaviour
         day = new DayController(garden);
         updates.Add(day);
 
+        // CREATE SPRITE CONTROLLER
+        spriteUpdate = new SpriteUpdateController();
+        updates.Add(spriteUpdate);
+
         // TODO: Add a sprite update controller
 
         // COLORS
@@ -37,7 +41,7 @@ public class MasterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (DayController control in updates)
+        foreach (IUpdateController control in updates)
         {
             control.ActionOnUpdate();
         }
