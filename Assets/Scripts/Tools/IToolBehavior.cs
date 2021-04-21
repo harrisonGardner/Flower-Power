@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IToolBehavior
+public class IToolBehavior : MonoBehaviour
 {
-    public void UseTool();
-    public void DropTool();
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-
-    public bool MakeActive();
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

@@ -39,7 +39,7 @@ public class PlotInteraction : MonoBehaviour
         if (Clippers.holding)
         {
             if (!Plot.IsEmpty)
-                Plot.RemoveSinglePlant();
+                Plot.plantHere.KillPlant();
             Clippers.useTool = true;
         }
         if (SeedPouch.holding == true)
