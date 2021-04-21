@@ -36,23 +36,21 @@ public class DayController : IUpdateController
 
     public void ActionOnUpdate()
     {
-        // UPDATE the TIME
+        // UPDATE TIME
         TimeOfDay += Time.deltaTime;
+
         // FIND OUT WHAT EVENT to INSTIGATE
-        //Debug.Log("ASKING for CURRENT EVENT");
         DailyEventType currentEvent = this.schedule.GetCurrentEvent(TimeOfDay);
-        //Debug.Log("Current Event is: " + currentEvent);
 
         // IF NOT NONE...
         if (currentEvent != DailyEventType.NONE)
         {
-            //Debug.Log("Time # " + TimeOfDay + " Event " + currentEvent);
 
             if (currentEvent == DailyEventType.ENDDAY)// IF END of DAY       
             {
                 TimeOfDay = 0.0f; // RESET TIME of DAY to zero
                 dayNumber++; // INCREMENT DAY NUMBER
-                Debug.Log("END of DAY, New day is: " + dayNumber);
+                //Debug.Log("END of DAY, New day is: " + dayNumber);
             }
             else // LAUNCH APPROPRIATE ACTION
             {
@@ -61,7 +59,7 @@ public class DayController : IUpdateController
         }
         else
         {
-            //Debug.Log("Time # " + TimeOfDay + " Event " + currentEvent);
+
         }
         // TODO: HERE or ELSEWHERE...CHECK if VICTORY CONDITIONS MET 
     }

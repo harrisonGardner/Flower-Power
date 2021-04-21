@@ -73,12 +73,6 @@ public class DailyEvents //: MonoBehaviour
             { DailyEventType.ENDDAY,
                 new EventInfo (this.dayLengthSeconds) }
         };
-
-        Debug.Log("CREATED DaysEvents Dictionary");
-        //foreach (KeyValuePair<DailyEventType, EventInfo> pair in daysEvents)
-        //{
-        //    // Debug.Log("Name: " + pair.Key + " Length: " + pair.Value.scheduledTime + " Happened Today: " + pair.Value.happenedToday);
-        //}
     }
 
     /// <summary>
@@ -88,18 +82,13 @@ public class DailyEvents //: MonoBehaviour
     /// <returns></returns>
     public DailyEventType GetCurrentEvent(float timeOfDay)
     {
-        //Debug.Log("LOOKING for CURRENT EVENT at " + timeOfDay);
         // ITERATE THROUGH ALL EVENT TYPES
         foreach (KeyValuePair<DailyEventType, EventInfo> pair in daysEvents)
         {
-            //Debug.Log("Name: " + pair.Key + " Length: " + pair.Value.scheduledTime + " Happened Today: " + pair.Value.happenedToday);
-
             // IF THE TIME IS AT or AFTER the EVENT's SCHEDULE TIME
             // AND the EVENT has NOT YET HAPPENED
             if (timeOfDay > pair.Value.scheduledTime && !pair.Value.happenedToday)
             {
-                //Debug.Log(pair.Value.scheduledTime + " is less than "
-                  //  + timeOfDay + " AND " + "Pair Value has not happened today: " + !pair.Value.happenedToday);
                 // SPECIAL CASES:
                 // BEGINNING of DAY -- MUST INDICATE ALL OTHER EVENTS HAVE NOT YET HAPPENED
                 if (pair.Key == DailyEventType.NEWDAY) // IF THE EVENT is a NEW DAY, RESET HAPPENED TODAY BOOL
@@ -112,7 +101,7 @@ public class DailyEvents //: MonoBehaviour
                     return DailyEventType.NEWDAY;
                 }
 
-                // END of DAY -- MUST RESET BEGINNING OF DAY
+                // END of DAY -- MUST RESET to BEGINNING OF DAY
                 if (pair.Key == DailyEventType.ENDDAY)
                 {
                     daysEvents[DailyEventType.NEWDAY].happenedToday = false;
