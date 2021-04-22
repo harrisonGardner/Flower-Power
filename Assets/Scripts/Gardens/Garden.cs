@@ -19,6 +19,8 @@ public class Garden : MonoBehaviour
     public int height;
     public int width;
     public int plotLength;
+
+    // ARRAYS
     public GameObject[,] plotGameObjects;
     public Plot[,] plots;
 
@@ -104,6 +106,8 @@ public class Garden : MonoBehaviour
                 this.plots[x, y].AdjacentPlots = new Neighbors(surroundingPlots);
             }
         }
+        // ADD a RANDOM WEED
+        addRandomWeed();
     }
 
     private bool IsInGarden(int x, int y)
@@ -271,9 +275,16 @@ public class Garden : MonoBehaviour
     {
         // IF the size of the weeds list is below a certain number
         // Generate random numbers for height & width to choose initial space
+        int x = MasterController.universallyAvailableRandom.Next(0, this.width);
+        int y = MasterController.universallyAvailableRandom.Next(0, this.height);
 
         // Check if plot has something growing
         // IF YES, then choose random neighbor
+        if (plots[x, y].IsEmpty)
+        {
+            Debug.Log("Adding weed at (" + x + ", " + y + ")");
+            plots[x, y].AddPlant(PlantType.Weed, ColorName.NONE);
+        }
 
         // Try this five times -- if there still is no success, displace
         // whatever is growing in the fifth space explored.

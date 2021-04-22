@@ -54,21 +54,19 @@ public class WeedFeedingBehavior : IFeedingBehavior
     /// <returns></returns>
     public int CollectWater(Plot plot)
     {
-        Debug.Log("Weed collect water called");
         plot.removeWater(ThirstIntensity);
 
+        // PROBLEM IS HERE
         Plot[] adjacent = plot.AdjacentPlots.getNeighbors();
 
         for (int i = 0; i < adjacent.Length; i++)
         {
             if (adjacent[i] != null) // CHECK PLOT is in GARDEN
             {
-                Debug.Log("Weed take water from adjacent");
                 adjacent[i].removeWater(ThirstIntensity - 1);
                 SpriteUpdateController.AddSpriteToRedraw(plot.gameObject.GetComponent<PlantSpriteUpdater>());
             }
         }
-
         return 0; // n.b. the Health Interface does not need this for weeds
     }
 }
