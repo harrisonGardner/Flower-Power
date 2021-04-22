@@ -92,7 +92,6 @@ public class Plot : MonoBehaviour
             }
             else if (pt == PlantType.Weed)
             {
-                Debug.Log($"Should be a Weed {pt}");
                 plant.StartPlant(pt, new WeedHealth(), this, Colors.GetColor(ColorName.NONE), plantPrefab);
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteWeed(plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
