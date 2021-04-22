@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Contains a set of different generic elements with a count for each
+/// of those elements. 
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <author>Nicholas Gliserman</author>
-public class TalliedSet<T>
+public class TalliedSet<T> : IEnumerable
 {
     private IDictionary<T, int> Elements { get; set; } = new Dictionary<T, int>();
-    public int N { get; private set; } = 0;
-    System.Random randomNumber = new System.Random();
+    public int Num { get; private set; } = 0;
 
     /// <summary>
     /// Adds a given element to the collection if it is not already there...or, if
     /// it is, then the number of that element type is incremented.
     /// </summary>
-    /// <param name="el"></param>
+    /// <param name="el">the element to be added</param>
     public void Add(T el)
     {
         if (Elements.ContainsKey(el))
@@ -26,7 +26,22 @@ public class TalliedSet<T>
         else
             Elements.Add(el, 1);
 
-        N++;
+        Num++;
+    }
+
+    /// <summary>
+    /// Adds a given element to the collection in the specified quanity.
+    /// </summary>
+    /// <param name="el">element to be added</param>
+    /// <param name="amount">the number of that element to be added</param>
+    public void Add(T el, int amount)
+    {
+        if (Elements.ContainsKey(el))
+            Elements[el] += amount;
+        else
+            Elements.Add(el, amount);
+
+        Num += amount;
     }
 
     /// <summary>
@@ -45,7 +60,6 @@ public class TalliedSet<T>
         {
             return Elements[el];
         }
-
         return 0;
     }
 
@@ -67,7 +81,7 @@ public class TalliedSet<T>
                 {
                     Elements.Remove(el);
                 }
-                N--;
+                Num--;
                 return el;
             }
         }
@@ -77,15 +91,15 @@ public class TalliedSet<T>
     public T[] RemoveRandomElements(int numElementsToRemove)
     {
         T[] removedElements;
-        if (N > numElementsToRemove)
+        if (Num > numElementsToRemove)
         {
             removedElements = new T[numElementsToRemove];
-            N -= numElementsToRemove;
+            Num -= numElementsToRemove;
         }
         else
         {
-            removedElements = new T[N];
-            N = 0;
+            removedElements = new T[Num];
+            Num = 0;
         }
 
         // CHOOSE RANDOMLY SELECTED ELEMENTS IN DICTIONARY to REMOVE
@@ -115,7 +129,9 @@ public class TalliedSet<T>
             return default(T);
         }
 
-        int randomColorNum = randomNumber.Next(0, this.Elements.Keys.Count);
+        //int randomColorNum = MasterController.universallyAvailableRandom.Next(0, this.Elements.Keys.Count);
+
+        int randomColorNum = 0; // TODO DELETE AFTER TEST
         int j = 0;
 
         foreach (KeyValuePair<T, int> el in this.Elements)
@@ -129,4 +145,11 @@ public class TalliedSet<T>
 
         throw new KeyNotFoundException("Could not find random key");
     }
+
+    public IEnumerator GetEnumerator()
+    {
+        return Elements.GetEnumerator();
+    }
+
 }
+
