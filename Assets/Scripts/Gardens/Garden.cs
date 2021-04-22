@@ -23,32 +23,20 @@ public class Garden : MonoBehaviour
     public Plot[,] plots;
 
     /// <summary>
-    /// n.b. Having these lists of Plants lets us iterate through the plant-based
+    /// n.b. Having these lists lets us iterate through the pest & plant-based
     /// actions at a faster pace, i.e. rather than trying to iterate
     /// through all the plots in the 2d array.
     /// </summary>
     public IList<Plant> Flowers { get; } = new List<Plant>();
     public IList<Plant> Weeds { get; } = new List<Plant>();
-    public IList<Plant> Remove { get; set; } = new List<Plant>();
+    public IList<Plant> RemovePlants { get; set; } = new List<Plant>();
+    public IList<Pest> Pests { get; set; } = new List<Pest>();
 
     // WEATHER
     public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.right);
     public bool WindyToday { get; set; }
 
-    // RANDOM
-    public System.Random random = new System.Random();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        initializeGarden();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //UpdateAllSpriteTemp();
-    }
+    #region INITIALIZE GARDEN
 
     /// <summary>
     /// Builds the garden object at the beginning of the game.
@@ -82,7 +70,6 @@ public class Garden : MonoBehaviour
                 // ADD to ARRAY
                 this.plotGameObjects[x, y] = prefab;
                 this.plots[x, y] = prefab.GetComponent<Plot>();
-
                 this.plots[x, y].InitializePlotSettings(this, prefab);
             }
         }
@@ -124,7 +111,9 @@ public class Garden : MonoBehaviour
         return (y < height && y >= 0 && x < width && x >= 0);
     }
 
-    // WEATHER RELATED METHODS
+    #endregion
+
+    #region WEATHER RELATED METHODS
 
     /// <summary>
     /// Rainy weather restores the water level in each plot of land.
@@ -178,28 +167,9 @@ public class Garden : MonoBehaviour
         SunAllPlots(1);
     }
 
-    public void UpdateAllSpriteTemp()
-    {
-        //SpriteUpdateController.TempSpriteUpdate();
+    #endregion
 
-        //Old Code, was for updating flowers only
-        //IList<Plant> removedPlants = new List<Plant>();
-
-        //foreach (Plant flower in this.Flowers)
-        //{
-        //    // TODO: REVISIT FLOWER vs. PLANT
-        //    //Flower tempFlower = (Flower)flower;
-        //    //tempFlower.SpriteUpdate();
-        //    if (flower.CurrentStage.CurrentStage == StageType.DEAD)
-        //        removedPlants.Add(flower);
-        //}
-        //foreach (Plant remove in removedPlants)
-        //{
-        //    remove.MyPlot.removePlant();
-        //}
-    }
-
-    // PLANT UPDATE METHODS
+    #region PLANT UPDATE METHODS
     /// <summary>
     /// Plants take in sun energy and water based on their
     /// feeding behavior.
@@ -223,6 +193,94 @@ public class Garden : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plants grow according to their plant stage and health.
+    /// </summary>
+    /// <param name="plantType"></param>
+    public void PlantsGrow(PlantType plantType)
+    {
+        if (plantType == PlantType.Weed)
+        {
+            foreach (Plant weed in this.Weeds)
+            {
+                weed.Grow();
+            }
+        }
+        else if (plantType == PlantType.Flower)
+        {
+            foreach (Plant flower in this.Flowers)
+            {
+                flower.Grow();
+            }
+        }
+        RemoveFromGarden();
+    }
+    #endregion
+
+    #region ADD AND REMOVE PLANTS from GARDEN
+
+    /// <summary>
+    /// Appends plant to the appropriate list, depending on whether
+    /// it is a flower or weed.
+    /// </summary>
+    /// <param name="plant"></param>
+    public void AddPlant(Plant plant)
+    {
+        // if the plant is a weed
+        if (plant.PlantType == PlantType.Weed)
+            this.Weeds.Add(plant);
+        // plant is a flower
+        else if (plant.PlantType == PlantType.Flower)
+            this.Flowers.Add(plant);
+    }
+
+    /// <summary>
+    /// Deletes plant from the appropriate list, depending on whether
+    /// it is a flower or weed.
+    /// </summary>
+    /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
+    public void AddToRemove(Plant removeMe) { RemovePlants.Add(removeMe); }
+
+    /// <summary>
+    /// Removes all plants in the remove list from the garden, invoking the plot's
+    /// destroy method to get rid of the game object.
+    /// </summary>
+    public void RemoveFromGarden()
+    {
+        // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
+        if (RemovePlants.Count > 0)
+        {
+            foreach (Plant plant in RemovePlants)
+            {
+                if (plant != null)
+                {
+                    if (plant.PlantType == PlantType.Flower)
+                        Flowers.Remove(plant);
+                    else if (plant.PlantType == PlantType.Weed)
+                        Weeds.Remove(plant);
+
+                    plant.MyPlot.DestroyPlant();
+                }
+            }
+            RemovePlants = new List<Plant>(); // RESET REMOVAL LIST
+        }
+    }
+
+    // TODO: IMPLEMENT THIS 
+    public void addRandomWeed()
+    {
+        // IF the size of the weeds list is below a certain number
+        // Generate random numbers for height & width to choose initial space
+
+        // Check if plot has something growing
+        // IF YES, then choose random neighbor
+
+        // Try this five times -- if there still is no success, displace
+        // whatever is growing in the fifth space explored.
+    }
+    #endregion
+
+    #region POLLEN & SEEDS
     /// <summary>
     /// Plants in the garden give off pollen depending on their life stage
     /// </summary>
@@ -278,80 +336,6 @@ public class Garden : MonoBehaviour
         {
             temporary[i].MakeSeeds();
         }
-
-        //RemovePollen();
-    }
-
-    /// <summary>
-    /// Plants grow according to their plant stage and health.
-    /// </summary>
-    /// <param name="plantType"></param>
-    public void PlantsGrow(PlantType plantType)
-    {
-        if (plantType == PlantType.Weed)
-        {
-            foreach (Plant weed in this.Weeds)
-            {
-                weed.Grow();
-            }
-        }
-        else if (plantType == PlantType.Flower)
-        {
-            foreach (Plant flower in this.Flowers)
-            {
-                flower.Grow();
-            }
-        }
-        RemoveFromGarden();
-    }
-
-    // ADD AND REMOVE PLANTS from GARDEN
-
-    /// <summary>
-    /// Appends plant to the appropriate list, depending on whether
-    /// it is a flower or weed.
-    /// </summary>
-    /// <param name="plant"></param>
-    public void AddPlant(Plant plant)
-    {
-        // if the plant is a weed
-        if (plant.PlantType == PlantType.Weed)
-            this.Weeds.Add(plant);
-        // plant is a flower
-        else if (plant.PlantType == PlantType.Flower)
-            this.Flowers.Add(plant);
-    }
-
-    /// <summary>
-    /// Deletes plant from the appropriate list, depending on whether
-    /// it is a flower or weed.
-    /// </summary>
-    /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
-    public void AddToRemove(Plant removeMe) { Remove.Add(removeMe); }
-
-    /// <summary>
-    /// Removes all plants in the remove list from the garden, invoking the plot's
-    /// destroy method to get rid of the game object.
-    /// </summary>
-    public void RemoveFromGarden()
-    {
-        // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
-        if (Remove.Count > 0)
-        {
-            foreach (Plant plant in Remove)
-            {
-                if (plant != null)
-                {
-                    if (plant.PlantType == PlantType.Flower)
-                        Flowers.Remove(plant);
-                    else if (plant.PlantType == PlantType.Weed)
-                        Weeds.Remove(plant);
-
-                    plant.MyPlot.DestroyPlant();
-                }
-            }
-            Remove = new List<Plant>(); // RESET REMOVAL LIST
-        }
     }
 
     /// <summary>
@@ -368,18 +352,5 @@ public class Garden : MonoBehaviour
             }
         }
     }
-
-    // TODO: IMPLEMENT THIS 
-    public void addRandomWeed()
-    {
-        // IF the size of the weeds list is below a certain number
-        // Generate random numbers for height & width to choose initial space
-
-        // Check if plot has something growing
-        // IF YES, then choose random neighbor
-
-        // Try this five times -- if there still is no success, displace
-        // whatever is growing in the fifth space explored.
-    }
-
+    #endregion
 }
