@@ -117,7 +117,7 @@ public class FlowerReproduction : IReproductionBehavior
                 //adjPlot.addPlant(new Flower(adjPlot,
                 //    Colors.GetColor(flowerColor), new FlowerHealth(1, 1, 10, 10)));
 
-                adjPlot.addPlant(PlantType.Flower, flowerColor);
+                adjPlot.AddPlant(PlantType.Flower, flowerColor);
             }
             else
             {

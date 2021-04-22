@@ -91,7 +91,7 @@ public class WeedReproduction : IReproductionBehavior
             {
                 // TODO: Revisit this later
                 //adjPlot.addPlant(new Weed(adjPlot));
-                adjPlot.addPlant(PlantType.Weed, ColorName.NONE);
+                adjPlot.AddPlant(PlantType.Weed, ColorName.NONE);
             }
         }
     }
