@@ -31,10 +31,6 @@ public class Garden : MonoBehaviour
     public IList<Plant> Weeds { get; } = new List<Plant>();
     public IList<Plant> Remove { get; set; } = new List<Plant>();
 
-    // Temporary holding lists for new plants while iteration through existing lists is still occurring
-    //public IList<Plant> newFlowers { get; set; } = new List<Plant>();
-    //public IList<Plant> newWeeds { get; set; } = new List<Plant>();
-
     // WEATHER
     public Direction WindDirection { get; set; } = Directions.GetDirection(DirectionName.right);
     public bool WindyToday { get; set; }
@@ -282,6 +278,8 @@ public class Garden : MonoBehaviour
         {
             temporary[i].MakeSeeds();
         }
+
+        //RemovePollen();
     }
 
     /// <summary>
@@ -304,19 +302,7 @@ public class Garden : MonoBehaviour
                 flower.Grow();
             }
         }
-
-        // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
-        foreach (Plant plant in Remove)
-        {
-            if (plant != null)
-            {
-                if (plant.PlantType == PlantType.Flower)
-                    Flowers.Remove(plant);
-                else if (plant.PlantType == PlantType.Weed)
-                    Weeds.Remove(plant);
-            }
-        }
-        Remove = new List<Plant>(); // RESET REMOVAL LIST
+        RemoveFromGarden();
     }
 
     // ADD AND REMOVE PLANTS from GARDEN
@@ -342,6 +328,31 @@ public class Garden : MonoBehaviour
     /// </summary>
     /// <param name="removeMe">Plant to be removed, can be a flower or a weed</param>
     public void AddToRemove(Plant removeMe) { Remove.Add(removeMe); }
+
+    /// <summary>
+    /// Removes all plants in the remove list from the garden, invoking the plot's
+    /// destroy method to get rid of the game object.
+    /// </summary>
+    public void RemoveFromGarden()
+    {
+        // ITERATE through REMOVE LIST to COLLECT PLANTs that have DIED
+        if (Remove.Count > 0)
+        {
+            foreach (Plant plant in Remove)
+            {
+                if (plant != null)
+                {
+                    if (plant.PlantType == PlantType.Flower)
+                        Flowers.Remove(plant);
+                    else if (plant.PlantType == PlantType.Weed)
+                        Weeds.Remove(plant);
+
+                    plant.MyPlot.DestroyPlant();
+                }
+            }
+            Remove = new List<Plant>(); // RESET REMOVAL LIST
+        }
+    }
 
     /// <summary>
     /// At the end of the day, removes all pollen from the plots in the garden

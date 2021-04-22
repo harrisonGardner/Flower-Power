@@ -29,8 +29,9 @@ public class Plot : MonoBehaviour
     public GameObject plantPrefab;
     public bool IsEmpty = true;
     public TalliedSet<ColorName> PollenHere { get; set; } = new TalliedSet<ColorName>();
-    //public enum PlantAction { NONE, CUT, WILT }
-    //public PlantAction plotPlantAction = PlantAction.NONE;
+
+    // FIELDS for TESTING
+    public bool PollenIsHere = false;
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -97,25 +98,24 @@ public class Plot : MonoBehaviour
     /// <summary>
     /// When a plant has died, empties the plot to allow for a new plant.
     /// </summary>
-    public void removePlant()
+    public void RemoveSinglePlant()
     {
-        // REMOVE the PLANT FROM THE GARDEN
+        // BEFORE REMOVING from PLOT, REMOVE from GARDEN
         Garden.AddToRemove(this.plantHere);
-        
-        //if (this.plantHere.PlantType == PlantType.Weed)
-        //{
-        //    Garden.Weeds.Remove(this.plantHere);
-        //}
-        //else if (this.plantHere.PlantType == PlantType.Flower)
-        //{
-        //    Garden.Flowers.Remove(this.plantHere);
-        //}
+        Garden.RemoveFromGarden();
+    }
 
+    public void RemovePlantDuringGrowth()
+    {
+        Garden.AddToRemove(this.plantHere);
+    }
+
+    // CALLED after REMOVED from GARDEN
+    public void DestroyPlant() {
         // REMOVE from this PLOT
         IsEmpty = true;
-        Destroy(plantPrefab);
         this.plantHere = null;
-    }
+        Destroy(plantPrefab); }
 
     // WATER-RELATED METHODS
 
@@ -196,13 +196,14 @@ public class Plot : MonoBehaviour
     public void addPollen(int amount, ColorName color)
     {
         // ONLY DEPOSIT POLLEN if THERE IS A PLANT HERE
-        if (!this.IsEmpty)
-        {
+        //if (!this.IsEmpty)
+        //{
             for (int i = 0; i < amount; i++)
             {
                 PollenHere.Add(color);
             }
-        }
+        //}
+        PollenIsHere = true;
     }
 
     /// <summary>
@@ -216,6 +217,7 @@ public class Plot : MonoBehaviour
             // SET the OLD DATA LOOSE for GARBAGE COLLECTION
             PollenHere = new TalliedSet<ColorName>();
         }
+        PollenIsHere = false;
     }
 
     // TODO: Once Pest Class is Implemented

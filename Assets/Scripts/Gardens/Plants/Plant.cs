@@ -30,6 +30,9 @@ public class Plant : MonoBehaviour
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
 
+    // TESTING
+    public string visibleState;
+
     public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color, GameObject plantPrefab)
     {
         PlantType = plantType;
@@ -64,7 +67,6 @@ public class Plant : MonoBehaviour
     }
 
 
-
     /// <summary>
     /// Plant obtains water and energy from the plot,
     /// with amounts depending on its feeding behavior
@@ -89,7 +91,7 @@ public class Plant : MonoBehaviour
 
         if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
         {
-            MyPlot.removePlant();
+            MyPlot.RemovePlantDuringGrowth();
         }
     }
 
@@ -105,13 +107,16 @@ public class Plant : MonoBehaviour
         {
             IPlantStage temp = CurrentStage.GetNextStage();
             if (temp == null || temp.CurrentStage == StageType.DEAD) // IF THIS IS THE TERMINAL STAGE
-                KillPlant();
+                MyPlot.RemovePlantDuringGrowth();
             else
             {
                 CurrentStage = temp;
+                
                 SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             }
         }
+
+        this.visibleState = stringForTesting();
     }
 
     /// <summary>
@@ -119,7 +124,7 @@ public class Plant : MonoBehaviour
     /// </summary>
     public void KillPlant()
     {
-        MyPlot.removePlant();
+        MyPlot.RemoveSinglePlant();
     }
 
     /// <summary>
@@ -142,5 +147,12 @@ public class Plant : MonoBehaviour
     public void MakeSeeds()
     {
         CurrentStage.Reproduction.Seed(MyPlot);
+    }
+
+    public string stringForTesting()
+    {
+        return "Stage " + CurrentStage.CurrentStage.ToString()
+            + " Color " + PlantColor.Name.ToString() + " Wilting: " + Health.WiltingToday;
+
     }
 }

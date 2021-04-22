@@ -12,6 +12,7 @@ public class MasterController : MonoBehaviour
     DayController day;
     Colors allColors;
     SpriteUpdateController spriteUpdate;
+    public static System.Random universallyAvailableRandom = new System.Random();
 
     // FIELDs to KEEP TRACK of TIME
     public static float TimeOfDay { get; private set; } = 0;
@@ -32,8 +33,6 @@ public class MasterController : MonoBehaviour
         spriteUpdate = new SpriteUpdateController();
         updates.Add(spriteUpdate);
 
-        // TODO: Add a sprite update controller
-
         // COLORS
         allColors = new Colors();
     }
@@ -48,5 +47,6 @@ public class MasterController : MonoBehaviour
 
         TimeOfDay = day.TimeOfDay;
         DayNumber = day.dayNumber;
+
     }
 }

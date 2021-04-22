@@ -76,6 +76,7 @@ public class Color
 /// <author>Lisette Peck & Nicholas Gliserman</author
 public class Colors
 {
+    
 
     private static Color[] allColors = new Color[] {
         new Color(ColorName.NONE, ColorType.NONE, ""), // NONE
@@ -93,6 +94,7 @@ public class Colors
     /// </summary>
     public Colors()
     {
+
         // ESTABLISH OPPOSITE COLORS:
         // RED & GREEN
         GetColor(ColorName.GREEN).setOpposite(GetColor(ColorName.RED));
@@ -145,14 +147,31 @@ public class Colors
 
     public static ColorName GetColorBlend(Color color1, Color color2)
     {
-        // TODO: Add in functionality for secondary colors
+        // TODO: Add in functionality for secondary colors to yield tertiary colors
         
         if (color1.Type == ColorType.PRIMARY && color2.Type == ColorType.PRIMARY)
         {
             return color1.Blends[color2.Name].Name;
         }
 
-        return ColorName.NONE;
+        if (color1.Type == ColorType.PRIMARY && color2.Type == ColorType.SECONDARY)
+        {
+            return color1.Name;
+        }
+
+        if (color1.Type == ColorType.SECONDARY && color2.Type == ColorType.PRIMARY)
+        {
+            return color2.Name;
+        }
+        if (color1.Type == ColorType.SECONDARY && color2.Type == ColorType.SECONDARY)
+        {
+            if (MasterController.universallyAvailableRandom.Next(0, 1) == 1)
+                return color1.Name;
+            return color2.Name;
+        }
+
+        throw new KeyNotFoundException($"These two input colors {color1.Name} and {color2.Name} do not yield a result");
+
     }
 
 }
