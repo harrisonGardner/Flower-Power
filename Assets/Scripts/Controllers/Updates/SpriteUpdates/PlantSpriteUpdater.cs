@@ -8,14 +8,14 @@ public class PlantSpriteUpdater : MonoBehaviour, ISpriteUpdate
     {
         if (gameObject != null)
         {
-            if (gameObject.GetComponent<Flower>() != null)
+            if (gameObject.GetComponent<Plant>() != null)
             {
-                Color plantColor = gameObject.GetComponent<Flower>().PlantColor;
+                Color plantColor = gameObject.GetComponent<Plant>().PlantColor;
+                StageType currentStage = gameObject.GetComponent<Plant>().CurrentStage.CurrentStage;
                 if (plantColor.Name != ColorName.NONE)
-                {
-                    StageType currentStage = gameObject.GetComponent<Flower>().CurrentStage.CurrentStage;
                     gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteFlower(plantColor.Name, currentStage);
-                }
+                else
+                    gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteWeed(currentStage);
             }
         }
     }
