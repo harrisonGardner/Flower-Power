@@ -84,21 +84,19 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
+                Debug.Log($"Should be a flower {pt}");
                 plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
                     plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
             }
-            else
+            else if (pt == PlantType.Weed)
             {
+                Debug.Log($"Should be a Weed {pt}");
                 plant.StartPlant(pt, new WeedHealth(), this, Colors.GetColor(ColorName.NONE), plantPrefab);
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteWeed(plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
             }
-            // SET the SPRITE for the PLANT PREFAB
-            plantPrefab.GetComponent<SpriteRenderer>().sprite =
-                SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
-                plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
 
             this.IsEmpty = false;
             this.plantHere = plant;
