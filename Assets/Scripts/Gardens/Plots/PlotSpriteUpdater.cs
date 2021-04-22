@@ -61,16 +61,12 @@ public class PlotSpriteUpdater : MonoBehaviour, ISpriteUpdate
     {
         for (int i = 0; i < pollenParticles.Length; i++)
         {
-            if (gameObject.GetComponent<Plot>().PollenHere.Count(pollenColors[i]) <= 0)
-                pollenParticles[i].enableEmission = false;
-            else
+            if (gameObject.GetComponent<Plot>().PollenHere.Count(pollenColors[i]) > 0)
                 pollenParticles[i].enableEmission = true;
-            var colGrad = pollenParticles[i].colorOverLifetime;
-            Gradient grad = new Gradient();
-            grad.SetKeys(new GradientColorKey[] { new GradientColorKey(colorNameToEngineColor(pollenColors[i]), 0.0f),
-            new GradientColorKey(colorNameToEngineColor(pollenColors[i]), 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(0.0f, 0.0f),
-                new GradientAlphaKey(1.0f, 0.5f), new GradientAlphaKey(0.0f, 1.0f) });
-            colGrad.color = grad;
+            else
+                pollenParticles[i].enableEmission = false;
+
+            pollenParticles[i].emissionRate = gameObject.GetComponent<Plot>().PollenHere.Count(pollenColors[i]) * gameObject.GetComponent<Plot>().PollenHere.Count(pollenColors[i]) * 2;
         }
     }
 
