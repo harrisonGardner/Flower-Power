@@ -74,24 +74,33 @@ public class Plot : MonoBehaviour
         if (this.IsEmpty)
         {
             // TODO: ADD LOGIC to INSTANTIATE WEED as WELL based on PLANTTYPE
-            plantPrefab = Instantiate(Resources.Load("Prefabs/FlowerPrefab") as GameObject,
+            plantPrefab = Instantiate(Resources.Load("Prefabs/PlantPrefab") as GameObject,
                 new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1), new Quaternion());
 
             // GET UNDERLYING PLANT from GAME OBJECT
-            Flower flower = plantPrefab.GetComponent<Flower>();
-            flower.spriteUpdate = plantPrefab.GetComponent<PlantSpriteUpdater>();
+            Plant plant = plantPrefab.GetComponent<Plant>();
+            plant.spriteUpdate = plantPrefab.GetComponent<PlantSpriteUpdater>();
 
             //INITIALIZE FLOWER SETTINGS
-            flower.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
-
-            // SET the SPRITE for the PLANT PREFAB
-            plantPrefab.GetComponent<SpriteRenderer>().sprite =
-                SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
-                plantPrefab.GetComponent<Flower>().CurrentStage.CurrentStage);
+            if (pt == PlantType.Flower)
+            {
+                Debug.Log($"Should be a flower {pt}");
+                plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plantPrefab.GetComponent<SpriteRenderer>().sprite =
+                    SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
+                    plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
+            }
+            else if (pt == PlantType.Weed)
+            {
+                Debug.Log($"Should be a Weed {pt}");
+                plant.StartPlant(pt, new WeedHealth(), this, Colors.GetColor(ColorName.NONE), plantPrefab);
+                plantPrefab.GetComponent<SpriteRenderer>().sprite =
+                    SpriteFetcher.GetSpriteWeed(plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
+            }
 
             this.IsEmpty = false;
-            this.plantHere = flower;
-            Garden.AddPlant(flower);
+            this.plantHere = plant;
+            Garden.AddPlant(plant);
         }
     }
 

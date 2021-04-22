@@ -39,6 +39,21 @@ public class SpriteFetcher : MonoBehaviour
         throw new Exception("Cannot visualize color.none");
     }
 
+    //Weed Sprite Getter
+    public static Sprite GetSpriteWeed(StageType type)
+    {
+        //Find the Sprites Container and load them into an array
+        string spriteName = $"Sprites/Weed";
+        Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
+
+        //Change the spriteName to the name of the specific sprite in that array
+        Debug.Log($"Type of weed: {KeyWordFormat(type.ToString())}");
+        Debug.Log(sprites.Length);
+        spriteName = $"{KeyWordFormat(type.ToString())}";
+
+        return SpriteFind(sprites, spriteName);
+    }
+
     //Plot Sprite Getter
     public static Sprite GetSpritePlot(int waterLevel)
     {
@@ -126,6 +141,7 @@ public class SpriteFetcher : MonoBehaviour
     //Uses LINQ to find the sprite that matches the path string
     private static Sprite SpriteFind(Sprite[] sprites, String spriteName)
     {
+        Debug.Log($"{spriteName}, {sprites.Length}");
         IEnumerable<Sprite> sp =
             from s in sprites
             where s.name.Equals(spriteName)

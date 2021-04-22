@@ -34,6 +34,8 @@ public class PlotInteraction : MonoBehaviour
             Plot.addWater(3);
             WateringCan.useTool = true;
             SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
+
+            Plot.addPlant(PlantType.Weed, ColorName.NONE);
         }
         //Clippers Click
         if (Clippers.holding)

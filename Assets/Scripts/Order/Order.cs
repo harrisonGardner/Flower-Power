@@ -52,7 +52,7 @@ public static class Order //: MonoBehaviour
     /// on their mission to fulfill the order.
     /// </summary>
     /// <param name="flower"></param>
-    public static void AddFlower(Flower flower)
+    public static void AddFlower(Plant flower)
     {
         // ONLY ADD if FLOWER is FLOWERING
         if (flower.CurrentStage.CurrentStage == StageType.FLOWERING)
