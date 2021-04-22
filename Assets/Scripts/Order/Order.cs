@@ -12,17 +12,18 @@ using UnityEngine;
 /// in which the order can be completed.
 /// 
 /// </summary>
-public class Order //: MonoBehaviour
+public static class Order //: MonoBehaviour
 {
-    public TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
-    public TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
-    public int maxNumDays;
+    public static TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
+    public static TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
+    public static int maxNumDays;
+    public static string levelName;
 
     /// <summary>
     /// Has the player harvested all of the flowers required?
     /// </summary>
     /// <returns></returns>
-    public bool IsOrderFulfilled()
+    public static bool IsOrderFulfilled()
     {
         foreach (KeyValuePair<ColorName, int> seedCount in flowerRequirements)
         {
@@ -32,6 +33,18 @@ public class Order //: MonoBehaviour
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Displays how close to completion and order is for the inputted color.
+    ///
+    /// Used for game UI.
+    /// </summary>
+    /// <param name="colorName"></param>
+    /// <returns></returns>
+    public static string colorStatus(ColorName colorName)
+    {
+        return flowersFulfilled.Count(colorName) + "/" + flowerRequirements.Count(colorName);
     }
 
     /// <summary>
@@ -52,7 +65,7 @@ public class Order //: MonoBehaviour
     /// Has the player exceeded the time limit?
     /// </summary>
     /// <returns></returns>
-    public bool IsTimeUp()
+    public static bool IsTimeUp()
     {
         return (MasterController.DayNumber > maxNumDays);
     }
@@ -60,7 +73,7 @@ public class Order //: MonoBehaviour
     /// <summary>
     /// Testing method before File I/O is implemented
     /// </summary>
-    public void CreateDummyOrder()
+    public static void CreateDummyOrder()
     {
         // PRIMARY COLORS
         flowerRequirements.Add(ColorName.BLUE, 10);

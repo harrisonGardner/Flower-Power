@@ -24,6 +24,7 @@ public class MasterController : MonoBehaviour
     {
         // GET the GARDEN from the GARDENSCRIPT GAME OBJECT
         garden = GardenScript.GetComponent<Garden>();
+        garden.initializeGarden();
 
         // CREATE A DAY CONTROLLER
         day = new DayController(garden);
