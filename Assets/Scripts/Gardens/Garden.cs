@@ -278,6 +278,8 @@ public class Garden : MonoBehaviour
         {
             temporary[i].MakeSeeds();
         }
+
+        //RemovePollen();
     }
 
     /// <summary>
