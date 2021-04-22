@@ -7,5 +7,7 @@ public class FlowerGrow : IGardenUpdate
     public void ActionOnUpdate(Garden garden)
     {
         garden.PlantsGrow(PlantType.Flower);
+
+        garden.RemovePollen();
     }
 }

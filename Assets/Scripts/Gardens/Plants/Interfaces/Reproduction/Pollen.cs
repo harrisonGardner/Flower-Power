@@ -45,10 +45,10 @@ public class Pollen
     private void DepositPollen()
     {
         // ONLY ADD POLLEN if PLANT in the SPACE
-        if (currentPlot.plantHere != null)
-        { 
-            currentPlot.addPollen(Intensity, this.color);
-        }
+        //if (currentPlot.plantHere != null)
+        //{ 
+        currentPlot.addPollen(Intensity, this.color);
+        //}
     }
 
     /// <summary>

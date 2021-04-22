@@ -29,8 +29,9 @@ public class Plot : MonoBehaviour
     public GameObject plantPrefab;
     public bool IsEmpty = true;
     public TalliedSet<ColorName> PollenHere { get; set; } = new TalliedSet<ColorName>();
-    //public enum PlantAction { NONE, CUT, WILT }
-    //public PlantAction plotPlantAction = PlantAction.NONE;
+
+    // FIELDS for TESTING
+    public bool PollenIsHere = false;
 
     // Pest Related Fields
     // TODO: the pest in this space
@@ -195,13 +196,14 @@ public class Plot : MonoBehaviour
     public void addPollen(int amount, ColorName color)
     {
         // ONLY DEPOSIT POLLEN if THERE IS A PLANT HERE
-        if (!this.IsEmpty)
-        {
+        //if (!this.IsEmpty)
+        //{
             for (int i = 0; i < amount; i++)
             {
                 PollenHere.Add(color);
             }
-        }
+        //}
+        PollenIsHere = true;
     }
 
     /// <summary>
@@ -215,6 +217,7 @@ public class Plot : MonoBehaviour
             // SET the OLD DATA LOOSE for GARBAGE COLLECTION
             PollenHere = new TalliedSet<ColorName>();
         }
+        PollenIsHere = false;
     }
 
     // TODO: Once Pest Class is Implemented

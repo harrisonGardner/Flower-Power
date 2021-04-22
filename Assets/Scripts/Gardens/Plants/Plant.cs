@@ -30,6 +30,9 @@ public class Plant : MonoBehaviour
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
 
+    // TESTING
+    public string visibleState;
+
     public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color, GameObject plantPrefab)
     {
         PlantType = plantType;
@@ -62,7 +65,6 @@ public class Plant : MonoBehaviour
     {
         
     }
-
 
 
     /// <summary>
@@ -109,9 +111,12 @@ public class Plant : MonoBehaviour
             else
             {
                 CurrentStage = temp;
+                
                 SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             }
         }
+
+        this.visibleState = stringForTesting();
     }
 
     /// <summary>
@@ -142,5 +147,12 @@ public class Plant : MonoBehaviour
     public void MakeSeeds()
     {
         CurrentStage.Reproduction.Seed(MyPlot);
+    }
+
+    public string stringForTesting()
+    {
+        return "Stage " + CurrentStage.CurrentStage.ToString()
+            + " Color " + PlantColor.Name.ToString() + " Wilting: " + Health.WiltingToday;
+
     }
 }
