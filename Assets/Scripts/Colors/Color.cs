@@ -76,8 +76,6 @@ public class Color
 /// <author>Lisette Peck & Nicholas Gliserman</author
 public class Colors
 {
-    
-
     private static Color[] allColors = new Color[] {
         new Color(ColorName.NONE, ColorType.NONE, ""), // NONE
         new Color(ColorName.RED, ColorType.PRIMARY, ""),
