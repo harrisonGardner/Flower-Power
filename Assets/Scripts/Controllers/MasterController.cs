@@ -54,6 +54,6 @@ public class MasterController : MonoBehaviour
 
         TimeOfDay = day.TimeOfDay;
         DayNumber = day.dayNumber;
-
+        order.UpdateAll();
     }
 }
