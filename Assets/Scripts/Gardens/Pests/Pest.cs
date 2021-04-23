@@ -13,6 +13,12 @@ public class Pest : MonoBehaviour
     public Plot CurrentPlot { get; set; }
     bool dead = false;
 
+    public void FixedUpdate()
+    {
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, CurrentPlot.gameObject.transform.position, 0.2f);
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -3);
+    }
+
     /// <summary>
     /// The pest eats the plant in the current space.
     /// </summary>
@@ -21,7 +27,10 @@ public class Pest : MonoBehaviour
         if (!CurrentPlot.IsEmpty)
             CurrentPlot.RemoveSinglePlant();
         else // IN CASE PLANT HERE YESTERDAY is now DEAD
+        {
             dead = true;
+            Destroy(this.gameObject);
+        }
     }
 
     /// <summary>
@@ -32,7 +41,10 @@ public class Pest : MonoBehaviour
         Eat();
         CurrentPlot = CurrentPlot.AdjacentPlots.getRandomNeighborWithPlant();
         if (CurrentPlot == null) // IF NO ADJACENT PLOT HAS A PLANT
+        {
             dead = true;
+            Destroy(this.gameObject);
+        }
     }
 
     /// <summary>
