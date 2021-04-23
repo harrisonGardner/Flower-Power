@@ -38,8 +38,8 @@ public class GenericDailyEventQueue //: MonoBehaviour
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
     public bool lastEventHappened;
-    public static int count = Enum.GetValues(typeof(DailyEventType)).Length;
-    private static EventQueue<EventInfo> daysEvents = new EventQueue<EventInfo>(count);
+    public static int count = Enum.GetValues(typeof(DailyEventType)).Length - 1;    //Minus 1, as to not include "NONE" in the Daily Event count
+    private static RevolvingQueue<EventInfo> daysEvents = new RevolvingQueue<EventInfo>(count);
 
     public GenericDailyEventQueue()
     {
@@ -72,7 +72,7 @@ public class GenericDailyEventQueue //: MonoBehaviour
         if (timeOfDay > nextEvent.scheduledTime)
         {
             // DEQUEUE THE EVENT, AND RETURN THE EVENT TYPE
-            daysEvents.Dequeue();
+            daysEvents.MoveItemToTail();
             return nextEvent.dailyEventType;
         }
 

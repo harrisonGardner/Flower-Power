@@ -1,7 +1,8 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-class EventQueue<T>
+public class RevolvingQueue : //MonoBehaviour
 {
     private int head;       //where items are removed
     private int tail;       //where items are added
@@ -13,7 +14,7 @@ class EventQueue<T>
     /// Creates the queue with the capacity specified by the user.
     /// </summary>
     /// <param name="capacity">Size of queue to create.</param>
-    public EventQueue(int capacity)
+    public RevolvingQueue(int capacity)
     {
         this.capacity = capacity;
 
@@ -42,25 +43,20 @@ class EventQueue<T>
     }
 
     /// <summary>
-    /// Removes & returns the frist item in the queue.
+    /// Return the item at the front of the queue, and moves it
+    /// to the back of the queue.
     /// </summary>
     /// <returns>First item in the queue.</returns>
-    public T Dequeue()
+    public T MoveItemToTail()
     {
         if (IsEmpty())
             throw new NotSupportedException("Can't remove an item from an empty queue.");
 
         T removedItem = items[head];
-        items[head] = default(T); //avoid loitering
-        n--;
 
-        if (IsEmpty())
-        {
-            head = -1;
-            tail = -1;
-        }
-        else
-            head = ++head % capacity;
+        //UPDATE POSITION OF THE HEAD AND TAIL
+        head = ++head % capacity;
+        tail = ++tail % capacity;
 
         return removedItem;
     }
