@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RevolvingQueue : //MonoBehaviour
+/// <summary>
+/// Holds the given amount of items, of the type specified.
+/// Adds items up to the capacity, when an item is called, it is 
+/// moved to the end of the queue.
+/// </summary>
+/// <author>Megan Lisette Peck</author>
+public class RevolvingQueue<T> : //MonoBehaviour
 {
-    private int head;       //where items are removed
-    private int tail;       //where items are added
-    private int n;          //number of items currently in the queue
-    private int capacity;   //maxium number of items
+    private int head;       
+    private int tail;     
+    private int n;          
+    private int capacity;   
     private T[] items;
 
     /// <summary>
@@ -43,7 +49,7 @@ public class RevolvingQueue : //MonoBehaviour
     }
 
     /// <summary>
-    /// Return the item at the front of the queue, and moves it
+    /// Returns the item at the front of the queue, and moves it
     /// to the back of the queue.
     /// </summary>
     /// <returns>First item in the queue.</returns>
@@ -61,6 +67,11 @@ public class RevolvingQueue : //MonoBehaviour
         return removedItem;
     }
 
+    /// <summary>
+    /// Look at the next item in the queue, without moving it
+    /// to the end of the queue.
+    /// </summary>
+    /// <returns></returns>
     public T Peek()
     {
         if (IsEmpty())

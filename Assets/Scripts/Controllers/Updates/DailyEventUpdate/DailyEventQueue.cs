@@ -15,8 +15,12 @@ public enum DailyEventType
     COLORCLASH, DYING, ENDDAY
 }
 
-// TODO: Make into a generic structure
-// IMPROVED Functionality by shuffling the events in a queue structure.
+/// <summary>
+/// Holds the event type and the time that is should happen
+/// during each day.
+/// </summary>
+/// <author>Nicholas Gliserman & Megan Lisette Peck</author>
+// TODO: IMPROVED Functionality by shuffling the events in a queue structure. - Do we still want this??
 public class EventInfo
 {
     public DailyEventType dailyEventType;
@@ -30,10 +34,11 @@ public class EventInfo
 }
 
 /// <summary>
-/// Dictates when events should occur within a given day.
+/// Creates a revolvingQueue of type EventInfo called "daysEvents"
+/// which holds each event and the time it should happen each day.
 /// </summary>
-/// <author>Nicholas Gliserman</author>
-public class GenericDailyEventQueue //: MonoBehaviour
+/// <author>Nicholas Gliserman & Megan Lisette Peck</author>
+public class DailyEventQueue //: MonoBehaviour
 {
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
@@ -41,7 +46,7 @@ public class GenericDailyEventQueue //: MonoBehaviour
     public static int count = Enum.GetValues(typeof(DailyEventType)).Length - 1;    //Minus 1, as to not include "NONE" in the Daily Event count
     private static RevolvingQueue<EventInfo> daysEvents = new RevolvingQueue<EventInfo>(count);
 
-    public GenericDailyEventQueue()
+    public DailyEventQueue()
     {
         daysEvents.Enqueue(new EventInfo(DailyEventType.NEWDAY, (this.intervalTime * (int)DailyEventType.NEWDAY)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEATHER, (this.intervalTime * (int)DailyEventType.WEATHER)));
@@ -62,16 +67,17 @@ public class GenericDailyEventQueue //: MonoBehaviour
     /// Given the time of the day, will return what event should happen (if any)
     /// </summary>
     /// <param name="timeOfDay"></param>
-    /// <returns></returns>
+    /// <returns>What even should happen (if any)</returns>
+    /// <author>Nicholas Gliserman & Megan Lisette Peck</author>
     public DailyEventType GetCurrentEvent(float timeOfDay)
     {
-        // GET NEXT EVENT IN THE QUEUE
+        // GET NEXT EVENT IN THE REVOLVING QUEUE
         EventInfo nextEvent = daysEvents.Peek();
 
         // IF THE TIME IS AT or AFTER the EVENT's SCHEDULE TIME
         if (timeOfDay > nextEvent.scheduledTime)
         {
-            // DEQUEUE THE EVENT, AND RETURN THE EVENT TYPE
+            // MOVE EVENT TO END OF THE QUEUE, AND RETURN IT AS THE CURRENT EVENT
             daysEvents.MoveItemToTail();
             return nextEvent.dailyEventType;
         }
