@@ -41,6 +41,7 @@ public class PlotInteraction : MonoBehaviour
             if (!Plot.IsEmpty)
                 Plot.RemoveSinglePlant();
             Clippers.useTool = true;
+            UITextUpdater.UpdateOrderNumbers();
         }
         if (SeedPouch.holding == true)
         {
