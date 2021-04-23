@@ -1,0 +1,94 @@
+using System;
+using System.Collections;
+
+class EventQueue<T>
+{
+    private int head;       //where items are removed
+    private int tail;       //where items are added
+    private int n;          //number of items currently in the queue
+    private int capacity;   //maxium number of items
+    private T[] items;
+
+    /// <summary>
+    /// Creates the queue with the capacity specified by the user.
+    /// </summary>
+    /// <param name="capacity">Size of queue to create.</param>
+    public EventQueue(int capacity)
+    {
+        this.capacity = capacity;
+
+        //initialize the empty queue
+        head = -1;
+        tail = -1;
+        n = 0;
+        items = new T[capacity];
+    }
+
+    /// <summary>
+    /// Add an item to the last position in the queue.
+    /// </summary>
+    /// <param name="item">Item to queue</param>
+    public void Enqueue(T item)
+    {
+        if (n == capacity)
+            throw new NotSupportedException("Can't add an item to a full queue.");
+
+        if (IsEmpty())
+            head = 0;
+
+        tail = ++tail % capacity;
+        items[tail] = item;
+        n++;
+    }
+
+    /// <summary>
+    /// Removes & returns the frist item in the queue.
+    /// </summary>
+    /// <returns>First item in the queue.</returns>
+    public T Dequeue()
+    {
+        if (IsEmpty())
+            throw new NotSupportedException("Can't remove an item from an empty queue.");
+
+        T removedItem = items[head];
+        items[head] = default(T); //avoid loitering
+        n--;
+
+        if (IsEmpty())
+        {
+            head = -1;
+            tail = -1;
+        }
+        else
+            head = ++head % capacity;
+
+        return removedItem;
+    }
+
+    public T Peek()
+    {
+        if (IsEmpty())
+            throw new NotSupportedException("Can't remove an item from an empty queue.");
+
+        T nextItem = items[head];
+        return nextItem;
+    }
+
+    /// <summary>
+    /// Determins the number of items currently in the queue.
+    /// </summary>
+    /// <returns>Number of elements</returns>
+    public int Size()
+    {
+        return n;
+    }
+
+    /// <summary>
+    /// Determins whether the queue is empty.
+    /// </summary>
+    /// <returns>True if the queue is empty</returns>
+    public bool IsEmpty()
+    {
+        return n == 0;
+    }
+}

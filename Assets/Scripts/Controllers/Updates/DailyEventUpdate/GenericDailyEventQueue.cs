@@ -22,7 +22,7 @@ public class EventInfo
     public DailyEventType dailyEventType;
     public float scheduledTime;
 
-    public EventInfo(float time, DailyEventType eventType)
+    public EventInfo(DailyEventType eventType, float time)
     {
         dailyEventType = eventType;
         scheduledTime = time;
@@ -38,39 +38,24 @@ public class GenericDailyEventQueue //: MonoBehaviour
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
     public bool lastEventHappened;
-    public EventQueue<EventInfo> daysEvents;
+    public static int count = Enum.GetValues(typeof(DailyEventType)).Length;
+    private static EventQueue<EventInfo> daysEvents = new EventQueue<EventInfo>(count);
 
     public GenericDailyEventQueue()
     {
-        daysEvents = new EventQueue<EventInfo>()
-        {
-            { new EventInfo (DailyEventType.NEWDAY,
-                (this.intervalTime * (int) DailyEventType.NEWDAY)) },
-            { new EventInfo (DailyEventType.WEATHER,
-                (this.intervalTime * (int) DailyEventType.WEATHER)) },
-            { new EventInfo (DailyEventType.WEEDFEEDING,
-                (this.intervalTime * (int) DailyEventType. WEEDFEEDING)) },
-            { new EventInfo (DailyEventType.FLOWERFEEDING,
-                (this.intervalTime * (int) DailyEventType. FLOWERFEEDING)) },
-            { new EventInfo (DailyEventType.WEEDPOLLINATION,
-                (this.intervalTime * (int) DailyEventType. WEEDPOLLINATION)) },
-            { new EventInfo (DailyEventType.FLOWERPOLLINATION,
-                (this.intervalTime * (int) DailyEventType.FLOWERPOLLINATION)) },
-            { new EventInfo (DailyEventType.WEEDSEEDING,
-                (this.intervalTime * (int) DailyEventType.WEEDSEEDING)) },
-            { new EventInfo (DailyEventType.FLOWERSEEDING,
-                (this.intervalTime * (int) DailyEventType.FLOWERSEEDING)) },
-            { new EventInfo (DailyEventType.WEEDGROW,
-                (this.intervalTime * (int) DailyEventType.WEEDGROW)) },
-            { new EventInfo (DailyEventType.FLOWERGROW,
-                (this.intervalTime * (int) DailyEventType.FLOWERGROW)) },
-            { new EventInfo (DailyEventType.COLORCLASH,
-                (this.intervalTime * (int) DailyEventType.COLORCLASH)) }, //TODO
-            { new EventInfo (DailyEventType.DYING,
-                (this.intervalTime * (int) DailyEventType.DYING)) }, // TODO
-            { new EventInfo (DailyEventType.ENDDAY,
-                this.dayLengthSeconds) }
-        };
+        daysEvents.Enqueue(new EventInfo(DailyEventType.NEWDAY, (this.intervalTime * (int)DailyEventType.NEWDAY)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.WEATHER, (this.intervalTime * (int)DailyEventType.WEATHER)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDFEEDING, (this.intervalTime * (int)DailyEventType.WEEDFEEDING)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERFEEDING, (this.intervalTime * (int)DailyEventType.FLOWERFEEDING)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDPOLLINATION, (this.intervalTime * (int)DailyEventType.WEEDPOLLINATION)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERPOLLINATION, (this.intervalTime * (int)DailyEventType.FLOWERPOLLINATION)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDSEEDING, (this.intervalTime * (int)DailyEventType.WEEDSEEDING)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERSEEDING, (this.intervalTime * (int)DailyEventType.FLOWERSEEDING)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDGROW, (this.intervalTime * (int)DailyEventType.WEEDGROW)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERGROW, (this.intervalTime * (int)DailyEventType.FLOWERGROW)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.COLORCLASH, (this.intervalTime * (int)DailyEventType.COLORCLASH))); //TODO
+        daysEvents.Enqueue(new EventInfo(DailyEventType.DYING, (this.intervalTime * (int)DailyEventType.DYING))); //TODO
+        daysEvents.Enqueue(new EventInfo(DailyEventType.ENDDAY, this.dayLengthSeconds));
     }
 
     /// <summary>
@@ -81,17 +66,17 @@ public class GenericDailyEventQueue //: MonoBehaviour
     public DailyEventType GetCurrentEvent(float timeOfDay)
     {
         // GET NEXT EVENT IN THE QUEUE
-        private EventInfo nextEvent = daysEvents.Peek();
+        EventInfo nextEvent = daysEvents.Peek();
 
         // IF THE TIME IS AT or AFTER the EVENT's SCHEDULE TIME
-        if(timeOfDay > nextEvent.scheduledTime) 
+        if (timeOfDay > nextEvent.scheduledTime)
         {
             // DEQUEUE THE EVENT, AND RETURN THE EVENT TYPE
             daysEvents.Dequeue();
             return nextEvent.dailyEventType;
         }
 
-        // NO EVENT HAPPENED
+        // ELSE - NO EVENT HAPPENED
         return DailyEventType.NONE;
     }
 }
