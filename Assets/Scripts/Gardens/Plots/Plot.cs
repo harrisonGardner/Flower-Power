@@ -59,7 +59,7 @@ public class Plot : MonoBehaviour
         this.PlotObject.transform.localScale.Set(width, height, 1);
     }
 
-    // PLANT-RELATED METHODS
+    #region PLANT-RELATED METHODS
 
     /// <summary>
     /// If there is not already a plant in this plot, places
@@ -108,11 +108,14 @@ public class Plot : MonoBehaviour
     /// <summary>
     /// When a plant has died, empties the plot to allow for a new plant.
     /// </summary>
-    public void RemoveSinglePlant()
+    public Plant RemoveSinglePlant()
     {
         // BEFORE REMOVING from PLOT, REMOVE from GARDEN
+        Plant temp = this.plantHere;
         Garden.AddToRemove(this.plantHere);
         Garden.RemoveFromGarden();
+
+        return temp;
     }
 
     public void RemovePlantDuringGrowth()
@@ -120,12 +123,16 @@ public class Plot : MonoBehaviour
         Garden.AddToRemove(this.plantHere);
     }
 
-    // CALLED after REMOVED from GARDEN
+    /// <summary>
+    /// Called by the garden after it is removed from the garden.
+    /// </summary>
     public void DestroyPlant() {
         // REMOVE from this PLOT
         IsEmpty = true;
         this.plantHere = null;
         Destroy(plantPrefab); }
+
+    #endregion
 
     // WATER-RELATED METHODS
 

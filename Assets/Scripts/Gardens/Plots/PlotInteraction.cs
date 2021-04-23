@@ -17,14 +17,6 @@ public class PlotInteraction : MonoBehaviour
 
     public bool hasBeenClicked = false;
 
-    // Update is called once per frame
-    // n.b. IDEALLY we don't want to run all plots through the update function
-    // PREFERRED -- on a click event via the OnMouseDown function, determine which action to perform and do it then
-    void Update()
-    {
-        //PlotClickedOnCheck();
-    }
-
     private void OnMouseDown()
     {
         //Watering Can Click
@@ -38,7 +30,15 @@ public class PlotInteraction : MonoBehaviour
         if (Clippers.holding)
         {
             if (!Plot.IsEmpty)
-                Plot.RemoveSinglePlant();
+            {
+                Debug.Log("In Plot with " + Plot.plantHere.PlantType.ToString() + " of color " + Plot.plantHere.PlantColor.Name);
+                Debug.Log("Cutting Down Now...");
+                Plant removed = Plot.RemoveSinglePlant();
+                Order currentOrder = GameObject.Find("OrderInfo").GetComponent<Order>();
+                Debug.Log("Trying to Add " + removed.PlantType + " of color " + removed.PlantColor.Name);
+                currentOrder.AddFlower(removed);
+            }
+                
             Clippers.useTool = true;
             //UITextUpdater.UpdateOrderNumbers();
         }

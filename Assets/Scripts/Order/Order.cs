@@ -76,36 +76,28 @@ public class Order : MonoBehaviour
         {
             flowersFulfilled.Add(flower.PlantColor.Name);
         }
+
+        UpdateOrder(flower.PlantColor.Name);
     }
+
+    #region UPDATE ORDERS
 
     public void UpdateOrder(ColorName cn)
     {
         UnityEngine.UI.Text text;
 
         if (cn == ColorName.RED)
-        {
             text = red.GetComponent<Text>();
-        }
         else if (cn == ColorName.BLUE)
-        {
             text = blue.GetComponent<Text>();
-        }
         else if (cn == ColorName.YELLOW)
-        {
             text = yellow.GetComponent<Text>();
-        }
         else if (cn == ColorName.GREEN)
-        {
             text = green.GetComponent<Text>();
-        }
         else if (cn == ColorName.ORANGE)
-        {
             text = orange.GetComponent<Text>();
-        }
         else // if (cn == ColorName.PURPLE)
-        {
             text = purple.GetComponent<Text>();
-        }
 
         text.text = colorStatus(cn);
     }
@@ -120,6 +112,8 @@ public class Order : MonoBehaviour
             }
         }
     }
+
+    #endregion
 
     /// <summary>
     /// Has the player exceeded the time limit?
