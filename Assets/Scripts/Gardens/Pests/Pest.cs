@@ -19,11 +19,14 @@ public class Pest : MonoBehaviour
     public void Eat()
     {
         if (!CurrentPlot.IsEmpty)
-            CurrentPlot.RemoveSinglePlant(); // TODO: Single plant or batch?
+            CurrentPlot.RemoveSinglePlant();
         else // IN CASE PLANT HERE YESTERDAY is now DEAD
             dead = true;
     }
 
+    /// <summary>
+    /// The pest moves into a new space.
+    /// </summary>
     public void Spread()
     {
         Eat();

@@ -14,6 +14,8 @@ public class MasterController : MonoBehaviour
     SpriteUpdateController spriteUpdate;
     public static System.Random universallyAvailableRandom = new System.Random();
 
+
+
     // FIELDs to KEEP TRACK of TIME
     public static float TimeOfDay { get; private set; } = 0;
     public static int DayNumber { get; private set; } = 0;
@@ -36,6 +38,9 @@ public class MasterController : MonoBehaviour
 
         // COLORS
         allColors = new Colors();
+
+        // ORDER
+        Order.CreateDummyOrder();
     }
 
     // Update is called once per frame

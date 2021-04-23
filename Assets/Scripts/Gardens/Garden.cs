@@ -411,6 +411,9 @@ public class Garden : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// All the pests in the garden attempt to move into a new space.
+    /// </summary>
     public void PestSpread()
     {
         IList<Pest> RemovePests = new List<Pest>();
