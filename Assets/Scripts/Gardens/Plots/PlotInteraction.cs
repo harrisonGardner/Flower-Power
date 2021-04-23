@@ -22,7 +22,7 @@ public class PlotInteraction : MonoBehaviour
         //Watering Can Click
         if (WateringCan.holding)
         {
-            Plot.addWater(3);
+            Plot.addWater(4);
             WateringCan.useTool = true;
             SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
         }

@@ -12,7 +12,7 @@ public class WeatherUpdate : IGardenUpdate
         //todaysWeather.SetDaysWeather(garden);
 
         garden.SunAllPlots(5);
-        garden.WaterAllPlots(1);
+        garden.WaterAllPlots(4);
 
     }
 }
