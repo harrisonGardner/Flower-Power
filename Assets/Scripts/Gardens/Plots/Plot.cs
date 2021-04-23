@@ -31,11 +31,10 @@ public class Plot : MonoBehaviour
     public TalliedSet<ColorName> PollenHere { get; set; } = new TalliedSet<ColorName>();
 
     // FIELDS for TESTING
-    public bool PollenIsHere = false;
+    //public bool PollenIsHere = false;
 
-    // Pest Related Fields
-    // TODO: the pest in this space
-    public bool clashingFlowerColorHere = false;
+    //// Pest Related Fields
+    //public bool clashingFlowerColorHere = false;
 
     // PLOT SETTINGS
     public void InitializePlotSettings(Garden garden, GameObject plotObject)
@@ -218,7 +217,7 @@ public class Plot : MonoBehaviour
                 PollenHere.Add(color);
             }
         //}
-        PollenIsHere = true;
+        //PollenIsHere = true;
     }
 
     /// <summary>
@@ -232,12 +231,6 @@ public class Plot : MonoBehaviour
             // SET the OLD DATA LOOSE for GARBAGE COLLECTION
             PollenHere = new TalliedSet<ColorName>();
         }
-        PollenIsHere = false;
-    }
-
-    // TODO: Once Pest Class is Implemented
-    public void addPest()
-    {
-        
+        //PollenIsHere = false;
     }
 }

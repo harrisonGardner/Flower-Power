@@ -270,7 +270,10 @@ public class Garden : MonoBehaviour
         }
     }
 
-    // TODO: IMPLEMENT THIS 
+    /// <summary>
+    /// Places a weed at a random location in the garden, so long as there
+    /// isn't something already there.
+    /// </summary>
     public void addRandomWeed()
     {
         // IF the size of the weeds list is below a certain number
@@ -311,6 +314,8 @@ public class Garden : MonoBehaviour
                 flower.SpreadPollen(WindDirection, WindyToday);
             }
         }
+
+        CheckForPest();
     }
 
     /// <summary>
@@ -362,5 +367,68 @@ public class Garden : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region PESTS
+
+    /// <summary>
+    /// Generates a new pest if pollen of opposite colors are present in a 
+    /// plot with a flower.
+    /// </summary>
+    public void CheckForPest()
+    {
+        IList<Plant> OppositeColorsHere = new List<Plant>();
+
+        // ADD OPPOSITES to LIST
+        foreach (Plant flower in Flowers)
+        {
+            if (flower.GeneratePestHere())
+            {
+                OppositeColorsHere.Add(flower);
+            }
+        }
+
+        // IF LIST has 1+ ELEMENTs, DECIDE WHERE to PLACE PEST
+
+        int oppositeCount = OppositeColorsHere.Count;
+        if (oppositeCount > 0)
+        {
+            // CHOOSE 1 at RANDOM
+            int rand = MasterController.universallyAvailableRandom.Next(0, oppositeCount);
+            int i = 0;
+
+            foreach (Plant infected in OppositeColorsHere)
+            {
+                if (i == rand)
+                {
+                    Pest pest = new Pest(); // TODO: CREATE AS GAME OBJECT THEN GET PEST COMPONENT
+                    pest.CurrentPlot = infected.MyPlot;
+                    Pests.Add(pest);
+                    break;
+                }
+                i++;
+            }
+        }
+    }
+
+    public void PestSpread()
+    {
+        IList<Pest> RemovePests = new List<Pest>();
+
+        foreach (Pest p in Pests)
+        {
+            if (p.IsDead())
+                RemovePests.Add(p);
+            else
+                p.Spread(); // PEST EATS PLANT & MOVES to NEW PLOT
+        }
+
+        foreach (Pest removeMe in RemovePests)
+        {
+            Pests.Remove(removeMe);
+        }
+    }
+
+
     #endregion
 }

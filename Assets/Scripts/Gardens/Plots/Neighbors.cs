@@ -42,9 +42,7 @@ public class Neighbors
             {
                 neighbors[i] = neighborsInclSelf[i + 1].Target;
             }
-
         }
-
     }
 
     /// <summary>
@@ -72,7 +70,6 @@ public class Neighbors
             {
                 neighbors[i] = neighborsInclSelf[i + 1].Target;
             }
-
         }
     }
 
@@ -101,20 +98,34 @@ public class Neighbors
         return randomNeighbor;
     }
 
-    public Plot[] getNeighbors()
+    public Plot getRandomNeighborWithPlant()
     {
-        //    Plot[] adjacentPlots = new Plot[] {
-        //        neighbors[1].Target, neighbors[2].Target,
-        //        neighbors[3].Target, neighbors[4].Target,
-        //        neighbors[5].Target, neighbors[6].Target,
-        //        neighbors[7].Target, neighbors[8].Target,
-        //        neighbors[9].Target
-        //    };
+        Plot randomNeighborWPlant = null;
+        IList<Plot> plotsWPlants = new List<Plot>();
 
-        return this.neighbors;
+        foreach (Plot p in neighbors)
+        {
+            if (p != null && p.plantHere != null)
+            {
+                plotsWPlants.Add(p);
+            }
+        }
+
+        int rand = MasterController.universallyAvailableRandom.Next(0, plotsWPlants.Count);
+
+        int i = 0;
+        foreach (Plot withPlant in plotsWPlants)
+        {
+            if (i == rand)
+            {
+                randomNeighborWPlant = withPlant;
+            }
+            i++;
+        }
+
+        return randomNeighborWPlant;
     }
 
-    // TODO: Method for a pest to go into a new space with a plant & if none available, die.
-    // TODO: Method to check if the flower in this space is adjacent to a flower of the opposite color
+    public Plot[] getNeighbors() { return this.neighbors; }
 
 }
