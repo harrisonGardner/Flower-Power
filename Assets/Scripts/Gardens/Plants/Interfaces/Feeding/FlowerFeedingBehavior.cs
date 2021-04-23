@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FlowerFeedingBehavior : IFeedingBehavior
 {
-    int FeedingIntensity { get; }
-    int ThirstIntensity { get; }
+    public int FeedingIntensity { get; }
+    public int ThirstIntensity { get; }
 
     public FlowerFeedingBehavior(int thirst, int hunger)
     {

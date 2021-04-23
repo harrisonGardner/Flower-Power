@@ -85,7 +85,10 @@ public class Plot : MonoBehaviour
             if (pt == PlantType.Flower)
             {
                 //Debug.Log($"Should be a flower {pt}");
-                plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plant.StartPlant(pt, new FlowerHealth(90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plant.Health.SetMinFeedingRequirements(plant.CurrentStage.FeedingBehavior.ThirstIntensity,
+                    plant.CurrentStage.FeedingBehavior.FeedingIntensity);
+
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
                     plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage, plantPrefab.GetComponent<Plant>().Health.WiltingToday);
