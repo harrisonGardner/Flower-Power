@@ -13,15 +13,20 @@ public class Clippers : MonoBehaviour
     public static bool holding = false;
     public static bool useTool = false;
 
+    public GameObject orderGameObject;
+    public Order order;
+
     public int itemUseDelay = 120;
     public static int itemUseTimer = 0;
 
     private Vector3 defaultPosition;
 
     public GameObject toolDrag;
+
     // Start is called before the first frame update
     void Start()
     {
+        order = orderGameObject.GetComponent<Order>();
         defaultPosition = transform.position;
     }
 
