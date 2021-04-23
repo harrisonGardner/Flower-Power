@@ -11,7 +11,7 @@ public enum InteractionType { NONE, WATER, CUT, PLANT}
 public class PlotInteraction : MonoBehaviour
 {
     public Plot Plot { get; set; }
-    public enum PlantAction { NONE, CUT, WILT } // TODO: REVISIT
+    public enum PlantAction { NONE, CUT, WILT }
     public PlantAction plotPlantAction = PlantAction.NONE;
     public InteractionType currentAction;
 
@@ -27,26 +27,30 @@ public class PlotInteraction : MonoBehaviour
             SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
         }
         //Clippers Click
-        if (Clippers.holding)
+        else if (Clippers.holding)
         {
             if (!Plot.IsEmpty)
             {
-                Debug.Log("In Plot with " + Plot.plantHere.PlantType.ToString() + " of color " + Plot.plantHere.PlantColor.Name);
-                Debug.Log("Cutting Down Now...");
                 Plant removed = Plot.RemoveSinglePlant();
                 Order currentOrder = GameObject.Find("OrderInfo").GetComponent<Order>();
-                Debug.Log("Trying to Add " + removed.PlantType + " of color " + removed.PlantColor.Name);
                 currentOrder.AddFlower(removed);
             }
                 
             Clippers.useTool = true;
             //UITextUpdater.UpdateOrderNumbers();
         }
-        if (SeedPouch.holding == true)
+        else if (SeedPouch.holding == true)
         {
             if (Plot.IsEmpty)
             {
-                Plot.AddPlant(PlantType.Flower, SeedPouch.GetSeedColor());
+                SeedPouch pouch = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
+
+                try
+                {
+                    Plot.AddPlant(PlantType.Flower, pouch.RemoveSeed());
+                }
+                catch (KeyNotFoundException) { }
+               
             }
         }
     }
