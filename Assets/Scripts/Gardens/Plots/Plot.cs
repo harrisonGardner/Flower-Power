@@ -89,8 +89,8 @@ public class Plot : MonoBehaviour
                     plant.CurrentStage.FeedingBehavior.FeedingIntensity);
 
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
-                    SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
-                    plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage, plantPrefab.GetComponent<Plant>().Health.WiltingToday);
+                    SpriteFetcher.GetSpriteFlower(cn, plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage,
+                    plantPrefab.GetComponent<Plant>().Health.WiltingToday);
             }
             else if (pt == PlantType.Weed)
             {
