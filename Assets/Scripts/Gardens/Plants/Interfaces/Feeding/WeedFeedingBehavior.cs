@@ -8,8 +8,8 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public class WeedFeedingBehavior : IFeedingBehavior
 {
-    int FeedingIntensity { get; }
-    int ThirstIntensity { get; }
+    public int FeedingIntensity { get; }
+    public int ThirstIntensity { get; }
 
     /// <summary>
     /// Constructs a new WeedFeedingBehavior object, allowing for

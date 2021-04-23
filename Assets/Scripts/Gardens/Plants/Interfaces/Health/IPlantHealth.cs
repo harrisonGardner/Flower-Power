@@ -13,4 +13,5 @@ public interface IPlantHealth
     public bool WiltingToday { get; set; } // Unhealthy today
 
     public void FeedingToday(int sun, int water);
+    public void SetMinFeedingRequirements(int minWater, int minSun);
 }
