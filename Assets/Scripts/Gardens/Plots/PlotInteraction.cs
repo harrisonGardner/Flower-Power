@@ -46,7 +46,7 @@ public class PlotInteraction : MonoBehaviour
         {
             if (Plot.IsEmpty)
             {
-                Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
+                Plot.AddPlant(PlantType.Flower, SeedPouch.GetSeedColor());
             }
         }
     }

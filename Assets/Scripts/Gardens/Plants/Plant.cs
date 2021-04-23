@@ -66,7 +66,6 @@ public class Plant : MonoBehaviour
         
     }
 
-
     /// <summary>
     /// Plant obtains water and energy from the plot,
     /// with amounts depending on its feeding behavior

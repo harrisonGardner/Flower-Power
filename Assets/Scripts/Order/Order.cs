@@ -18,6 +18,7 @@ public static class Order //: MonoBehaviour
     public static TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
     public static int maxNumDays;
     public static string levelName;
+    public static int bestTime;
 
     /// <summary>
     /// Has the player harvested all of the flowers required?
@@ -33,6 +34,11 @@ public static class Order //: MonoBehaviour
         }
 
         return true;
+    }
+
+    public static bool BeatsBestTime() // IF yes, write back to original file
+    {
+        return false;
     }
 
     /// <summary>
@@ -86,5 +92,7 @@ public static class Order //: MonoBehaviour
         flowerRequirements.Add(ColorName.PURPLE,7);
 
         maxNumDays = 30;
+        levelName = "Dummy Level";
+        bestTime = 28;
     }
 }

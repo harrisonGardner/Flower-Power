@@ -68,7 +68,7 @@ public class Plot : MonoBehaviour
     /// </summary>
     /// <param name="pt">PlantType</param>
     /// <param name="cn">ColorName</param>
-    public void addPlant(PlantType pt, ColorName cn)
+    public void AddPlant(PlantType pt, ColorName cn)
     {
         // Add the plant to the appropriate list (weed or flower) in the garden
         if (this.IsEmpty)
@@ -84,7 +84,7 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
-                Debug.Log($"Should be a flower {pt}");
+                //Debug.Log($"Should be a flower {pt}");
                 plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
