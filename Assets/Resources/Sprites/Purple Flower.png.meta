@@ -13,7 +13,13 @@ TextureImporter:
     second: Purple Flower Flowering
   - first:
       213: 7987934582789746561
-    second: Purple Flower Dying
+    second: Purple Flower Seed Wilting
+  - first:
+      213: 8146869624179042004
+    second: Purple Flower Sprout Wilting
+  - first:
+      213: 3189520925241157999
+    second: Purple Flower Flowering Wilting
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,8 +62,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -178,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Flower Dying
+      name: Purple Flower Seed Wilting
       rect:
         serializedVersion: 2
         x: 48
@@ -194,6 +200,48 @@ TextureImporter:
       bones: []
       spriteID: 18fad306e28dade60800000000000000
       internalID: 7987934582789746561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Purple Flower Sprout Wilting
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d6ac9c52ce7f0170800000000000000
+      internalID: 8146869624179042004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Purple Flower Flowering Wilting
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69aca8f164734c20800000000000000
+      internalID: 3189520925241157999
       vertices: []
       indices: 
       edges: []
