@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Contains the number of seeds, in each color that the player has.
@@ -18,6 +19,8 @@ public class SeedPouch : MonoBehaviour
 
     public GameObject seedObject;
     private Vector3 defaultPosition;
+
+    public Text seedAmountText;
 
     /// <summary>
     /// Adds a seed of the given color to the players pouch.
@@ -92,6 +95,8 @@ public class SeedPouch : MonoBehaviour
 
     private void OnMouseDown()
     {
+        seedAmountText.text = Seeds.Count(bagColors[bagColorArrayHead]).ToString();
+
         if (!holding)
         {
             WateringCan.DropTool();

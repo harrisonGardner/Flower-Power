@@ -13,7 +13,13 @@ TextureImporter:
     second: Green Flower Flowering
   - first:
       213: 235335517655664653
-    second: Green Flower Dying
+    second: Green Flower Seed Wilting
+  - first:
+      213: -81341407394359457
+    second: Green Flower Sprout Wilting
+  - first:
+      213: 1394382479843272495
+    second: Green Flower Flowering Wilting
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,8 +62,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -178,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Green Flower Dying
+      name: Green Flower Seed Wilting
       rect:
         serializedVersion: 2
         x: 48
@@ -194,6 +200,48 @@ TextureImporter:
       bones: []
       spriteID: d0806ec0864144300800000000000000
       internalID: 235335517655664653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Flower Sprout Wilting
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f579ab2cb640fdef0800000000000000
+      internalID: -81341407394359457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Flower Flowering Wilting
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2726184a77d95310800000000000000
+      internalID: 1394382479843272495
       vertices: []
       indices: 
       edges: []

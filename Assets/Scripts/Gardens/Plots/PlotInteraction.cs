@@ -27,7 +27,6 @@ public class PlotInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(!gameObject.GetComponent<Plot>().IsEmpty) gameObject.GetComponent<Plot>().plantPrefab.GetComponent<Plant>().Grow();
         //Watering Can Click
         if (WateringCan.holding)
         {

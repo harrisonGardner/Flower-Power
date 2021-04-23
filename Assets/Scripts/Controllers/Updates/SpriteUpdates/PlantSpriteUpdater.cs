@@ -13,7 +13,7 @@ public class PlantSpriteUpdater : MonoBehaviour, ISpriteUpdate
                 Color plantColor = gameObject.GetComponent<Plant>().PlantColor;
                 StageType currentStage = gameObject.GetComponent<Plant>().CurrentStage.CurrentStage;
                 if (plantColor.Name != ColorName.NONE)
-                    gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteFlower(plantColor.Name, currentStage);
+                    gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteFlower(plantColor.Name, currentStage, gameObject.GetComponent<Plant>().Health.WiltingToday);
                 else
                     gameObject.GetComponent<SpriteRenderer>().sprite = SpriteFetcher.GetSpriteWeed(currentStage);
             }

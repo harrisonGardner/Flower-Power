@@ -88,7 +88,7 @@ public class Plot : MonoBehaviour
                 plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
-                    plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
+                    plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage, plantPrefab.GetComponent<Plant>().Health.WiltingToday);
             }
             else if (pt == PlantType.Weed)
             {
