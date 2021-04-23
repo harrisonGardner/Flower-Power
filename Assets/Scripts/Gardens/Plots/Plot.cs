@@ -144,6 +144,8 @@ public class Plot : MonoBehaviour
         // If the new waterlevel exceeds capacity, set it to capacity
         if (this.waterLevel > WATER_CAPCITY)
             this.waterLevel = WATER_CAPCITY;
+
+        SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
     }
 
     /// <summary>
@@ -159,12 +161,14 @@ public class Plot : MonoBehaviour
         if (this.waterLevel >= requestedWater)
         {
             this.waterLevel -= requestedWater;
+            SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
             return requestedWater;
         }
         else
         {
             int temp = this.waterLevel;
             this.waterLevel = 0;
+            SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
             return temp;
         }
     }
