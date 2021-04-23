@@ -14,6 +14,7 @@ public class Garden : MonoBehaviour
     // PREFABS
     public GameObject plotPrefab;
     public GameObject gardenPrefab;
+    public GameObject pestPrefab;
 
     // DIMENSIONS
     public int height;
@@ -401,9 +402,9 @@ public class Garden : MonoBehaviour
             {
                 if (i == rand)
                 {
-                    Pest pest = new Pest(); // TODO: CREATE AS GAME OBJECT THEN GET PEST COMPONENT
-                    pest.CurrentPlot = infected.MyPlot;
-                    Pests.Add(pest);
+                    GameObject pestObject = Instantiate(pestPrefab, infected.MyPlot.gameObject.transform); 
+                    pestObject.GetComponent<Pest>().CurrentPlot = infected.MyPlot;
+                    Pests.Add(pestObject.GetComponent<Pest>());
                     break;
                 }
                 i++;
