@@ -22,17 +22,25 @@ public class SpriteFetcher : MonoBehaviour
     }
 
     //Flower Sprite Getter
-    public static Sprite GetSpriteFlower(ColorName color, StageType type)
+    public static Sprite GetSpriteFlower(ColorName color, StageType type, bool wilting)
     {
         if (color != ColorName.NONE)
         {
+            Sprite[] sprites;
+            if (type == StageType.DYING)
+            {
+                sprites = Resources.LoadAll<Sprite>("Sprites/Dead Flower");
+                return sprites[0];
+            }
             //Find the Sprites Container and load them into an array
             string spriteName = $"Sprites/{KeyWordFormat(color.ToString())} Flower";
-            Sprite[] sprites = Resources.LoadAll<Sprite>(spriteName);
+            sprites = Resources.LoadAll<Sprite>(spriteName);
 
             //Change the spriteName to the name of the specific sprite in that array
-            spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
-
+            if(wilting)
+                spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())} Wilting";
+            else
+                spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
             return SpriteFind(sprites, spriteName);
         }
 
