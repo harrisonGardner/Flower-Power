@@ -13,8 +13,7 @@ public class MasterController : MonoBehaviour
     Colors allColors;
     SpriteUpdateController spriteUpdate;
     public static System.Random universallyAvailableRandom = new System.Random();
-
-
+    public Order order;
 
     // FIELDs to KEEP TRACK of TIME
     public static float TimeOfDay { get; private set; } = 0;
@@ -40,7 +39,9 @@ public class MasterController : MonoBehaviour
         allColors = new Colors();
 
         // ORDER
-        Order.CreateDummyOrder();
+        order = GameObject.Find("OrderInfo").GetComponent<Order>();
+        order.CreateDummyOrder();
+        order.UpdateAll();
     }
 
     // Update is called once per frame
