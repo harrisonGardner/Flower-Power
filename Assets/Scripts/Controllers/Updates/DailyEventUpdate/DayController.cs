@@ -24,7 +24,7 @@ public class DayController : IUpdateController
             {DailyEventType.FLOWERSEEDING, new FlowerSeed() },
             {DailyEventType.WEEDGROW, new WeedGrow() },
             {DailyEventType.FLOWERGROW, new FlowerGrow() },
-            {DailyEventType.COLORCLASH, new ColorClash() }, // TODO
+            {DailyEventType.PESTSPREAD, new PestSpread() },
             {DailyEventType.DYING, new DeathEvent() } // TODO: IS THIS NEEDED???
     };
 

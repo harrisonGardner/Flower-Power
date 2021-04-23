@@ -143,6 +143,52 @@ public class Colors
         return false;
     }
 
+    /// <summary>
+    /// Given a set of colors, determines if the set contains opposite colors.
+    /// </summary>
+    /// <param name="colors"></param>
+    /// <returns></returns>
+    public static bool containsOpposites(TalliedSet<ColorName> colors)
+    {
+        // ONE COLOR by itself wont' have an OPPOSITE
+
+        if (colors.Num > 1)
+        {
+            IList<Color> primary = new List<Color>();
+            IList<Color> secondary = new List<Color>();
+
+            // SORT into PRIMARY and SECONDARY COLORS
+            foreach (KeyValuePair<ColorName, int> cn in colors)
+            {
+                if (cn.Key != ColorName.NONE)
+                {
+                    Color color = GetColor(cn.Key);
+                    if (color.Type == ColorType.PRIMARY)
+                    {
+                        primary.Add(color);
+                    }
+                    else if (color.Type == ColorType.SECONDARY)
+                    {
+                        secondary.Add(color);
+                    }
+                }
+            }
+
+            // ONLY A SECONDARY COLOR will be the OPPOSITE of a PRIMARY COLOR
+            // ITERATE THROUGH SECONDARY COLORS
+            foreach (Color s in secondary)
+            {
+                // NESTED LOOP through PRIMARY COLORS
+                foreach (Color p in primary)
+                {
+                    if (areOpposites(s.Name, p.Name))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static ColorName GetColorBlend(Color color1, Color color2)
     {
         // TODO: Add in functionality for secondary colors to yield tertiary colors

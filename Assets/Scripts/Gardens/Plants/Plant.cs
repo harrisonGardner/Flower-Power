@@ -156,6 +156,19 @@ public class Plant : MonoBehaviour
         CurrentStage.Reproduction.Seed(MyPlot);
     }
 
+    /// <summary>
+    /// Based on the pollen colors in this plant's plot, determines whether
+    /// a pest should be generated here.
+    /// </summary>
+    /// <returns></returns>
+    public bool GeneratePestHere()
+    {
+        if (PlantType == PlantType.Flower && Colors.containsOpposites(MyPlot.PollenHere))
+            return true;
+
+        return false;
+    }
+
     public string stringForTesting()
     {
         return "Stage " + CurrentStage.CurrentStage.ToString()

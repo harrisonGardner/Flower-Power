@@ -10,37 +10,32 @@ using UnityEngine;
 /// </summary>
 public class Pest : MonoBehaviour
 {
-    Plot CurrentPlot { get; set; }
-    int MaxDaysWithoutFood = 1;
-    int DaysWithoutFood = 0;
+    public Plot CurrentPlot { get; set; }
+    bool dead = false;
 
     /// <summary>
     /// The pest eats the plant in the current space.
     /// </summary>
-    public void KillPlant()
+    public void Eat()
     {
-        CurrentPlot.RemoveSinglePlant(); // TODO: Single plant or batch?
-        DaysWithoutFood = 0;
+        if (!CurrentPlot.IsEmpty)
+            CurrentPlot.RemoveSinglePlant(); // TODO: Single plant or batch?
+        else // IN CASE PLANT HERE YESTERDAY is now DEAD
+            dead = true;
     }
 
     public void Spread()
     {
-
+        Eat();
+        CurrentPlot = CurrentPlot.AdjacentPlots.getRandomNeighborWithPlant();
+        if (CurrentPlot == null) // IF NO ADJACENT PLOT HAS A PLANT
+            dead = true;
     }
 
     /// <summary>
     /// If the pest has not eaten a plant recently,
     /// it will die.
     /// </summary>
-    public void Die()
-    {
-        //
-        // DESTROY GAME OBJECT
-    }
-
-    public void RemoveFromGame()
-    {
-
-    }
+    public bool IsDead() { return (dead); }
 
 }
