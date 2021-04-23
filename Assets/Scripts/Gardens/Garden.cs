@@ -282,7 +282,6 @@ public class Garden : MonoBehaviour
         // IF YES, then choose random neighbor
         if (plots[x, y].IsEmpty)
         {
-            Debug.Log("Adding weed at (" + x + ", " + y + ")");
             plots[x, y].AddPlant(PlantType.Weed, ColorName.NONE);
         }
 

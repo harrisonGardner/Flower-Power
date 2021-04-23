@@ -14,4 +14,5 @@ public class WeedHealth : IPlantHealth
     public bool WiltingToday { get; set; } = false;
     
     public void FeedingToday(int sun, int water) { }
+    public void SetMinFeedingRequirements(int minWater, int minSun) { }
 }
