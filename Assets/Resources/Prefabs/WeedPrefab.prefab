@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1521616648411062924}
   - component: {fileID: 7382688270655111914}
-  - component: {fileID: 631442042933370471}
+  - component: {fileID: 4497960414008093121}
   m_Layer: 0
   m_Name: WeedPrefab
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &631442042933370471
+--- !u!114 &4497960414008093121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6184259248183733122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7723739dfddaa4b4e8ca5497f074c905, type: 3}
+  m_Script: {fileID: 11500000, guid: fa8b74c988a4748ca813e0aee5191356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantPrefab: {fileID: 6184259248183733122}
+  plantPrefab: {fileID: 0}
   visibleState: 
