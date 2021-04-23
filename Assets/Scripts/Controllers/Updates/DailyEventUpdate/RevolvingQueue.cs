@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,12 @@ using UnityEngine;
 /// moved to the end of the queue.
 /// </summary>
 /// <author>Megan Lisette Peck</author>
-public class RevolvingQueue<T> : //MonoBehaviour
+public class RevolvingQueue<T> //: MonoBehaviour
 {
-    private int head;       
-    private int tail;     
-    private int n;          
-    private int capacity;   
+    private int head;
+    private int tail;
+    private int n;
+    private int capacity;
     private T[] items;
 
     /// <summary>
@@ -38,7 +39,7 @@ public class RevolvingQueue<T> : //MonoBehaviour
     public void Enqueue(T item)
     {
         if (n == capacity)
-            throw new NotSupportedException("Can't add an item to a full queue.");
+            throw new System.NotSupportedException("Can't add an item to a full queue.");
 
         if (IsEmpty())
             head = 0;
