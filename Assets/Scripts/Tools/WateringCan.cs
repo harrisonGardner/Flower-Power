@@ -13,16 +13,23 @@ public class WateringCan : MonoBehaviour
     public static bool holding = false;
     public static bool useTool = false;
 
-    public int itemUseDelay = 120;
+    public int itemUseDelay = 30;
     public static int itemUseTimer = 0;
 
     private Vector3 defaultPosition;
 
     public GameObject toolDrag;
+    public ParticleSystem waterParticles;
+    public AudioSource wateringSound;
+
+    private bool playSound;
+
     // Start is called before the first frame update
     void Start()
     {
         defaultPosition = transform.position;
+        waterParticles.enableEmission = false;
+        wateringSound.Stop();
     }
 
     // Update is called once per frame
@@ -30,32 +37,42 @@ public class WateringCan : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
             DropTool();
+
+        if (Input.GetMouseButtonDown(0) && holding)
+            useTool = true;
+        if (Input.GetMouseButtonUp(0))
+            useTool = false;
     }
 
     void FixedUpdate()
     {
         if (holding == true)
         {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
             if (!useTool)
             {
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
-                itemUseTimer = itemUseDelay;
+                wateringSound.Stop();
+                playSound = true;
+                waterParticles.enableEmission = false;
                 toolDrag.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteTool(tool, false);
             }
-            else if (itemUseTimer > 0)
+            else if (useTool)
             {
+                if (playSound)
+                {
+                    wateringSound.Play();
+                    playSound = false;
+                }
                 UseTool();
-            }
-            else
-            {
-                useTool = false;
             }
         }
         else
         {
-            useTool = false;
+            wateringSound.Stop();
+            playSound = true;
+            waterParticles.enableEmission = false;
             toolDrag.transform.position = Vector3.MoveTowards(toolDrag.transform.position, defaultPosition, 0.2f);
             toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSpriteTool(tool, false);
@@ -64,15 +81,14 @@ public class WateringCan : MonoBehaviour
 
     private void UseTool()
     {
+        waterParticles.enableEmission = true;
         toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSpriteTool(tool, true);
-        itemUseTimer--;
     }
 
     public static void DropTool()
     {
         holding = false;
-        itemUseTimer = 0;
     }
 
     private void OnMouseDown()

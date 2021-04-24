@@ -18,7 +18,11 @@ public class Forecast : MonoBehaviour
     public GameObject[] visualForecast;
     public GameObject windIcon;
 
+    public AudioSource rainSound;
+    public AudioSource windSound;
+
     //public DirectionName WindDirection { get; set; }
+    public int extraSunChance = 25;
 
     private void Start()
     {
@@ -51,10 +55,8 @@ public class Forecast : MonoBehaviour
     /// <returns></returns>
     public  IWeather GetRandomWeather()
     {
-
-
         int numWeatherTypes = weathers.Length;
-        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes + 1);
+        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes + extraSunChance);
 
         // Increase likelihood of sun
         if (weatherVal >= numWeatherTypes)
@@ -67,12 +69,17 @@ public class Forecast : MonoBehaviour
     /// Adds a 
     /// </summary>
     /// <returns></returns>
-    public  void AdvanceWeather()
+    public void AdvanceWeather()
     {
         forecast.Dequeue();
         IWeather randomWeather = GetRandomWeather();
         forecast.Enqueue(randomWeather);
-        
+
+        if (forecast.Peek().ToString().Equals("Rain"))
+            rainSound.Play();
+        else if (forecast.Peek().ToString().Equals("Wind"))
+            windSound.Play();
+
         for (int i = 0; i < numDays; i++)
         {
             // UPDATE SPRITES for the VISUAL FORECAST 
