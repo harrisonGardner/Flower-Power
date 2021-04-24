@@ -15,23 +15,19 @@ public class PlotInteraction : MonoBehaviour
     public PlantAction plotPlantAction = PlantAction.NONE;
     public InteractionType currentAction;
 
-    public bool watering = false;
-
-
-    private void FixedUpdate()
-    {
-        //if we are watering the plot continually add 1 until we stop
-        if (watering)
-        {
-            Plot.addWater(1);
-            SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
-        }
-    }
+    public bool hasBeenClicked = false;
 
     private void OnMouseDown()
     {
+        //Watering Can Click
+        if (WateringCan.holding)
+        {
+            Plot.addWater(4);
+            WateringCan.useTool = true;
+            SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
+        }
         //Clippers Click
-        if (Clippers.holding)
+        else if (Clippers.holding)
         {
             if (!Plot.IsEmpty)
             {
@@ -56,19 +52,5 @@ public class PlotInteraction : MonoBehaviour
                
             }
         }
-    }
-
-    private void OnMouseOver()
-    {
-        //Check if useTool is true while over the plot
-        //If it is set watering to true so we can add water each step
-        if (WateringCan.useTool)
-            watering = true;
-    }
-
-    private void OnMouseExit()
-    {
-        //Once the mouse leaves the plots collider set watering to false so we stop
-        watering = false;
     }
 }

@@ -13,7 +13,7 @@ TextureImporter:
     second: Blue Flower Flowering
   - first:
       213: -1193402978602774121
-    second: Blue Flower Seed Wilting
+    second: Blue Flower Seed Wilitng
   - first:
       213: 4473647600633565536
     second: Blue Flower Sprout Wilting
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Flower Seed Wilting
+      name: Blue Flower Seed Wilitng
       rect:
         serializedVersion: 2
         x: 48
