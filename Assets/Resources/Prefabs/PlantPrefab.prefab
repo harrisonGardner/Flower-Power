@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1550045221861440788}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,4 +110,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 0}
+  isHealthy: 1
   visibleState: 
+  plantingSound: {fileID: 4689773423411253826}
+--- !u!1001 &308402547350855891
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5123321938046248460}
+    m_Modifications:
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.038675845
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.04194394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.3033576
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130038555630715060, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+      propertyPath: m_Name
+      value: PlantingSound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+--- !u!4 &1550045221861440788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1280561134389943751, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+  m_PrefabInstance: {fileID: 308402547350855891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4689773423411253826 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4995273118257951377, guid: ce289de5b359b6a4083b87f372d5c217, type: 3}
+  m_PrefabInstance: {fileID: 308402547350855891}
+  m_PrefabAsset: {fileID: 0}
