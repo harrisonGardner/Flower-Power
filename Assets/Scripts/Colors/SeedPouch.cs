@@ -42,6 +42,11 @@ public class SeedPouch : MonoBehaviour
         }
     }
 
+    public void Add(ColorName color, int amount)
+    {
+        Seeds.Add(color, amount);
+    }
+
     public ColorName RemoveSeed()
     {
         try
@@ -54,21 +59,16 @@ public class SeedPouch : MonoBehaviour
         {
             throw new KeyNotFoundException("No more seeds of this color in the pouch");
         }
-        
-
-        
-
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Seeds.Add(ColorName.BLUE, 20);
-        Seeds.Add(ColorName.RED, 20);
-        Seeds.Add(ColorName.YELLOW, 20);
+
 
         defaultPosition = seedObject.transform.position;
+        
     }
 
     void FixedUpdate()
@@ -102,7 +102,7 @@ public class SeedPouch : MonoBehaviour
         }
     }
 
-    private void UpdateSeedAmount()
+    public void UpdateSeedAmount()
     {
         // Update the count
         seedAmountText.text = Seeds.Count(bagColors[bagColorArrayHead]).ToString();

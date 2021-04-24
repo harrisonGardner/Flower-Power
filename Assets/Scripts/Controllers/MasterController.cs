@@ -43,8 +43,8 @@ public class MasterController : MonoBehaviour
 
         // ORDER
         order = GameObject.Find("OrderInfo").GetComponent<Order>();
-        order.CreateDummyOrder();
-        order.UpdateAll();
+        //order.CreateDummyOrder();
+        //order.UpdateAll();
     }
 
     // Update is called once per frame
@@ -59,4 +59,5 @@ public class MasterController : MonoBehaviour
         DayNumber = day.dayNumber;
         order.UpdateAll();
     }
+
 }

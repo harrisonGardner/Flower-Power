@@ -9,7 +9,6 @@ public class Wind : IWeather
 
     public void SetDaysWeather(Garden garden)
     {
-        Debug.Log("Direction is: " + RandomDir.Name);
         garden.WindyToday = true;
         garden.AdjustWindDirection(RandomDir);
 
