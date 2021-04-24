@@ -19,7 +19,7 @@ public enum DailyEventType
 // IMPROVED Functionality by shuffling the events in a queue structure.
 // GET rid of bool as if the event happened, it will be pushed to the back
 // ONLY 1 ACCESS needed
-public class EventInfo : MonoBehaviour
+public class EventInfo //: MonoBehaviour
 {
     public float scheduledTime;
     public bool happenedToday;
@@ -42,7 +42,7 @@ public class DailyEvents : MonoBehaviour
     public bool lastEventHappened;
     public IDictionary<DailyEventType, EventInfo> daysEvents;
 
-    public DailyEvents()
+    public void InitializeDailyEvents()
     {
         daysEvents = new Dictionary<DailyEventType, EventInfo>()
         {
