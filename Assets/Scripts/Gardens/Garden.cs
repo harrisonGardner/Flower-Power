@@ -172,7 +172,6 @@ public class Garden : MonoBehaviour
     public void AdjustWindDirection(Direction newWindDirection)
     {
         WindDirection = newWindDirection;
-        Debug.Log("In garden with new wind direction: " + WindDirection.Name.ToString());
         WindyToday = true;
         SunAllPlots(1);
     }
@@ -306,8 +305,6 @@ public class Garden : MonoBehaviour
     /// <param name="plantType"></param>
     public void SpreadPollen(PlantType plantType)
     {
-        Debug.Log("In garden about to spread pollen");
-        Debug.Log("Wind direction is: " + WindDirection.Name.ToString());
         if (plantType == PlantType.Weed)
         {
             foreach (Plant weed in this.Weeds)
