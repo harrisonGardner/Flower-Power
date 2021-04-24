@@ -16,7 +16,7 @@ public class Clippers : MonoBehaviour
     public GameObject orderGameObject;
     public Order order;
 
-    public int itemUseDelay = 120;
+    public int itemUseDelay = 30;
     public static int itemUseTimer = 0;
 
     private Vector3 defaultPosition;
@@ -43,10 +43,10 @@ public class Clippers : MonoBehaviour
         //    DropTool();
         if (holding == true)
         {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
             if (!useTool)
             {
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
                 itemUseTimer = itemUseDelay;
                 toolDrag.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteTool(tool, false);

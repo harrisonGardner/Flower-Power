@@ -58,6 +58,8 @@ public class DailyEvents : MonoBehaviour
                 new EventInfo (this.intervalTime * (int) DailyEventType. WEEDPOLLINATION)},
             { DailyEventType.FLOWERPOLLINATION,
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERPOLLINATION) },
+            { DailyEventType.PESTSPREAD,
+                new EventInfo (this.intervalTime * (int) DailyEventType.PESTSPREAD) },
             { DailyEventType.WEEDSEEDING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDSEEDING) },
             { DailyEventType.FLOWERSEEDING,
@@ -66,8 +68,6 @@ public class DailyEvents : MonoBehaviour
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDGROW) },
             { DailyEventType.FLOWERGROW,
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERGROW)},
-            { DailyEventType.PESTSPREAD,
-                new EventInfo (this.intervalTime * (int) DailyEventType.PESTSPREAD) }, //TODO
             { DailyEventType.DYING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.DYING) }, // TODO
             { DailyEventType.ENDDAY,
