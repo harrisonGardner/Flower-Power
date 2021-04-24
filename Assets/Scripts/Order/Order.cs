@@ -35,13 +35,14 @@ public class Order : MonoBehaviour
     {
         seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
         CreateDummyOrder();
+        GameObject.Find("Record").GetComponent<Text>().text = $"Record: {bestTime}";
     }
 
     /// <summary>
     /// Has the player harvested all of the flowers required?
     /// </summary>
     /// <returns></returns>
-    public bool IsOrderFulfilled()
+    public bool OrderFulfilled()
     {
         foreach (KeyValuePair<ColorName, int> seedCount in flowerRequirements)
         {
@@ -53,10 +54,13 @@ public class Order : MonoBehaviour
         return true;
     }
 
-    // TODO: IMPLEMENT
-    public static bool BeatsBestTime() // IF yes, write back to original file
+    /// <summary>
+    /// Has the current (completed) game beaten the previous record.
+    /// </summary>
+    /// <returns></returns>
+    public  bool BeatsBestTime() // IF yes, write back to original file
     {
-        return false;
+        return (OrderFulfilled() && MasterController.DayNumber < bestTime);
     }
 
     /// <summary>
@@ -84,7 +88,14 @@ public class Order : MonoBehaviour
             flowersFulfilled.Add(flower.PlantColor.Name);
         }
 
+        // UPDATE VISUALS
         UpdateOrder(flower.PlantColor.Name);
+
+        // CHECK for VICTORY
+        if (OrderFulfilled())
+        {
+            GameObject.Find("Victory").GetComponent<Text>().text = "VICTORY is YOURS!!!";
+        }
     }
 
     #region UPDATE ORDERS
@@ -137,14 +148,14 @@ public class Order : MonoBehaviour
     public void CreateDummyOrder()
     {
         // PRIMARY COLORS
-        flowerRequirements.Add(ColorName.BLUE, 10);
-        flowerRequirements.Add(ColorName.RED, 10);
-        flowerRequirements.Add(ColorName.YELLOW, 10);
+        flowerRequirements.Add(ColorName.BLUE, 13);
+        flowerRequirements.Add(ColorName.RED, 13);
+        flowerRequirements.Add(ColorName.YELLOW, 13);
 
         // SECONDARY COLORS
-        flowerRequirements.Add(ColorName.GREEN, 7);
-        flowerRequirements.Add(ColorName.ORANGE, 7);
-        flowerRequirements.Add(ColorName.PURPLE,7);
+        flowerRequirements.Add(ColorName.GREEN, 9);
+        flowerRequirements.Add(ColorName.ORANGE, 9);
+        flowerRequirements.Add(ColorName.PURPLE, 9);
 
         seeds.Add(ColorName.BLUE, 30);
         seeds.Add(ColorName.RED, 30);
