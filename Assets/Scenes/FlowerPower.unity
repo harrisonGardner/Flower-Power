@@ -2797,7 +2797,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Record Time: 40 Days'
+  m_Text: 'Record Time: 41 Days'
 --- !u!222 &1660372475
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2964,7 +2964,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 12a7f78194ba5c74e94b1919aba17501, type: 3}
     m_FontSize: 30
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
@@ -3657,7 +3657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969845791577264897, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2969845791577264897, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
       propertyPath: m_LocalRotation.w
