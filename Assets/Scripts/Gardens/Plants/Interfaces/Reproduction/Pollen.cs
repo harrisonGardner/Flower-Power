@@ -60,6 +60,7 @@ public class Pollen
     {
         try
         {
+            Debug.Log("In Pollen trying to go " + Move.Name);
             Plot next = currentPlot.AdjacentPlots.getNeighbor(Move.Name);
             currentPlot = next;
             return true;

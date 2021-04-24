@@ -12,7 +12,7 @@ public class ForecastScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Forecast.LoadFiveDaysWeather();
+        //Forecast.LoadFiveDaysWeather();
         UpdateWeatherIcons();
         UpdateWindIcon();
     }
@@ -21,7 +21,7 @@ public class ForecastScript : MonoBehaviour
     {
         for (int i = 0; i < days.Length; i++)
         {
-            days[i].GetComponent<WeatherIcon>().Weather = Forecast.FiveDayForecast.ToArray()[i];
+            //days[i].GetComponent<WeatherIcon>().Weather = Forecast.FiveDayForecast.ToArray()[i];
 
             days[i].GetComponent<WeatherIcon>().spriteUpdate = days[i].GetComponent<WeatherIconSpriteUpdater>();
             SpriteUpdateController.AddSpriteToRedraw(days[i].GetComponent<WeatherIcon>().spriteUpdate);
@@ -30,7 +30,7 @@ public class ForecastScript : MonoBehaviour
 
     public void UpdateWindIcon()
     {
-        windIcon.GetComponent<WindIcon>().Direction = garden.GetComponent<Garden>().WindDirection.Name; 
+        windIcon.GetComponent<WindIcon>().Direction = garden.GetComponent<Garden>().WindDirection.Name;
         windIcon.GetComponent<WindIcon>().spriteUpdate = windIcon.GetComponent<WindIconSpriteUpdater>();
         SpriteUpdateController.AddSpriteToRedraw(windIcon.GetComponent<WindIcon>().spriteUpdate);
     }

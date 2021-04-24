@@ -65,7 +65,7 @@ public class Garden : MonoBehaviour
             {
                 // DUPLICATE PLOT PREFAB
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
-                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * 0.16F), 1F), new Quaternion());
+                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * -0.16F), 1F), new Quaternion());
 
                 // Hierarchy
                 prefab.transform.parent = gameObject.transform;
@@ -74,6 +74,10 @@ public class Garden : MonoBehaviour
                 this.plotGameObjects[x, y] = prefab;
                 this.plots[x, y] = prefab.GetComponent<Plot>();
                 this.plots[x, y].InitializePlotSettings(this, prefab);
+
+                this.plots[x, y].X = x;
+                this.plots[x, y].Y = y;
+                this.plots[x, y].OrderCreated = y * this.width + x;
             }
         }
 
@@ -168,6 +172,7 @@ public class Garden : MonoBehaviour
     public void AdjustWindDirection(Direction newWindDirection)
     {
         WindDirection = newWindDirection;
+        Debug.Log("In garden with new wind direction: " + WindDirection.Name.ToString());
         WindyToday = true;
         SunAllPlots(1);
     }
@@ -301,6 +306,8 @@ public class Garden : MonoBehaviour
     /// <param name="plantType"></param>
     public void SpreadPollen(PlantType plantType)
     {
+        Debug.Log("In garden about to spread pollen");
+        Debug.Log("Wind direction is: " + WindDirection.Name.ToString());
         if (plantType == PlantType.Weed)
         {
             foreach (Plant weed in this.Weeds)
