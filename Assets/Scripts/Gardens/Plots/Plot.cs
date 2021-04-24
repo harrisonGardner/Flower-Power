@@ -15,6 +15,11 @@ public class Plot : MonoBehaviour
     public PlotInteraction PlotInteraction { get; set; }
     public ISpriteUpdate spriteUpdate;
 
+    // COORDINATES: TEMPORARY
+    public int X;
+    public int Y;
+    public int OrderCreated;
+
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
     public Garden Garden { get; set; }

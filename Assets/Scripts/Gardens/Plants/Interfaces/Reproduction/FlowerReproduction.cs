@@ -30,6 +30,7 @@ public class FlowerReproduction : IReproductionBehavior
 
         // STRONG STREAM of POLLEN
         Pollen strong = new Pollen(direction, distance, pollenIntensity, color);
+        Debug.Log("In flower reproduction trying to head: " + direction.Name);
         try
         {
             strong.currentPlot = plot.AdjacentPlots.getNeighbor(direction.Name);

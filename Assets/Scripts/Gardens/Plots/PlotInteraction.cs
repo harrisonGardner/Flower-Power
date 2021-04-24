@@ -37,7 +37,6 @@ public class PlotInteraction : MonoBehaviour
             }
                 
             Clippers.useTool = true;
-            //UITextUpdater.UpdateOrderNumbers();
         }
         else if (SeedPouch.holding == true)
         {

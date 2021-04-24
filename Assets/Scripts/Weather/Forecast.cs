@@ -10,50 +10,106 @@ public enum WeatherType { RAIN, SUN, WIND }
 /// </summary>
 public class Forecast : MonoBehaviour
 {
-    static System.Random RandomNum { get; } = new System.Random();
-    public static int numDaysInForecast = 5;
-
+    private int numDays;
     private static IWeather[] weathers = new IWeather[] { new Rain(), new Sun(), new Wind() };
+    private Queue<IWeather> forecast;
+    private DirectionName currentWindDirection;
 
-    public static Queue<IWeather> FiveDayForecast { get; set; } = LoadFiveDaysWeather();
-    public static DirectionName WindDirection { get; set; } = DirectionName.right;
+    public GameObject[] visualForecast;
+    public GameObject windIcon;
 
-    public static Queue<IWeather> LoadFiveDaysWeather()
+    //public DirectionName WindDirection { get; set; }
+
+    private void Start()
     {
-        Queue<IWeather> forecast = new Queue<IWeather>();
+        numDays = visualForecast.Length;
+        LoadFiveDaysWeather();
+    }
 
-        for (int i = 0; i < numDaysInForecast; i++)
+    public void LoadFiveDaysWeather()
+    {
+        // RANDOMLY CHOOSE first DAYS of WEATHER...
+        forecast = new Queue<IWeather>();
+        for (int i = 0; i < numDays; i++)
         {
-            forecast.Enqueue(GetRandomWeather());
+            IWeather randomWeather = GetRandomWeather();
+            forecast.Enqueue(randomWeather);
+
+
+            // UPDATE SPRITES for the VISUAL FORECAST
+            visualForecast[i].GetComponent<WeatherIcon>().Weather = randomWeather;
+
+            visualForecast[i].GetComponent<WeatherIcon>().spriteUpdate =
+                visualForecast[i].GetComponent<WeatherIconSpriteUpdater>();
+            SpriteUpdateController.AddSpriteToRedraw(visualForecast[i].GetComponent<WeatherIcon>().spriteUpdate);
         }
-
-        return forecast;
-    }
-
-    public static IWeather GetRandomWeather()
-    {
-        int numWeatherTypes = weathers.Length;
-        int weatherVal = RandomNum.Next(0, numWeatherTypes);
-        return weathers[weatherVal];
-    }
-
-    public static IWeather AddRandomWeather()
-    {
-        IWeather temp = GetRandomWeather();
-        FiveDayForecast.Enqueue(temp);
-        return temp;
     }
 
     /// <summary>
-    /// Returns the weather today, removing it from the queue.
+    /// Generates a random IWeather
     /// </summary>
     /// <returns></returns>
-    public static IWeather GetTodaysWeather()
+    public  IWeather GetRandomWeather()
     {
-        // TODO: ADD RANDOM WEATHER
-        // TODO: GET the new WEATHER to the end of the Five Day Forecast
-        // TODO: UPDATE SPRITES
-        //AddRandomWeather();
-        return FiveDayForecast.Dequeue();
+        int numWeatherTypes = weathers.Length;
+        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes);
+        return weathers[weatherVal];
+    }
+
+    /// <summary>
+    /// Adds a 
+    /// </summary>
+    /// <returns></returns>
+    public  void AdvanceWeather()
+    {
+        forecast.Dequeue();
+        IWeather randomWeather = GetRandomWeather();
+        forecast.Enqueue(randomWeather);
+        
+        for (int i = 0; i < numDays; i++)
+        {
+            // UPDATE SPRITES for the VISUAL FORECAST 
+            if (i < numDays - 1) // ADVANCING EXISTING GAME OBJECTS
+            {
+                visualForecast[i].GetComponent<WeatherIcon>().Weather =
+                    visualForecast[i + 1].GetComponent<WeatherIcon>().Weather;
+            }
+            else
+            {
+                visualForecast[i].GetComponent<WeatherIcon>().Weather = randomWeather;
+            }
+
+            visualForecast[i].GetComponent<WeatherIcon>().spriteUpdate =
+                visualForecast[i].GetComponent<WeatherIconSpriteUpdater>();
+
+            SpriteUpdateController.AddSpriteToRedraw(visualForecast[i].GetComponent<WeatherIcon>().spriteUpdate);
+        }
+    }
+
+    /// <summary>
+    /// Returns the weather today.
+    /// </summary>
+    /// <returns></returns>
+    public  IWeather GetTodaysWeather()
+    {
+        AdvanceWeather();
+        IWeather today = forecast.Peek();
+        if (today.Type == WeatherType.WIND)
+        {
+            Wind windToday = (Wind)today;
+            currentWindDirection = windToday.RandomDir.Name;
+            Debug.Log("IN forecast about to adjust wind to: " + currentWindDirection);
+            UpdateWindIcon();
+        }
+            
+        return today;
+    }
+
+
+    public void UpdateWindIcon()
+    {
+        windIcon.GetComponent<WindIcon>().Direction = currentWindDirection;
+        windIcon.GetComponent<WindIcon>().spriteUpdate = windIcon.GetComponent<WindIconSpriteUpdater>();
+        SpriteUpdateController.AddSpriteToRedraw(windIcon.GetComponent<WindIcon>().spriteUpdate);
     }
 }
