@@ -19,7 +19,7 @@ public enum DailyEventType
 // IMPROVED Functionality by shuffling the events in a queue structure.
 // GET rid of bool as if the event happened, it will be pushed to the back
 // ONLY 1 ACCESS needed
-public class EventInfo
+public class EventInfo : MonoBehaviour
 {
     public float scheduledTime;
     public bool happenedToday;
@@ -35,7 +35,7 @@ public class EventInfo
 /// Dictates when events should occur within a given day.
 /// </summary>
 /// <author>Nicholas Gliserman</author>
-public class DailyEvents //: MonoBehaviour
+public class DailyEvents : MonoBehaviour
 {
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
