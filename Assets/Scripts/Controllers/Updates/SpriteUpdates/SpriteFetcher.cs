@@ -16,6 +16,10 @@ using UnityEngine;
 /// <author>Harrison Gardner</author>
 public class SpriteFetcher : MonoBehaviour
 {
+    public SpriteFetcher()
+    {
+
+    }
 
     //Flower Sprite Getter
     public static Sprite GetSpriteFlower(ColorName color, StageType type, bool wilting)
@@ -37,7 +41,6 @@ public class SpriteFetcher : MonoBehaviour
                 spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())} Wilting";
             else
                 spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
-
             return SpriteFind(sprites, spriteName);
         }
 

@@ -9,7 +9,6 @@ public class Sun : IWeather
     public void SetDaysWeather(Garden garden)
     {
         garden.SunAllPlots(5);
-        garden.RemoveWaterFromRandomPlots(4);
     }
 }
 
