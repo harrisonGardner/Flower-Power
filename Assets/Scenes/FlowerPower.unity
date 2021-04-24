@@ -311,8 +311,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -309.1, y: -207.2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -288.37, y: -207.2}
+  m_SizeDelta: {x: 201.46, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326140599
 MonoBehaviour:
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae7121749a5a9344b8b83c5fa641624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderObject: {fileID: 1965666559}
 --- !u!1 &367346825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,7 +2534,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.8
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
