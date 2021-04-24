@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// < summary >
-/// Holds the given amount of items, of the type specified.
-/// Adds items up to the capacity, when an item is called, it is 
-/// moved to the end of the queue.
-/// </summary>
-/// < author>Megan Lisette Peck</author>
-public class RevolvingQueue<T> //: MonoBehaviour
+///// <summary>
+///// Holds the given amount of items, of the type specified.
+///// Adds items up to the capacity, when an item is called, it is 
+///// moved to the end of the queue.
+///// </summary>
+///// <author>Megan Lisette Peck</author>
+public class RevolvingQueue<T> : MonoBehaviour
 {
     private int head;
     private int tail;
@@ -31,7 +31,6 @@ public class RevolvingQueue<T> //: MonoBehaviour
         n = 0;
         items = new T[capacity];
     }
-
 
     /// < summary >
     /// Add an item to the last position in the queue.
