@@ -90,6 +90,8 @@ public class Plant : MonoBehaviour
         Health.FeedingToday(sunshine, water);
 
         this.isHealthy = !Health.WiltingToday;
+        if(!isHealthy)
+            SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
 
         if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
         {

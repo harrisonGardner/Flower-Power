@@ -19,6 +19,7 @@ public class Forecast : MonoBehaviour
     public GameObject windIcon;
 
     //public DirectionName WindDirection { get; set; }
+    public int extraSunChance = 25;
 
     private void Start()
     {
@@ -51,10 +52,8 @@ public class Forecast : MonoBehaviour
     /// <returns></returns>
     public  IWeather GetRandomWeather()
     {
-
-
         int numWeatherTypes = weathers.Length;
-        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes + 1);
+        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes + extraSunChance);
 
         // Increase likelihood of sun
         if (weatherVal >= numWeatherTypes)
