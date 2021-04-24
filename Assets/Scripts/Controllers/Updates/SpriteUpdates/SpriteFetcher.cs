@@ -37,7 +37,6 @@ public class SpriteFetcher : MonoBehaviour
                 spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())} Wilting";
             else
                 spriteName = $"{KeyWordFormat(color.ToString())} Flower {KeyWordFormat(type.ToString())}";
-            Debug.Log(spriteName);
 
             return SpriteFind(sprites, spriteName);
         }

@@ -34,6 +34,9 @@ public class Plant : MonoBehaviour
     // TESTING
     public string visibleState;
 
+    // SOUND
+    public AudioSource plantingSound;
+
     public void StartPlant(PlantType plantType, IPlantHealth health, Plot plot, Color color, GameObject plantPrefab)
     {
         PlantType = plantType;
@@ -51,7 +54,11 @@ public class Plant : MonoBehaviour
         if (PlantType == PlantType.Weed)
             CurrentStage = new YoungWeed();
         else
+        {
+            plantingSound.enabled = true;
+            plantingSound.Play();
             CurrentStage = new Seed();
+        }
     }
 
 
