@@ -51,8 +51,15 @@ public class Forecast : MonoBehaviour
     /// <returns></returns>
     public  IWeather GetRandomWeather()
     {
+
+
         int numWeatherTypes = weathers.Length;
-        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes);
+        int weatherVal = MasterController.universallyAvailableRandom.Next(0, numWeatherTypes + 1);
+
+        // Increase likelihood of sun
+        if (weatherVal >= numWeatherTypes)
+            weatherVal = 1; // 1 for Sun
+
         return weathers[weatherVal];
     }
 

@@ -31,6 +31,7 @@ public class DayController : IUpdateController
     public DayController(Garden garden)
     {
         schedule = new DailyEvents();
+        schedule.InitializeDailyEvents();
         this.garden = garden;
     }
 

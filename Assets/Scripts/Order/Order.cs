@@ -18,9 +18,10 @@ public class Order : MonoBehaviour
 {
     public TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
     public TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
-    public int maxNumDays;
+    public int maxNumDays { get; set; }
     public string levelName;
     public int bestTime;
+    public SeedPouch seeds;
 
     // ORDER ICONS
     public GameObject red;
@@ -29,6 +30,12 @@ public class Order : MonoBehaviour
     public GameObject green;
     public GameObject purple;
     public GameObject orange;
+
+    private void Start()
+    {
+        seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
+        CreateDummyOrder();
+    }
 
     /// <summary>
     /// Has the player harvested all of the flowers required?
@@ -139,8 +146,15 @@ public class Order : MonoBehaviour
         flowerRequirements.Add(ColorName.ORANGE, 7);
         flowerRequirements.Add(ColorName.PURPLE,7);
 
-        maxNumDays = 30;
+        seeds.Add(ColorName.BLUE, 30);
+        seeds.Add(ColorName.RED, 30);
+        seeds.Add(ColorName.YELLOW, 30);
+        seeds.UpdateSeedAmount();
+
+        maxNumDays = 100;
         levelName = "Dummy Level";
-        bestTime = 28;
+        bestTime = 57;
+
+        UpdateAll();
     }
 }

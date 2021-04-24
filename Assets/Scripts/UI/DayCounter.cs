@@ -6,8 +6,15 @@ using UnityEngine.UI;
 public class DayCounter : MonoBehaviour
 {
     public GameObject orderObject;
-    private void FixedUpdate()
+    public string deadline;
+
+    private void Start()
     {
-        gameObject.GetComponent<Text>().text = $"Day: {MasterController.DayNumber}     deadline: {orderObject.GetComponent<Order>().maxNumDays}";
+        
     }
+
+    //private void FixedUpdate()
+    //{
+    //    gameObject.GetComponent<Text>().text = $"Day: {MasterController.DayNumber}     deadline: {orderObject.GetComponent<Order>().maxNumDays}";
+    //}
 }

@@ -77,7 +77,6 @@ public class Plot : MonoBehaviour
         // Add the plant to the appropriate list (weed or flower) in the garden
         if (this.IsEmpty)
         {
-            // TODO: ADD LOGIC to INSTANTIATE WEED as WELL based on PLANTTYPE
             plantPrefab = Instantiate(Resources.Load("Prefabs/PlantPrefab") as GameObject,
                 new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1), new Quaternion());
 
@@ -88,7 +87,7 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
-                plant.StartPlant(pt, new FlowerHealth(90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plant.StartPlant(pt, new FlowerHealth(10, 10), this, Colors.GetColor(cn), plantPrefab);
                 plant.Health.SetMinFeedingRequirements(plant.CurrentStage.FeedingBehavior.ThirstIntensity,
                     plant.CurrentStage.FeedingBehavior.FeedingIntensity);
 
