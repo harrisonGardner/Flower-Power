@@ -10,7 +10,10 @@ public class StartDay : MonoBehaviour, IGardenUpdate
 {
     public void ActionOnUpdate(Garden garden)
     {
+        // GET ORDER
         Order order = GameObject.Find("OrderInfo").GetComponent<Order>();
+
+        // 
         int deadline = order.maxNumDays;
         string deadeline = $"Day: {MasterController.DayNumber}     Deadline: {deadline}";
         GameObject.Find("DayCounter").GetComponent<Text>().text = deadeline;

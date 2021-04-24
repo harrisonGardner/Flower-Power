@@ -8,6 +8,6 @@ public class Rain : IWeather
 
     public void SetDaysWeather(Garden garden)
     {
-        garden.WaterAllPlots(7);
+        garden.WaterAllPlots(3);
     }
 }
