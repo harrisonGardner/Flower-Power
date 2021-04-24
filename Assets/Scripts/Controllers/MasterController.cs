@@ -9,9 +9,12 @@ public class MasterController : MonoBehaviour
 {
     public GameObject GardenScript;
     Garden garden;
-    DayController day;
     Colors allColors;
+
+    // CONTROLLERS
+    DayController day;
     SpriteUpdateController spriteUpdate;
+
     public static System.Random universallyAvailableRandom = new System.Random();
     public Order order;
 

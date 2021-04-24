@@ -65,7 +65,7 @@ public class Garden : MonoBehaviour
             {
                 // DUPLICATE PLOT PREFAB
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
-                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * 0.16F), 1F), new Quaternion());
+                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * -0.16F), 1F), new Quaternion());
 
                 // Hierarchy
                 prefab.transform.parent = gameObject.transform;
@@ -74,6 +74,10 @@ public class Garden : MonoBehaviour
                 this.plotGameObjects[x, y] = prefab;
                 this.plots[x, y] = prefab.GetComponent<Plot>();
                 this.plots[x, y].InitializePlotSettings(this, prefab);
+
+                this.plots[x, y].X = x;
+                this.plots[x, y].Y = y;
+                this.plots[x, y].OrderCreated = y * this.width + x;
             }
         }
 

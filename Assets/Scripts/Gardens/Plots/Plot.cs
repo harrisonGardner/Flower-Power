@@ -15,6 +15,11 @@ public class Plot : MonoBehaviour
     public PlotInteraction PlotInteraction { get; set; }
     public ISpriteUpdate spriteUpdate;
 
+    // COORDINATES: TEMPORARY
+    public int X;
+    public int Y;
+    public int OrderCreated;
+
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
     public Garden Garden { get; set; }
@@ -83,7 +88,6 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
-                //Debug.Log($"Should be a flower {pt}");
                 plant.StartPlant(pt, new FlowerHealth(90, 10), this, Colors.GetColor(cn), plantPrefab);
                 plant.Health.SetMinFeedingRequirements(plant.CurrentStage.FeedingBehavior.ThirstIntensity,
                     plant.CurrentStage.FeedingBehavior.FeedingIntensity);
