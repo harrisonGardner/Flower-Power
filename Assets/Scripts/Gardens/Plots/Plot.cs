@@ -88,7 +88,6 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
-                //Debug.Log($"Should be a flower {pt}");
                 plant.StartPlant(pt, new FlowerHealth(90, 10), this, Colors.GetColor(cn), plantPrefab);
                 plant.Health.SetMinFeedingRequirements(plant.CurrentStage.FeedingBehavior.ThirstIntensity,
                     plant.CurrentStage.FeedingBehavior.FeedingIntensity);

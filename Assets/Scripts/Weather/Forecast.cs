@@ -98,7 +98,6 @@ public class Forecast : MonoBehaviour
         {
             Wind windToday = (Wind)today;
             currentWindDirection = windToday.RandomDir.Name;
-            Debug.Log("IN forecast about to adjust wind to: " + currentWindDirection);
             UpdateWindIcon();
         }
             
