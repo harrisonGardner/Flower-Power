@@ -17,7 +17,6 @@ public class StartDay : MonoBehaviour, IGardenUpdate
         int deadline = order.maxNumDays;
         string deadeline = $"Day: {MasterController.DayNumber}     Deadline: {deadline}";
         GameObject.Find("DayCounter").GetComponent<Text>().text = deadeline;
-        GameObject.Find("DayCounter").GetComponent<DayCounter>().dayStartDing.Play();
 
         // HOUSEKEEPING
         garden.WindyToday = false;
