@@ -7,5 +7,14 @@ public class DayCounter : MonoBehaviour
 {
     public GameObject orderObject;
     public string deadline;
-    public AudioSource dayStartDing;
+
+    private void Start()
+    {
+        
+    }
+
+    //private void FixedUpdate()
+    //{
+    //    gameObject.GetComponent<Text>().text = $"Day: {MasterController.DayNumber}     deadline: {orderObject.GetComponent<Order>().maxNumDays}";
+    //}
 }
