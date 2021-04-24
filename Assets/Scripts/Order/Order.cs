@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Represents the objective of a given level in the game
@@ -12,19 +13,28 @@ using UnityEngine;
 /// in which the order can be completed.
 /// 
 /// </summary>
-public static class Order //: MonoBehaviour
+/// <author>Nicholas Gliserman</author>
+public class Order : MonoBehaviour
 {
-    public static TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
-    public static TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
-    public static int maxNumDays;
-    public static string levelName;
-    public static int bestTime;
+    public TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
+    public TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
+    public int maxNumDays;
+    public string levelName;
+    public int bestTime;
+
+    // ORDER ICONS
+    public GameObject red;
+    public GameObject blue;
+    public GameObject yellow;
+    public GameObject green;
+    public GameObject purple;
+    public GameObject orange;
 
     /// <summary>
     /// Has the player harvested all of the flowers required?
     /// </summary>
     /// <returns></returns>
-    public static bool IsOrderFulfilled()
+    public bool IsOrderFulfilled()
     {
         foreach (KeyValuePair<ColorName, int> seedCount in flowerRequirements)
         {
@@ -36,19 +46,20 @@ public static class Order //: MonoBehaviour
         return true;
     }
 
+    // TODO: IMPLEMENT
     public static bool BeatsBestTime() // IF yes, write back to original file
     {
         return false;
     }
 
     /// <summary>
-    /// Displays how close to completion and order is for the inputted color.
+    /// Displays how close to completion an order is for the inputted color.
     ///
     /// Used for game UI.
     /// </summary>
     /// <param name="colorName"></param>
     /// <returns></returns>
-    public static string colorStatus(ColorName colorName)
+    public string colorStatus(ColorName colorName)
     {
         return flowersFulfilled.Count(colorName) + "/" + flowerRequirements.Count(colorName);
     }
@@ -58,20 +69,57 @@ public static class Order //: MonoBehaviour
     /// on their mission to fulfill the order.
     /// </summary>
     /// <param name="flower"></param>
-    public static void AddFlower(Plant flower)
+    public void AddFlower(Plant flower)
     {
         // ONLY ADD if FLOWER is FLOWERING
         if (flower.CurrentStage.CurrentStage == StageType.FLOWERING)
         {
             flowersFulfilled.Add(flower.PlantColor.Name);
         }
+
+        UpdateOrder(flower.PlantColor.Name);
     }
+
+    #region UPDATE ORDERS
+
+    public void UpdateOrder(ColorName cn)
+    {
+        UnityEngine.UI.Text text;
+
+        if (cn == ColorName.RED)
+            text = red.GetComponent<Text>();
+        else if (cn == ColorName.BLUE)
+            text = blue.GetComponent<Text>();
+        else if (cn == ColorName.YELLOW)
+            text = yellow.GetComponent<Text>();
+        else if (cn == ColorName.GREEN)
+            text = green.GetComponent<Text>();
+        else if (cn == ColorName.ORANGE)
+            text = orange.GetComponent<Text>();
+        else // if (cn == ColorName.PURPLE)
+            text = purple.GetComponent<Text>();
+
+        text.text = colorStatus(cn);
+    }
+
+    public void UpdateAll()
+    {
+        foreach (ColorName c in Enum.GetValues(typeof(ColorName)))
+        {
+            if (c != ColorName.NONE)
+            {
+                UpdateOrder(c);
+            }
+        }
+    }
+
+    #endregion
 
     /// <summary>
     /// Has the player exceeded the time limit?
     /// </summary>
     /// <returns></returns>
-    public static bool IsTimeUp()
+    public bool IsTimeUp()
     {
         return (MasterController.DayNumber > maxNumDays);
     }
@@ -79,7 +127,7 @@ public static class Order //: MonoBehaviour
     /// <summary>
     /// Testing method before File I/O is implemented
     /// </summary>
-    public static void CreateDummyOrder()
+    public void CreateDummyOrder()
     {
         // PRIMARY COLORS
         flowerRequirements.Add(ColorName.BLUE, 10);

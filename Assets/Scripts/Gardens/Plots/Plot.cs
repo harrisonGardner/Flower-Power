@@ -15,6 +15,11 @@ public class Plot : MonoBehaviour
     public PlotInteraction PlotInteraction { get; set; }
     public ISpriteUpdate spriteUpdate;
 
+    // COORDINATES: TEMPORARY
+    public int X;
+    public int Y;
+    public int OrderCreated;
+
     // Spatial Logic
     public Neighbors AdjacentPlots { get; set; }
     public Garden Garden { get; set; }
@@ -31,11 +36,10 @@ public class Plot : MonoBehaviour
     public TalliedSet<ColorName> PollenHere { get; set; } = new TalliedSet<ColorName>();
 
     // FIELDS for TESTING
-    public bool PollenIsHere = false;
+    //public bool PollenIsHere = false;
 
-    // Pest Related Fields
-    // TODO: the pest in this space
-    public bool clashingFlowerColorHere = false;
+    //// Pest Related Fields
+    //public bool clashingFlowerColorHere = false;
 
     // PLOT SETTINGS
     public void InitializePlotSettings(Garden garden, GameObject plotObject)
@@ -60,7 +64,7 @@ public class Plot : MonoBehaviour
         this.PlotObject.transform.localScale.Set(width, height, 1);
     }
 
-    // PLANT-RELATED METHODS
+    #region PLANT-RELATED METHODS
 
     /// <summary>
     /// If there is not already a plant in this plot, places
@@ -68,7 +72,7 @@ public class Plot : MonoBehaviour
     /// </summary>
     /// <param name="pt">PlantType</param>
     /// <param name="cn">ColorName</param>
-    public void addPlant(PlantType pt, ColorName cn)
+    public void AddPlant(PlantType pt, ColorName cn)
     {
         // Add the plant to the appropriate list (weed or flower) in the garden
         if (this.IsEmpty)
@@ -84,11 +88,13 @@ public class Plot : MonoBehaviour
             //INITIALIZE FLOWER SETTINGS
             if (pt == PlantType.Flower)
             {
-                Debug.Log($"Should be a flower {pt}");
-                plant.StartPlant(pt, new FlowerHealth(0, 0, 90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plant.StartPlant(pt, new FlowerHealth(90, 10), this, Colors.GetColor(cn), plantPrefab);
+                plant.Health.SetMinFeedingRequirements(plant.CurrentStage.FeedingBehavior.ThirstIntensity,
+                    plant.CurrentStage.FeedingBehavior.FeedingIntensity);
+
                 plantPrefab.GetComponent<SpriteRenderer>().sprite =
-                    SpriteFetcher.GetSpriteFlower(SeedPouch.GetSeedColor(),
-                    plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage);
+                    SpriteFetcher.GetSpriteFlower(cn, plantPrefab.GetComponent<Plant>().CurrentStage.CurrentStage,
+                    plantPrefab.GetComponent<Plant>().Health.WiltingToday);
             }
             else if (pt == PlantType.Weed)
             {
@@ -106,11 +112,14 @@ public class Plot : MonoBehaviour
     /// <summary>
     /// When a plant has died, empties the plot to allow for a new plant.
     /// </summary>
-    public void RemoveSinglePlant()
+    public Plant RemoveSinglePlant()
     {
         // BEFORE REMOVING from PLOT, REMOVE from GARDEN
+        Plant temp = this.plantHere;
         Garden.AddToRemove(this.plantHere);
         Garden.RemoveFromGarden();
+
+        return temp;
     }
 
     public void RemovePlantDuringGrowth()
@@ -118,12 +127,16 @@ public class Plot : MonoBehaviour
         Garden.AddToRemove(this.plantHere);
     }
 
-    // CALLED after REMOVED from GARDEN
+    /// <summary>
+    /// Called by the garden after it is removed from the garden.
+    /// </summary>
     public void DestroyPlant() {
         // REMOVE from this PLOT
         IsEmpty = true;
         this.plantHere = null;
         Destroy(plantPrefab); }
+
+    #endregion
 
     // WATER-RELATED METHODS
 
@@ -144,6 +157,8 @@ public class Plot : MonoBehaviour
         // If the new waterlevel exceeds capacity, set it to capacity
         if (this.waterLevel > WATER_CAPCITY)
             this.waterLevel = WATER_CAPCITY;
+
+        SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
     }
 
     /// <summary>
@@ -159,12 +174,14 @@ public class Plot : MonoBehaviour
         if (this.waterLevel >= requestedWater)
         {
             this.waterLevel -= requestedWater;
+            SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             return requestedWater;
         }
         else
         {
             int temp = this.waterLevel;
             this.waterLevel = 0;
+            SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             return temp;
         }
     }
@@ -211,7 +228,7 @@ public class Plot : MonoBehaviour
                 PollenHere.Add(color);
             }
         //}
-        PollenIsHere = true;
+        //PollenIsHere = true;
     }
 
     /// <summary>
@@ -225,12 +242,6 @@ public class Plot : MonoBehaviour
             // SET the OLD DATA LOOSE for GARBAGE COLLECTION
             PollenHere = new TalliedSet<ColorName>();
         }
-        PollenIsHere = false;
-    }
-
-    // TODO: Once Pest Class is Implemented
-    public void addPest()
-    {
-        
+        //PollenIsHere = false;
     }
 }

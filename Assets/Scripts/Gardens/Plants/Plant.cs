@@ -27,6 +27,7 @@ public class Plant : MonoBehaviour
 
     // STATE of the PLANT
     public IPlantHealth Health { get; set; }
+    public bool isHealthy = true;
     public IPlantStage CurrentStage { get; set; }
     public Color PlantColor { get; set; }
 
@@ -66,7 +67,6 @@ public class Plant : MonoBehaviour
         
     }
 
-
     /// <summary>
     /// Plant obtains water and energy from the plot,
     /// with amounts depending on its feeding behavior
@@ -88,6 +88,8 @@ public class Plant : MonoBehaviour
     public void CheckHealth(int sunshine, int water)
     {
         Health.FeedingToday(sunshine, water);
+
+        this.isHealthy = !Health.WiltingToday;
 
         if (CurrentStage.CurrentStage == StageType.DEAD || Health.DyingToday)
         {
@@ -111,7 +113,12 @@ public class Plant : MonoBehaviour
             else
             {
                 CurrentStage = temp;
-                
+
+                if (PlantType == PlantType.Flower)
+                {
+                    Health.SetMinFeedingRequirements(CurrentStage.FeedingBehavior.ThirstIntensity,
+                        CurrentStage.FeedingBehavior.FeedingIntensity);
+                }
                 SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             }
         }
@@ -147,6 +154,19 @@ public class Plant : MonoBehaviour
     public void MakeSeeds()
     {
         CurrentStage.Reproduction.Seed(MyPlot);
+    }
+
+    /// <summary>
+    /// Based on the pollen colors in this plant's plot, determines whether
+    /// a pest should be generated here.
+    /// </summary>
+    /// <returns></returns>
+    public bool GeneratePestHere()
+    {
+        if (PlantType == PlantType.Flower && Colors.containsOpposites(MyPlot.PollenHere))
+            return true;
+
+        return false;
     }
 
     public string stringForTesting()

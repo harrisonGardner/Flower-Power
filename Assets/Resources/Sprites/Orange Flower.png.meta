@@ -13,7 +13,13 @@ TextureImporter:
     second: Orange Flower Flowering
   - first:
       213: 8539199378566205279
-    second: Orange Flower Dying
+    second: Orange Flower Seed Wilting
+  - first:
+      213: -1623240818028840144
+    second: Orange Flower Sprout Wilting
+  - first:
+      213: -2908895286411784272
+    second: Orange Flower Flowering Wilting
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,8 +62,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -178,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange Flower Dying
+      name: Orange Flower Seed Wilting
       rect:
         serializedVersion: 2
         x: 48
@@ -194,6 +200,48 @@ TextureImporter:
       bones: []
       spriteID: f5fcca99794518670800000000000000
       internalID: 8539199378566205279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Orange Flower Sprout Wilting
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03bf97883171979e0800000000000000
+      internalID: -1623240818028840144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Orange Flower Flowering Wilting
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bf0e94262781a7d0800000000000000
+      internalID: -2908895286411784272
       vertices: []
       indices: 
       edges: []

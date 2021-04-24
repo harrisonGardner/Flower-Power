@@ -14,11 +14,14 @@ public class Garden : MonoBehaviour
     // PREFABS
     public GameObject plotPrefab;
     public GameObject gardenPrefab;
+    public GameObject pestPrefab;
 
     // DIMENSIONS
     public int height;
     public int width;
     public int plotLength;
+
+    // ARRAYS
     public GameObject[,] plotGameObjects;
     public Plot[,] plots;
 
@@ -62,7 +65,7 @@ public class Garden : MonoBehaviour
             {
                 // DUPLICATE PLOT PREFAB
                 GameObject prefab = Instantiate<GameObject>(this.plotPrefab,
-                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * 0.16F), 1F), new Quaternion());
+                    new Vector3(gameObject.transform.position.x + (x * 0.16f), gameObject.transform.position.y + (y * -0.16F), 1F), new Quaternion());
 
                 // Hierarchy
                 prefab.transform.parent = gameObject.transform;
@@ -71,6 +74,10 @@ public class Garden : MonoBehaviour
                 this.plotGameObjects[x, y] = prefab;
                 this.plots[x, y] = prefab.GetComponent<Plot>();
                 this.plots[x, y].InitializePlotSettings(this, prefab);
+
+                this.plots[x, y].X = x;
+                this.plots[x, y].Y = y;
+                this.plots[x, y].OrderCreated = y * this.width + x;
             }
         }
 
@@ -104,6 +111,8 @@ public class Garden : MonoBehaviour
                 this.plots[x, y].AdjacentPlots = new Neighbors(surroundingPlots);
             }
         }
+        // ADD a RANDOM WEED
+        addRandomWeed();
     }
 
     private bool IsInGarden(int x, int y)
@@ -266,14 +275,23 @@ public class Garden : MonoBehaviour
         }
     }
 
-    // TODO: IMPLEMENT THIS 
+    /// <summary>
+    /// Places a weed at a random location in the garden, so long as there
+    /// isn't something already there.
+    /// </summary>
     public void addRandomWeed()
     {
         // IF the size of the weeds list is below a certain number
         // Generate random numbers for height & width to choose initial space
+        int x = MasterController.universallyAvailableRandom.Next(0, this.width);
+        int y = MasterController.universallyAvailableRandom.Next(0, this.height);
 
         // Check if plot has something growing
         // IF YES, then choose random neighbor
+        if (plots[x, y].IsEmpty)
+        {
+            plots[x, y].AddPlant(PlantType.Weed, ColorName.NONE);
+        }
 
         // Try this five times -- if there still is no success, displace
         // whatever is growing in the fifth space explored.
@@ -301,6 +319,8 @@ public class Garden : MonoBehaviour
                 flower.SpreadPollen(WindDirection, WindyToday);
             }
         }
+
+        CheckForPest();
     }
 
     /// <summary>
@@ -352,5 +372,71 @@ public class Garden : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region PESTS
+
+    /// <summary>
+    /// Generates a new pest if pollen of opposite colors are present in a 
+    /// plot with a flower.
+    /// </summary>
+    public void CheckForPest()
+    {
+        IList<Plant> OppositeColorsHere = new List<Plant>();
+
+        // ADD OPPOSITES to LIST
+        foreach (Plant flower in Flowers)
+        {
+            if (flower.GeneratePestHere())
+            {
+                OppositeColorsHere.Add(flower);
+            }
+        }
+
+        // IF LIST has 1+ ELEMENTs, DECIDE WHERE to PLACE PEST
+
+        int oppositeCount = OppositeColorsHere.Count;
+        if (oppositeCount > 0)
+        {
+            // CHOOSE 1 at RANDOM
+            int rand = MasterController.universallyAvailableRandom.Next(0, oppositeCount);
+            int i = 0;
+
+            foreach (Plant infected in OppositeColorsHere)
+            {
+                if (i == rand)
+                {
+                    GameObject pestObject = Instantiate(pestPrefab, infected.MyPlot.gameObject.transform); 
+                    pestObject.GetComponent<Pest>().CurrentPlot = infected.MyPlot;
+                    Pests.Add(pestObject.GetComponent<Pest>());
+                    break;
+                }
+                i++;
+            }
+        }
+    }
+
+    /// <summary>
+    /// All the pests in the garden attempt to move into a new space.
+    /// </summary>
+    public void PestSpread()
+    {
+        IList<Pest> RemovePests = new List<Pest>();
+
+        foreach (Pest p in Pests)
+        {
+            if (p.IsDead())
+                RemovePests.Add(p);
+            else
+                p.Spread(); // PEST EATS PLANT & MOVES to NEW PLOT
+        }
+
+        foreach (Pest removeMe in RemovePests)
+        {
+            Pests.Remove(removeMe);
+        }
+    }
+
+
     #endregion
 }

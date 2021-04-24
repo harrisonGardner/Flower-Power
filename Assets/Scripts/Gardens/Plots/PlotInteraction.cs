@@ -11,42 +11,45 @@ public enum InteractionType { NONE, WATER, CUT, PLANT}
 public class PlotInteraction : MonoBehaviour
 {
     public Plot Plot { get; set; }
-    public enum PlantAction { NONE, CUT, WILT } // TODO: REVISIT
+    public enum PlantAction { NONE, CUT, WILT }
     public PlantAction plotPlantAction = PlantAction.NONE;
     public InteractionType currentAction;
 
     public bool hasBeenClicked = false;
 
-    // Update is called once per frame
-    // n.b. IDEALLY we don't want to run all plots through the update function
-    // PREFERRED -- on a click event via the OnMouseDown function, determine which action to perform and do it then
-    void Update()
-    {
-        //PlotClickedOnCheck();
-    }
-
     private void OnMouseDown()
     {
-        if(!gameObject.GetComponent<Plot>().IsEmpty) gameObject.GetComponent<Plot>().plantPrefab.GetComponent<Plant>().Grow();
         //Watering Can Click
         if (WateringCan.holding)
         {
-            Plot.addWater(3);
+            Plot.addWater(4);
             WateringCan.useTool = true;
             SpriteUpdateController.AddSpriteToRedraw(GetComponent<Plot>().spriteUpdate);
         }
         //Clippers Click
-        if (Clippers.holding)
+        else if (Clippers.holding)
         {
             if (!Plot.IsEmpty)
-                Plot.RemoveSinglePlant();
+            {
+                Plant removed = Plot.RemoveSinglePlant();
+                Order currentOrder = GameObject.Find("OrderInfo").GetComponent<Order>();
+                currentOrder.AddFlower(removed);
+            }
+                
             Clippers.useTool = true;
         }
-        if (SeedPouch.holding == true)
+        else if (SeedPouch.holding == true)
         {
             if (Plot.IsEmpty)
             {
-                Plot.addPlant(PlantType.Flower, SeedPouch.GetSeedColor());
+                SeedPouch pouch = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
+
+                try
+                {
+                    Plot.AddPlant(PlantType.Flower, pouch.RemoveSeed());
+                }
+                catch (KeyNotFoundException) { }
+               
             }
         }
     }

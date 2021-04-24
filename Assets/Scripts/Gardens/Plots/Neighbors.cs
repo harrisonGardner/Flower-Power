@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Neighbors
 {
-    public Neighbor[] neighbors;
+    public Neighbor[] neighborsInclSelf;
+    public Plot[] neighbors;
 
     /// <summary>
     /// Constructs a Neighbors object
@@ -24,10 +25,24 @@ public class Neighbors
         Neighbor down, Neighbor downLeft, Neighbor left, Neighbor upLeft)
     {
         // FOLLOW the ORDER of the DirectionName ENUM for Easy Array Accesses
-        this.neighbors = new Neighbor[] {
+        this.neighborsInclSelf = new Neighbor[]
+        {
             self, up, upRight, right, downRight,
             down, downLeft, left, upLeft
         };
+        this.neighbors = new Plot[8];
+
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            if (neighborsInclSelf[i + 1].TargetIsOutOfBounds)
+            {
+                this.neighbors[i] = null;
+            }
+            else
+            {
+                neighbors[i] = neighborsInclSelf[i + 1].Target;
+            }
+        }
     }
 
     /// <summary>
@@ -40,16 +55,30 @@ public class Neighbors
     {
         if (surroundingNeighbors.Length == 9)
         {
-            this.neighbors = surroundingNeighbors;
+            this.neighborsInclSelf = surroundingNeighbors;
+        }
+
+        this.neighbors = new Plot[8];
+
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            if (neighborsInclSelf[i + 1].TargetIsOutOfBounds)
+            {
+                this.neighbors[i] = null;
+            }
+            else
+            {
+                neighbors[i] = neighborsInclSelf[i + 1].Target;
+            }
         }
     }
 
     public Plot getNeighbor(DirectionName direction)
     {
-        if (neighbors[(int)direction].TargetIsOutOfBounds)
+        if (neighborsInclSelf[(int)direction].TargetIsOutOfBounds)
             throw new IndexOutOfRangeException("Requested Plot is Outside the Garden");
 
-        return neighbors[(int)direction].Target;
+        return neighborsInclSelf[(int)direction].Target;
     }
 
 
@@ -69,20 +98,34 @@ public class Neighbors
         return randomNeighbor;
     }
 
-    public Plot[] getNeighbors()
+    public Plot getRandomNeighborWithPlant()
     {
-        Plot[] adjacentPlots = new Plot[] {
-            neighbors[1].Target, neighbors[2].Target,
-            neighbors[3].Target, neighbors[4].Target,
-            neighbors[5].Target, neighbors[6].Target,
-            neighbors[7].Target, neighbors[8].Target,
-            neighbors[9].Target
-        };
+        Plot randomNeighborWPlant = null;
+        IList<Plot> plotsWPlants = new List<Plot>();
 
-        return adjacentPlots;
+        foreach (Plot p in neighbors)
+        {
+            if (p != null && p.plantHere != null)
+            {
+                plotsWPlants.Add(p);
+            }
+        }
+
+        int rand = MasterController.universallyAvailableRandom.Next(0, plotsWPlants.Count);
+
+        int i = 0;
+        foreach (Plot withPlant in plotsWPlants)
+        {
+            if (i == rand)
+            {
+                randomNeighborWPlant = withPlant;
+            }
+            i++;
+        }
+
+        return randomNeighborWPlant;
     }
 
-    // TODO: Method for a pest to go into a new space with a plant & if none available, die.
-    // TODO: Method to check if the flower in this space is adjacent to a flower of the opposite color
+    public Plot[] getNeighbors() { return this.neighbors; }
 
 }

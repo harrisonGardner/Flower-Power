@@ -12,7 +12,7 @@ public enum DailyEventType
     WEEDPOLLINATION, FLOWERPOLLINATION,
     WEEDSEEDING, FLOWERSEEDING,
     WEEDGROW, FLOWERGROW,
-    COLORCLASH, DYING, ENDDAY
+    PESTSPREAD, DYING, ENDDAY
 }
 
 // TODO: Make into a generic structure
@@ -66,8 +66,8 @@ public class DailyEvents //: MonoBehaviour
                 new EventInfo (this.intervalTime * (int) DailyEventType.WEEDGROW) },
             { DailyEventType.FLOWERGROW,
                 new EventInfo (this.intervalTime * (int) DailyEventType.FLOWERGROW)},
-            { DailyEventType.COLORCLASH,
-                new EventInfo (this.intervalTime * (int) DailyEventType.COLORCLASH) }, //TODO
+            { DailyEventType.PESTSPREAD,
+                new EventInfo (this.intervalTime * (int) DailyEventType.PESTSPREAD) }, //TODO
             { DailyEventType.DYING,
                 new EventInfo (this.intervalTime * (int) DailyEventType.DYING) }, // TODO
             { DailyEventType.ENDDAY,

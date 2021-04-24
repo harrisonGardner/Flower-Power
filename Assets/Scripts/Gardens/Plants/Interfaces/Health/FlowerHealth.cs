@@ -9,8 +9,8 @@ using UnityEngine;
 /// <author>Nicholas Gliserman</author>
 public class FlowerHealth : IPlantHealth
 {
-    private int MinWaterRequirement { get; }
-    private int MinSunRequirement { get; }
+    private int MinWaterRequirement { get; set; }
+    private int MinSunRequirement { get; set; }
     private int MaxSunStorage { get; }
     private int UnhealthyDaysForDying { get; }
 
@@ -21,12 +21,16 @@ public class FlowerHealth : IPlantHealth
     public bool DyingToday { get; set; } = false;
     public bool WiltingToday { get; set; } = false;
 
-    public FlowerHealth(int minWater, int minSun, int unhealthyDaysForDying, int sunStorage)
+    public FlowerHealth(int unhealthyDaysForDying, int sunStorage)
+    {
+        UnhealthyDaysForDying = unhealthyDaysForDying;
+        MaxSunStorage = sunStorage;
+    }
+
+    public void SetMinFeedingRequirements(int minWater, int minSun)
     {
         MinWaterRequirement = minWater;
         MinSunRequirement = minSun;
-        UnhealthyDaysForDying = unhealthyDaysForDying;
-        MaxSunStorage = sunStorage;
     }
 
     public void FeedingToday(int sun, int water)

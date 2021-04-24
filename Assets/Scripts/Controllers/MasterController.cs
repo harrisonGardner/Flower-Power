@@ -9,10 +9,14 @@ public class MasterController : MonoBehaviour
 {
     public GameObject GardenScript;
     Garden garden;
-    DayController day;
     Colors allColors;
+
+    // CONTROLLERS
+    DayController day;
     SpriteUpdateController spriteUpdate;
+
     public static System.Random universallyAvailableRandom = new System.Random();
+    public Order order;
 
     // FIELDs to KEEP TRACK of TIME
     public static float TimeOfDay { get; private set; } = 0;
@@ -36,6 +40,11 @@ public class MasterController : MonoBehaviour
 
         // COLORS
         allColors = new Colors();
+
+        // ORDER
+        order = GameObject.Find("OrderInfo").GetComponent<Order>();
+        order.CreateDummyOrder();
+        order.UpdateAll();
     }
 
     // Update is called once per frame
@@ -48,6 +57,6 @@ public class MasterController : MonoBehaviour
 
         TimeOfDay = day.TimeOfDay;
         DayNumber = day.dayNumber;
-
+        order.UpdateAll();
     }
 }
