@@ -19,10 +19,17 @@ public class WateringCan : MonoBehaviour
     private Vector3 defaultPosition;
 
     public GameObject toolDrag;
+    public ParticleSystem waterParticles;
+    public AudioSource wateringSound;
+
+    private bool playSound;
+
     // Start is called before the first frame update
     void Start()
     {
         defaultPosition = transform.position;
+        waterParticles.enableEmission = false;
+        wateringSound.Stop();
     }
 
     // Update is called once per frame
@@ -45,16 +52,27 @@ public class WateringCan : MonoBehaviour
             toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
             if (!useTool)
             {
+                wateringSound.Stop();
+                playSound = true;
+                waterParticles.enableEmission = false;
                 toolDrag.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteTool(tool, false);
             }
             else if (useTool)
             {
+                if (playSound)
+                {
+                    wateringSound.Play();
+                    playSound = false;
+                }
                 UseTool();
             }
         }
         else
         {
+            wateringSound.Stop();
+            playSound = true;
+            waterParticles.enableEmission = false;
             toolDrag.transform.position = Vector3.MoveTowards(toolDrag.transform.position, defaultPosition, 0.2f);
             toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSpriteTool(tool, false);
@@ -63,6 +81,7 @@ public class WateringCan : MonoBehaviour
 
     private void UseTool()
     {
+        waterParticles.enableEmission = true;
         toolDrag.GetComponent<SpriteRenderer>().sprite =
                 SpriteFetcher.GetSpriteTool(tool, true);
     }

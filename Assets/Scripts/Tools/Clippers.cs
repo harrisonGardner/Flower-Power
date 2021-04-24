@@ -22,6 +22,7 @@ public class Clippers : MonoBehaviour
     private Vector3 defaultPosition;
 
     public GameObject toolDrag;
+    public AudioSource toolSound;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +36,14 @@ public class Clippers : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
             DropTool();
+        if (Input.GetMouseButtonDown(0))
+        {
+            itemUseTimer = itemUseDelay;
+        }
     }
 
     void FixedUpdate()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //    DropTool();
         if (holding == true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,6 +53,13 @@ public class Clippers : MonoBehaviour
                 itemUseTimer = itemUseDelay;
                 toolDrag.GetComponent<SpriteRenderer>().sprite =
                     SpriteFetcher.GetSpriteTool(tool, false);
+            }
+            else if (itemUseTimer >= itemUseDelay)
+            {
+                toolDrag.GetComponent<SpriteRenderer>().sprite =
+                    SpriteFetcher.GetSpriteTool(tool, false);
+                toolSound.Play();
+                itemUseTimer--;
             }
             else if(itemUseTimer > 0)
             {
