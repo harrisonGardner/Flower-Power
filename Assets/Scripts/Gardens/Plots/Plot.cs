@@ -159,7 +159,7 @@ public class Plot : MonoBehaviour
         if (this.waterLevel > WATER_CAPCITY)
             this.waterLevel = WATER_CAPCITY;
 
-        SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
+        SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
     }
 
     /// <summary>
@@ -175,14 +175,14 @@ public class Plot : MonoBehaviour
         if (this.waterLevel >= requestedWater)
         {
             this.waterLevel -= requestedWater;
-            SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
+            SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             return requestedWater;
         }
         else
         {
             int temp = this.waterLevel;
             this.waterLevel = 0;
-            SpriteUpdateController.AddSpriteToRedraw(gameObject.GetComponent<PlantSpriteUpdater>());
+            SpriteUpdateController.AddSpriteToRedraw(spriteUpdate);
             return temp;
         }
     }

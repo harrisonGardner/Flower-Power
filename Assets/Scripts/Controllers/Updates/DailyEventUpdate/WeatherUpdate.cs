@@ -10,7 +10,6 @@ public class WeatherUpdate : IGardenUpdate //MonoBehaviour,
     {
         IWeather todaysWeather = fiveDayWeather.GetTodaysWeather();
         todaysWeather.SetDaysWeather(garden);
-
         garden.SunAllPlots(2);
     }
 }
