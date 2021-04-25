@@ -86,36 +86,43 @@ public class Colors
         new Color(ColorName.PURPLE, ColorType.SECONDARY, ""),
     };
 
+    private static bool alreadySet = false;
+
     /// <summary>
     /// Constructor sets the opposite colors and therefore must be
     /// invoked before the game begins.
     /// </summary>
     public Colors()
     {
+        if (!alreadySet)
+        {
+            // ESTABLISH OPPOSITE COLORS:
+            // RED & GREEN
+            GetColor(ColorName.GREEN).setOpposite(GetColor(ColorName.RED));
+            // ORANGE & BLUE
+            GetColor(ColorName.ORANGE).setOpposite(GetColor(ColorName.BLUE));
+            // PURPLE & YELLOW
+            GetColor(ColorName.PURPLE).setOpposite(GetColor(ColorName.YELLOW));
 
-        // ESTABLISH OPPOSITE COLORS:
-        // RED & GREEN
-        GetColor(ColorName.GREEN).setOpposite(GetColor(ColorName.RED));
-        // ORANGE & BLUE
-        GetColor(ColorName.ORANGE).setOpposite(GetColor(ColorName.BLUE));
-        // PURPLE & YELLOW
-        GetColor(ColorName.PURPLE).setOpposite(GetColor(ColorName.YELLOW));
+            // SET BLEND INFORMATION
+            Color red = GetColor(ColorName.RED); // BLENDS w/ RED
+            red.Blends.Add(ColorName.BLUE, GetColor(ColorName.PURPLE));
+            red.Blends.Add(ColorName.YELLOW, GetColor(ColorName.ORANGE));
+            red.Blends.Add(ColorName.RED, GetColor(ColorName.RED));
 
-        // SET BLEND INFORMATION
-        Color red = GetColor(ColorName.RED); // BLENDS w/ RED
-        red.Blends.Add(ColorName.BLUE, GetColor(ColorName.PURPLE));
-        red.Blends.Add(ColorName.YELLOW, GetColor(ColorName.ORANGE));
-        red.Blends.Add(ColorName.RED, GetColor(ColorName.RED));
+            Color yellow = GetColor(ColorName.YELLOW); // BLENDS w/ YELLOW
+            yellow.Blends.Add(ColorName.RED, GetColor(ColorName.ORANGE));
+            yellow.Blends.Add(ColorName.BLUE, GetColor(ColorName.GREEN));
+            yellow.Blends.Add(ColorName.YELLOW, GetColor(ColorName.YELLOW));
 
-        Color yellow = GetColor(ColorName.YELLOW); // BLENDS w/ YELLOW
-        yellow.Blends.Add(ColorName.RED, GetColor(ColorName.ORANGE));
-        yellow.Blends.Add(ColorName.BLUE, GetColor(ColorName.GREEN));
-        yellow.Blends.Add(ColorName.YELLOW, GetColor(ColorName.YELLOW));
+            Color blue = GetColor(ColorName.BLUE); // BLENDS w/ YELLOW
+            blue.Blends.Add(ColorName.RED, GetColor(ColorName.PURPLE));
+            blue.Blends.Add(ColorName.YELLOW, GetColor(ColorName.GREEN));
+            blue.Blends.Add(ColorName.BLUE, GetColor(ColorName.BLUE));
 
-        Color blue = GetColor(ColorName.BLUE); // BLENDS w/ YELLOW
-        blue.Blends.Add(ColorName.RED, GetColor(ColorName.PURPLE));
-        blue.Blends.Add(ColorName.YELLOW, GetColor(ColorName.GREEN));
-        blue.Blends.Add(ColorName.BLUE, GetColor(ColorName.BLUE));
+            alreadySet = true;
+        }
+
     }
 
     /// <summary>

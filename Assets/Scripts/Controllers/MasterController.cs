@@ -9,7 +9,7 @@ public class MasterController : MonoBehaviour
 {
     public GameObject GardenScript;
     Garden garden;
-    Colors allColors;
+    public Colors allColors;
 
     // CONTROLLERS
     DayController day;
@@ -24,8 +24,16 @@ public class MasterController : MonoBehaviour
 
     private IList<IUpdateController> updates = new List<IUpdateController>();
 
+    private void Awake()
+    {
+        // COLORS
+        allColors = new Colors();
+    }
+
     void Start()
     {
+        Debug.Log("Start");
+
         // GET the GARDEN from the GARDENSCRIPT GAME OBJECT
         garden = GardenScript.GetComponent<Garden>();
         garden.initializeGarden();
@@ -37,9 +45,6 @@ public class MasterController : MonoBehaviour
         // CREATE SPRITE CONTROLLER
         spriteUpdate = new SpriteUpdateController();
         updates.Add(spriteUpdate);
-
-        // COLORS
-        allColors = new Colors();
 
         // ORDER
         order = GameObject.Find("OrderInfo").GetComponent<Order>();
