@@ -53,7 +53,7 @@ public class DailyEvents //: MonoBehaviour
         daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERFEEDING, (this.intervalTime * (int)DailyEventType.FLOWERFEEDING)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDPOLLINATION, (this.intervalTime * (int)DailyEventType.WEEDPOLLINATION)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERPOLLINATION, (this.intervalTime * (int)DailyEventType.FLOWERPOLLINATION)));
-        daysEvents.Enqueue(new EventInfo(DailyEventType.DYING, (this.intervalTime * (int)DailyEventType.PESTSPREAD)));
+        daysEvents.Enqueue(new EventInfo(DailyEventType.PESTSPREAD, (this.intervalTime * (int)DailyEventType.PESTSPREAD)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDSEEDING, (this.intervalTime * (int)DailyEventType.WEEDSEEDING)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.FLOWERSEEDING, (this.intervalTime * (int)DailyEventType.FLOWERSEEDING)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDGROW, (this.intervalTime * (int)DailyEventType.WEEDGROW)));
