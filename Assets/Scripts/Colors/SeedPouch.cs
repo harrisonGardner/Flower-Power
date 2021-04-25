@@ -65,10 +65,9 @@ public class SeedPouch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bagColorArrayHead = 0;
+        defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
 
-
-        defaultPosition = seedObject.transform.position;
-        
     }
 
     void FixedUpdate()
@@ -79,7 +78,7 @@ public class SeedPouch : MonoBehaviour
         if (holding)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
+            seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -2);
         }
         else
             seedObject.transform.position = Vector3.MoveTowards(seedObject.transform.position, defaultPosition, 0.2f);

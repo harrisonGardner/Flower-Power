@@ -28,7 +28,7 @@ public class Clippers : MonoBehaviour
     void Start()
     {
         order = orderGameObject.GetComponent<Order>();
-        defaultPosition = transform.position;
+        defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
     }
 
     // Update is called once per frame
@@ -47,7 +47,7 @@ public class Clippers : MonoBehaviour
         if (holding == true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
+            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -2);
             if (!useTool)
             {
                 itemUseTimer = itemUseDelay;
