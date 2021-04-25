@@ -2850,7 +2850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4133,7 +4133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969845791577264897, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2969845791577264897, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4167,6 +4167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WateringCanIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 5902077039953367843, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440a76f4269ae5548b39f39d4e742344, type: 3}
 --- !u!1001 &4959469445418564610
@@ -4198,7 +4202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4959469446490001058, guid: 1fe503dad22a7f34f80a54c2b9cd7f45, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4959469446490001058, guid: 1fe503dad22a7f34f80a54c2b9cd7f45, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4228,6 +4232,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6339249321996407331, guid: 1fe503dad22a7f34f80a54c2b9cd7f45, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe503dad22a7f34f80a54c2b9cd7f45, type: 3}
 --- !u!1001 &5418399332076473604
@@ -4251,7 +4259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5418399332350293305, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5418399332350293305, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4288,6 +4296,18 @@ PrefabInstance:
     - target: {fileID: 5418399332350293311, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
       propertyPath: m_Name
       value: SeedPouch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418399333780079412, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418399333780079412, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418399333780079412, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9085328bc9591c47a62d46fec7079bd, type: 3}
