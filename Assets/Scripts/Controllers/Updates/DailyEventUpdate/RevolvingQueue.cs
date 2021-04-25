@@ -57,13 +57,13 @@ public class RevolvingQueue<T> : MonoBehaviour
     {
         if (IsEmpty())
             throw new NotSupportedException("Can't remove an item from an empty queue.");
-        T removedItem = items[head];
+        T moveItem = items[head];
 
         //UPDATE POSITION OF THE HEAD AND TAIL
         head = ++head % capacity;
         tail = ++tail % capacity;
 
-        return removedItem;
+        return moveItem;
     }
 
     /// < summary >
@@ -76,6 +76,7 @@ public class RevolvingQueue<T> : MonoBehaviour
         if (IsEmpty())
             throw new NotSupportedException("Can't remove an item from an empty queue.");
         T nextItem = items[head];
+
         return nextItem;
     }
 
