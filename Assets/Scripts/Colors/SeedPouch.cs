@@ -65,7 +65,7 @@ public class SeedPouch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defaultPosition = seedObject.transform.position;
+        defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
         // Set the head to zero, for restarting the game.
         bagColorArrayHead = 0;
 
@@ -73,13 +73,14 @@ public class SeedPouch : MonoBehaviour
 
     void FixedUpdate()
     {
+        UpdateSeedAmount();
         if (Input.GetMouseButton(1))
             DropTool();
 
         if (holding)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
+            seedObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, -2);
         }
         else
             seedObject.transform.position = Vector3.MoveTowards(seedObject.transform.position, defaultPosition, 0.2f);
@@ -87,7 +88,7 @@ public class SeedPouch : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
             // Cycle through the colors in the bag
             bagColorArrayHead++;

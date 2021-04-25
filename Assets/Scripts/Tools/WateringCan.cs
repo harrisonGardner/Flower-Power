@@ -27,7 +27,7 @@ public class WateringCan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defaultPosition = transform.position;
+        defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
         waterParticles.enableEmission = false;
         wateringSound.Stop();
     }
@@ -49,7 +49,7 @@ public class WateringCan : MonoBehaviour
         if (holding == true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
+            toolDrag.transform.position = new Vector3(mousePosition.x, mousePosition.y, -2);
             if (!useTool)
             {
                 wateringSound.Stop();
