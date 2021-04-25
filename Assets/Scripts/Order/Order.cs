@@ -44,10 +44,8 @@ public class Order : MonoBehaviour
         //CreateDummyOrder();
         CreateOrder(levelName);
 
-        // TOD0 - Code below is giving the error:
-        // NullReferenceException: Object reference not set to an instance of an object
-        GameObject.Find("Record").GetComponent<Text>().text = $"Record: {bestTime}"; 
-        BeatsBestTime();
+        GameObject.Find("Record").GetComponent<Text>().text = 
+            $"Record: {(bestTime >= 0 ? bestTime : maxNumDays)}"; 
     }
 
     /// <summary>
@@ -107,8 +105,6 @@ public class Order : MonoBehaviour
         // CHECK for VICTORY
         if (OrderFulfilled())
         {
-            // TOD0 - Code below is giving the error:
-            // NullReferenceException: Object reference not set to an instance of an object
             GameObject.Find("Victory").GetComponent<Text>().text = "VICTORY is YOURS!!!";
         }
     }

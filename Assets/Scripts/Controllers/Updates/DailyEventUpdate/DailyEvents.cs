@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// List of events occuring within a day
 /// </summary>
-public enum DailyEventType
+/// MOVED TO DAILYEVENTQUEUE
+/*public enum DailyEventType
 {
     NONE, NEWDAY, WEATHER,
     WEEDFEEDING, FLOWERFEEDING,
@@ -13,13 +14,13 @@ public enum DailyEventType
     WEEDSEEDING, FLOWERSEEDING,
     WEEDGROW, FLOWERGROW,
     PESTSPREAD, DYING, ENDDAY
-}
+}*/
 
 // TODO: Make into a generic structure
 // IMPROVED Functionality by shuffling the events in a queue structure.
 // GET rid of bool as if the event happened, it will be pushed to the back
 // ONLY 1 ACCESS needed
-public class EventInfo //: MonoBehaviour
+/*public class EventInfo //: MonoBehaviour
 {
     public float scheduledTime;
     public bool happenedToday;
@@ -29,13 +30,13 @@ public class EventInfo //: MonoBehaviour
         scheduledTime = time;
         happenedToday = false;
     }
-}
+}*/
 
 /// <summary>
 /// Dictates when events should occur within a given day.
 /// </summary>
 /// <author>Nicholas Gliserman</author>
-public class DailyEvents : MonoBehaviour
+/*public class DailyEvents : MonoBehaviour
 {
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
@@ -119,5 +120,5 @@ public class DailyEvents : MonoBehaviour
         return DailyEventType.NONE;
     }
 
-}
+}*/
 
