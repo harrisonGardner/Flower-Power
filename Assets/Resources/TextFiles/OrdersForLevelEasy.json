@@ -1,0 +1,56 @@
+[
+  {
+    "orderType": "FLOWER",
+    "colorType": "PRIMARY",
+    "color": "BLUE",
+    "quantity": 5
+  },
+  {
+    "orderType": "FLOWER",
+    "colorType": "PRIMARY",
+    "color": "RED",
+    "quantity": 5
+  },
+  {
+    "orderType": "FLOWER",
+    "colorType": "PRIMARY",
+    "color": "YELLOW",
+    "quantity": 5
+  },
+  {
+    "orderType": "FLOWER",
+    "colorType": "SECONDARY",
+    "color": "GREEN",
+    "quantity": 0
+  },
+  {
+    "orderType": "FLOWER",
+    "colorType": "SECONDARY",
+    "color": "ORANGE",
+    "quantity": 0
+  },
+  {
+    "orderType": "FLOWER",
+    "colorType": "SECONDARY",
+    "color": "PURPLE",
+    "quantity": 0
+  },
+  {
+    "orderType": "SEED",
+    "colorType": "PRIMARY",
+    "color": "BLUE",
+    "quantity": 15
+  },
+  {
+    "orderType": "SEED",
+    "colorType": "PRIMARY",
+    "color": "RED",
+    "quantity": 15
+  },
+  {
+    "orderType": "SEED",
+    "colorType": "PRIMARY",
+    "color": "YELLOW",
+    "quantity": 15
+  }
+]
