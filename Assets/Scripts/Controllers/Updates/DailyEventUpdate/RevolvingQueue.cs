@@ -9,7 +9,7 @@ using UnityEngine;
 ///// moved to the end of the queue.
 ///// </summary>
 ///// <author>Megan Lisette Peck</author>
-public class RevolvingQueue<T> : MonoBehaviour
+public class RevolvingQueue<T> //: MonoBehaviour
 {
     private int head;
     private int tail;

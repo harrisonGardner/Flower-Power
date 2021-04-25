@@ -32,8 +32,6 @@ public class MasterController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start");
-
         // GET the GARDEN from the GARDENSCRIPT GAME OBJECT
         garden = GardenScript.GetComponent<Garden>();
         garden.initializeGarden();
