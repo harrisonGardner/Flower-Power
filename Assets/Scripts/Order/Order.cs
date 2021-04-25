@@ -38,7 +38,7 @@ public class Order : MonoBehaviour
 
     private void Start()
     {
-        levelName = "Easy";     //TODO - Dynamically pass a value for the level
+        levelName = LevelSelector.getSelectedLevel();
         seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
         
         //CreateDummyOrder();
