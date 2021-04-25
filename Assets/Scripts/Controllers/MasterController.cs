@@ -24,7 +24,7 @@ public class MasterController : MonoBehaviour
 
     private IList<IUpdateController> updates = new List<IUpdateController>();
 
-    void Awake()
+    void Start()
     {
         // GET the GARDEN from the GARDENSCRIPT GAME OBJECT
         garden = GardenScript.GetComponent<Garden>();
