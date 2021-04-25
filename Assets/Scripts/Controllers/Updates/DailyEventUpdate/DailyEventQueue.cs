@@ -45,6 +45,9 @@ public class DailyEvents //: MonoBehaviour
     //Minus 2, "NONE" & "DYING" are not in the Daily Event count
     private RevolvingQueue<EventInfo> daysEvents;
 
+    /// <summary>
+    /// Adds the various events of a day into the revolving queue.
+    /// </summary>
     public void InitializeDailyEvents()
     {
         count = Enum.GetValues(typeof(DailyEventType)).Length - 2;
