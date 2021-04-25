@@ -51,7 +51,6 @@ public class DayController : IUpdateController
             {
                 TimeOfDay = 0.0f; // RESET TIME of DAY to zero
                 dayNumber++; // INCREMENT DAY NUMBER
-                //Debug.Log("END of DAY, New day is: " + dayNumber);
             }
             else // LAUNCH APPROPRIATE ACTION
             {
