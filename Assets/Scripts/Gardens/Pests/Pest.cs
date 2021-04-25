@@ -13,6 +13,14 @@ public class Pest : MonoBehaviour
     public Plot CurrentPlot { get; set; }
     bool dead = false;
 
+    public AudioSource dieSound;
+    public AudioSource eatSound;
+
+    public void Start()
+    {
+        dieSound = GameObject.FindGameObjectWithTag("PestDeathSound").GetComponent<AudioSource>();
+    }
+
     public void FixedUpdate()
     {
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, CurrentPlot.gameObject.transform.position, 0.2f);
@@ -25,7 +33,10 @@ public class Pest : MonoBehaviour
     public void Eat()
     {
         if (!CurrentPlot.IsEmpty)
+        {
             CurrentPlot.RemoveSinglePlant();
+            eatSound.Play();
+        }
         else // IN CASE PLANT HERE YESTERDAY is now DEAD
         {
             dead = true;
@@ -42,6 +53,7 @@ public class Pest : MonoBehaviour
         CurrentPlot = CurrentPlot.AdjacentPlots.getRandomNeighborWithPlant();
         if (CurrentPlot == null) // IF NO ADJACENT PLOT HAS A PLANT
         {
+            dieSound.Play();
             dead = true;
             Destroy(this.gameObject);
         }
@@ -51,6 +63,9 @@ public class Pest : MonoBehaviour
     /// If the pest has not eaten a plant recently,
     /// it will die.
     /// </summary>
-    public bool IsDead() { return (dead); }
+    public bool IsDead() 
+    { 
+        return dead; 
+    }
 
 }
