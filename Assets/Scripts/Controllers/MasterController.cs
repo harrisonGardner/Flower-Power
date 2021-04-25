@@ -43,8 +43,6 @@ public class MasterController : MonoBehaviour
 
         // ORDER
         order = GameObject.Find("OrderInfo").GetComponent<Order>();
-        //order.CreateDummyOrder();
-        //order.UpdateAll();
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ using UnityEngine.UI;
 /// in which the order can be completed.
 /// 
 /// </summary>
-/// <author>Nicholas Gliserman</author>
+/// <author>Nicholas Gliserman & Megan Lisette Peck</author>
 public class Order : MonoBehaviour
 {
     public TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
@@ -22,6 +23,10 @@ public class Order : MonoBehaviour
     public string levelName;
     public int bestTime;
     public SeedPouch seeds;
+    private static string orderItemsFile;
+    private static string levelSettingsFile;
+    public static IList<ItemDetails> orderItems { get; private set; } = new List<ItemDetails>();
+    public static GameSettings levelSettings { get; private set; } = new GameSettings();
 
     // ORDER ICONS
     public GameObject red;
@@ -33,9 +38,16 @@ public class Order : MonoBehaviour
 
     private void Start()
     {
+        levelName = "Easy";     //TODO - Dynamically pass a value for the level
         seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
-        CreateDummyOrder();
-        GameObject.Find("Record").GetComponent<Text>().text = $"Record: {bestTime}";
+        
+        //CreateDummyOrder();
+        CreateOrder(levelName);
+
+        // TOD0 - Code below is giving the error:
+        // NullReferenceException: Object reference not set to an instance of an object
+        GameObject.Find("Record").GetComponent<Text>().text = $"Record: {bestTime}"; 
+        BeatsBestTime();
     }
 
     /// <summary>
@@ -58,9 +70,10 @@ public class Order : MonoBehaviour
     /// Has the current (completed) game beaten the previous record.
     /// </summary>
     /// <returns></returns>
-    public  bool BeatsBestTime() // IF yes, write back to original file
+    public void BeatsBestTime() // IF yes, write back to original file
     {
-        return (OrderFulfilled() && MasterController.DayNumber < bestTime);
+        if (OrderFulfilled() && (MasterController.DayNumber < bestTime || levelSettings.BestTime == -1))
+            PrintBestScore.WriteBestScore(levelName, MasterController.DayNumber);
     }
 
     /// <summary>
@@ -94,6 +107,8 @@ public class Order : MonoBehaviour
         // CHECK for VICTORY
         if (OrderFulfilled())
         {
+            // TOD0 - Code below is giving the error:
+            // NullReferenceException: Object reference not set to an instance of an object
             GameObject.Find("Victory").GetComponent<Text>().text = "VICTORY is YOURS!!!";
         }
     }
@@ -165,6 +180,42 @@ public class Order : MonoBehaviour
         maxNumDays = 100;
         levelName = "Dummy Level";
         bestTime = 57;
+
+        UpdateAll();
+    }
+
+    public void CreateOrder(string level)
+    {
+        //GetLevelDetails.ReadFiles(level); - Would have to return several items
+
+        orderItemsFile = FindFileLocations.findOrderItemsFile(level);
+        levelSettingsFile = FindFileLocations.findLevelSettingsFile(level);
+
+        orderItems = ReadLevelOrderandSettings.LoadOrderItems(orderItemsFile);
+        levelSettings = ReadLevelOrderandSettings.LoadSettings(levelSettingsFile);
+
+        foreach (ItemDetails order in orderItems)
+        {
+            switch (order.itemType)
+            {
+                case ItemType.FLOWER:
+                    if(order.quantity > 0)
+                    {
+                        flowerRequirements.Add(order.color, order.quantity);
+                    }
+                    break;
+                case ItemType.SEED:
+                    seeds.Add(order.color, order.quantity);
+                    break;
+                default:
+                    Debug.Log("Unknown ItemType");
+                    break;
+            }
+        }
+
+        maxNumDays = levelSettings.MaxNumDays;
+        levelName = levelSettings.LevelName;
+        bestTime = levelSettings.BestTime;
 
         UpdateAll();
     }
