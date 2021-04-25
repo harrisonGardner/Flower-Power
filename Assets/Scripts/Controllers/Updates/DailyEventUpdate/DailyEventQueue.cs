@@ -41,12 +41,15 @@ public class DailyEvents //: MonoBehaviour
     public float dayLengthSeconds = 5.0f;
     public float intervalTime = 0.1f;
     public bool lastEventHappened;
-    public static int count = Enum.GetValues(typeof(DailyEventType)).Length - 2;
+    public static int count; // = Enum.GetValues(typeof(DailyEventType)).Length - 2;
     //Minus 2, "NONE" & "DYING" are not in the Daily Event count
-    private static RevolvingQueue<EventInfo> daysEvents = new RevolvingQueue<EventInfo>(count);
+    private static RevolvingQueue<EventInfo> daysEvents;
 
     public void InitializeDailyEvents()
     {
+        count = Enum.GetValues(typeof(DailyEventType)).Length - 2;
+        daysEvents  = new RevolvingQueue<EventInfo>(count);
+
         daysEvents.Enqueue(new EventInfo(DailyEventType.NEWDAY, (this.intervalTime * (int)DailyEventType.NEWDAY)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEATHER, (this.intervalTime * (int)DailyEventType.WEATHER)));
         daysEvents.Enqueue(new EventInfo(DailyEventType.WEEDFEEDING, (this.intervalTime * (int)DailyEventType.WEEDFEEDING)));
