@@ -12,4 +12,17 @@ public class LevelSelector : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         SceneManager.LoadScene("FlowerPower");
     }
+
+    public static string getSelectedLevel()
+    {
+        switch (LevelNumber)
+        {
+            case 3:
+                return "Hard";
+            case 2:
+                return "Medium";
+            default:
+                return "Easy";
+        }
+    }
 }

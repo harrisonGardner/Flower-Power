@@ -20,6 +20,7 @@ public class Order : MonoBehaviour
     public TalliedSet<ColorName> flowerRequirements = new TalliedSet<ColorName>();
     public TalliedSet<ColorName> flowersFulfilled = new TalliedSet<ColorName>();
     public int maxNumDays { get; set; }
+    public int levelNumber;
     public string levelName;
     public int bestTime;
     public SeedPouch seeds;
@@ -38,7 +39,7 @@ public class Order : MonoBehaviour
 
     private void Start()
     {
-        levelName = "Easy";     //TODO - Dynamically pass a value for the level
+        levelName = LevelSelector.getSelectedLevel();
         seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
         
         //CreateDummyOrder();
