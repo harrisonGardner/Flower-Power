@@ -68,10 +68,12 @@ public class SeedPouch : MonoBehaviour
         defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
         // Set the head to zero, for restarting the game.
         bagColorArrayHead = 0;
+
     }
 
     void FixedUpdate()
     {
+        UpdateSeedAmount();
         if (Input.GetMouseButton(1))
             DropTool();
 
@@ -86,7 +88,7 @@ public class SeedPouch : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
             // Cycle through the colors in the bag
             bagColorArrayHead++;
