@@ -145,6 +145,24 @@ public class Garden : MonoBehaviour
     }
 
     /// <summary>
+    /// Sunny days will dry some plots out.
+    /// </summary>
+    /// <param name="waterAmount"></param>
+    public void RemoveWaterFromRandomPlots(int waterAmount)
+    {
+        // Iterate through array
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                //1 in 4 chance for the plot to remove water
+                if(MasterController.universallyAvailableRandom.Next(0,4) == 1)
+                    this.plots[x, y].removeWater(waterAmount);
+            }
+        }
+    }
+
+    /// <summary>
     /// Sunny weather gives plants increased amounts of energy to grow.
     /// </summary>
     /// <param name="sunAmount"></param>
