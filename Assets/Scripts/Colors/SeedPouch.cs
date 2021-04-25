@@ -65,9 +65,9 @@ public class SeedPouch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bagColorArrayHead = 0;
         defaultPosition = new Vector3(transform.position.x, transform.position.y, -2);
-
+        // Set the head to zero, for restarting the game.
+        bagColorArrayHead = 0;
     }
 
     void FixedUpdate()
