@@ -38,14 +38,20 @@ public class Order : MonoBehaviour
 
     private void Start()
     {
-        levelName = LevelSelector.getSelectedLevel();
         seeds = GameObject.Find("SeedPouch").GetComponent<SeedPouch>();
-        
-        //CreateDummyOrder();
-        CreateOrder(levelName);
 
-        GameObject.Find("Record").GetComponent<Text>().text = 
-            $"Record: {(bestTime >= 0 ? bestTime : maxNumDays)}"; 
+        CreateOrder();
+        SetBestTimeOnUI();
+    }
+
+    /// <summary>
+    /// Set best time on the screen, to the best time in text file
+    /// or to the maxNumDays if there is no best score yet.
+    /// </summary>
+    private void SetBestTimeOnUI()
+    {
+        GameObject.Find("Record").GetComponent<Text>().text =
+            $"Record: {(bestTime >= 0 ? bestTime : maxNumDays)}";
     }
 
     /// <summary>
@@ -106,6 +112,7 @@ public class Order : MonoBehaviour
         if (OrderFulfilled())
         {
             GameObject.Find("Victory").GetComponent<Text>().text = "VICTORY is YOURS!!!";
+            BeatsBestTime();
         }
     }
 
@@ -156,7 +163,7 @@ public class Order : MonoBehaviour
     /// <summary>
     /// Testing method before File I/O is implemented
     /// </summary>
-    public void CreateDummyOrder()
+    /*public void CreateDummyOrder()
     {
         // PRIMARY COLORS
         flowerRequirements.Add(ColorName.BLUE, 13);
@@ -178,14 +185,15 @@ public class Order : MonoBehaviour
         bestTime = 57;
 
         UpdateAll();
-    }
+    }*/
 
-    public void CreateOrder(string level)
+    public void CreateOrder()
     {
-        //GetLevelDetails.ReadFiles(level); - Would have to return several items
+        // Get the users selected level
+        levelName = LevelSelector.getSelectedLevel();
 
-        orderItemsFile = FindFileLocations.findOrderItemsFile(level);
-        levelSettingsFile = FindFileLocations.findLevelSettingsFile(level);
+        orderItemsFile = FindFileLocations.findOrderItemsFile(levelName);
+        levelSettingsFile = FindFileLocations.findLevelSettingsFile(levelName);
 
         orderItems = ReadLevelOrderandSettings.LoadOrderItems(orderItemsFile);
         levelSettings = ReadLevelOrderandSettings.LoadSettings(levelSettingsFile);
