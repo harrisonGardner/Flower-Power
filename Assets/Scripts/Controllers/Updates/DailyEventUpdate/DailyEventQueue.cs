@@ -43,7 +43,7 @@ public class DailyEvents //: MonoBehaviour
     public bool lastEventHappened;
     public static int count; // = Enum.GetValues(typeof(DailyEventType)).Length - 2;
     //Minus 2, "NONE" & "DYING" are not in the Daily Event count
-    private static RevolvingQueue<EventInfo> daysEvents;
+    private RevolvingQueue<EventInfo> daysEvents;
 
     public void InitializeDailyEvents()
     {
